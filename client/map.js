@@ -84,6 +84,7 @@ var Map = function(mapDiv) {
       var topNew = - constantY * Math.pow(2, this.zoom - 1) + mouseY;
       jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
       
+      // TODO : check this
       function recenter() {
       jQuery(this.mapDiv).attr('left', leftNew+'px');
       jQuery(this.mapDiv).attr('top', topNew+'px');
