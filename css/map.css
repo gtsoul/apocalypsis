@@ -1,0 +1,132 @@
+
+#mapWrapper {
+  width:800px;
+  height:400px;
+  overflow:hidden;
+  border:1px solid black;
+}
+
+#map {
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  cursor: move;
+}
+
+#map.zoom1 {
+  -moz-transform: scale(1);
+  -webkit-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -ms-transform: scale(1);
+}
+
+#map.zoom1 .planets img {
+  -moz-transform: scale(1);
+  -webkit-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -ms-transform: scale(1);
+}
+
+#map.zoom2 {
+  -moz-transform: scale(2);
+  -webkit-transform: scale(2);
+  -o-transform: scale(2);
+  transform: scale(2);
+  -ms-transform: scale(2);
+}
+
+#map.zoom2 .planets img {
+  -moz-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  transform: scale(0.5);
+  -ms-transform: scale(0.5);
+}
+
+#map.zoom3 {
+  -moz-transform: scale(4);
+  -webkit-transform: scale(4);
+  -o-transform: scale(4);
+  transform: scale(4);
+  -ms-transform: scale(4);
+}
+
+#map.zoom3 .planets img {
+  -moz-transform: scale(0.25);
+  -webkit-transform: scale(0.25);
+  -o-transform: scale(0.25);
+  transform: scale(0.25);
+  -ms-transform: scale(0.25);
+}
+
+#map.zoom4 {
+  -moz-transform: scale(8);
+  -webkit-transform: scale(8);
+  -o-transform: scale(8);
+  transform: scale(8);
+  -ms-transform: scale(8);
+}
+
+#map.zoom5 {
+  -moz-transform: scale(16);
+  -webkit-transform: scale(16);
+  -o-transform: scale(16);
+  transform: scale(16);
+  -ms-transform: scale(16);
+}
+
+
+#map.zoom5 .planets img {
+  -moz-transform: scale(0.625);
+  -webkit-transform: scale(0.625);
+  -o-transform: scale(0.625);
+  transform: scale(0.625);
+  -ms-transform: scale(0.625);
+}
+
+#map.zoom6 {
+  -moz-transform: scale(32);
+  -webkit-transform: scale(32);
+  -o-transform: scale(32);
+  transform: scale(32);
+  -ms-transform: scale(32);
+}
+
+#map.zoom7 {
+  -moz-transform: scale(64);
+  -webkit-transform: scale(64);
+  -o-transform: scale(64);
+  transform: scale(64);
+  -ms-transform: scale(64);
+}
+
+#map.zoom8 {
+  -moz-transform: scale(128);
+  -webkit-transform: scale(128);
+  -o-transform: scale(128);
+  transform: scale(128);
+  -ms-transform: scale(128);
+}
+
+#map.zoom9 {
+  -moz-transform: scale(256);
+  -webkit-transform: scale(256);
+  -o-transform: scale(256);
+  transform: scale(256);
+  -ms-transform: scale(256);
+}
+
+#map.zoom10 {
+  -moz-transform: scale(512);
+  -webkit-transform: scale(512);
+  -o-transform: scale(512);
+  transform: scale(512);
+  -ms-transform: scale(512);
+}
+
+#map .planets .planet  {
+  position: absolute;
+}
