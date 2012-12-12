@@ -96,14 +96,15 @@ var Map = function(mapDiv) {
       this.offsetLeft = jQuery(this.mapDiv).offset().left - this.mapRoot.offset().left;
       this.offsetTop = jQuery(this.mapDiv).offset().top - this.mapRoot.offset().top;
       
-      var leftNew = this.offsetLeft;// - (totalWidth * percentageX / zoomModifierOld);
-      var topNew = this.offsetTop;// - (totalHeight * percentageY / zoomModifierOld);
-      console.log('NEW '+this.offsetLeft+' : '+this.offsetTop+' = '+leftNew+' : '+topNew);
+      var leftNew = this.offsetLeft - zoomModifierNew/zoomModifierOld *(totalWidth * percentageX);// + this.mapRoot.width()/2;
+      var topNew = this.offsetTop - zoomModifierNew/zoomModifierOld *(totalHeight * percentageY);// + this.mapRoot.height()/2;
+      console.log('NEW '+this.offsetLeft+' : '+this.offsetTop+' = '+(percentageX * 100)+'% *'+totalWidth+' = '+(percentageX*totalWidth)+' : '+(totalHeight * percentageY / zoomModifierOld));
       
       // TODO : check this
       //function recenter() {
-      jQuery(this.mapDiv).css('left', leftNew+'px');
-      jQuery(this.mapDiv).css('top', topNew+'px');
+      jQuery(this.mapDiv).css('left', parseInt(leftNew)+'px');
+      jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');
+      
       //jQuery(this.mapDiv).offset({ top: topNew, left: leftNew});
       //alert('center');
       //};
