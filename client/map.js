@@ -50,7 +50,7 @@ var Map = function(mapDiv) {
   // Events
 
 	Map.prototype.onZoomChange = function(event, delta) {
-    console.log(this.zoom+' '+jQuery(this.mapDiv).offset().left+' '+event.clientX); 
+    //console.log(this.zoom+' '+jQuery(this.mapDiv).offset().left+' '+event.clientX); 
     //1 -303 456
     //2 -807 502
     //3 -2183 445
@@ -65,6 +65,9 @@ var Map = function(mapDiv) {
     
       var leftOld = jQuery(this.mapDiv).offset().left;
       var topOld = jQuery(this.mapDiv).offset().top;
+      //var leftOld = parseFloat(jQuery(this.mapDiv).css('left').replace('px', ''));
+      //var topOld = parseFloat(jQuery(this.mapDiv).css('top').replace('px', ''));      
+      console.log(jQuery(this.mapDiv).offset().top+' == '+jQuery(this.mapDiv).css('top'));
       var zoomModifierOld = Math.pow(2, this.zoom - 1);
       var mouseX = event.clientX;      
       var mouseY = event.clientY;      
@@ -72,24 +75,27 @@ var Map = function(mapDiv) {
       var constantY = (-topOld + mouseY) / zoomModifierOld;
       
       // Constants OK
-      console.log(constantX+' / '+constantY);
+      //console.log(constantX+' # '+constantY);
           
     
     if(newZoom != this.zoom) {
-      console.log('Zoom '+this.zoom+' => '+newZoom);
+      console.log('Zoom '+this.zoom+' => '+newZoom+' , '+constantX+' # '+constantY);
       
 
       this.zoom = newZoom;
-      var leftNew = - constantX * Math.pow(2, this.zoom - 1) + mouseX;
-      var topNew = - constantY * Math.pow(2, this.zoom - 1) + mouseY;
+      var leftNew = mouseX - constantX * Math.pow(2, this.zoom - 1);
+      var topNew = mouseY - constantY * Math.pow(2, this.zoom - 1);
       jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
+      console.log('NEW '+leftNew+' / '+topNew);
       
       // TODO : check this
-      function recenter() {
-      jQuery(this.mapDiv).attr('left', leftNew+'px');
-      jQuery(this.mapDiv).attr('top', topNew+'px');
-      };
-      setTimeout(recenter, 1000);
+      //function recenter() {
+      //jQuery(this.mapDiv).css('left', leftNew+'px');
+      //jQuery(this.mapDiv).css('top', topNew+'px');
+      jQuery(this.mapDiv).offset({ top: topNew, left: leftNew});
+      //alert('center');
+      //};
+      //setTimeout(recenter, 2000);
     }
   };    
   
