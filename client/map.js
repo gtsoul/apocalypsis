@@ -62,31 +62,37 @@ var Map = function(mapDiv) {
     var newZoom = Math.round(this.zoom + delta);
     newZoom = Math.min(3, Math.max(1, newZoom));
     
+    var mouseX = event.clientX;      
+    var mouseY = event.clientY;
+    var leftOld = jQuery(this.mapDiv).offset().left;
+    var topOld = jQuery(this.mapDiv).offset().top;
+    //var leftOld = parseFloat(jQuery(this.mapDiv).css('left').replace('px', ''));
+    //var topOld = parseFloat(jQuery(this.mapDiv).css('top').replace('px', ''));         
+    var totalWidth = jQuery(this.mapDiv).children().width();
+    var totalHeight = jQuery(this.mapDiv).children().width();
     
-      var leftOld = jQuery(this.mapDiv).offset().left;
-      var topOld = jQuery(this.mapDiv).offset().top;
-      //var leftOld = parseFloat(jQuery(this.mapDiv).css('left').replace('px', ''));
-      //var topOld = parseFloat(jQuery(this.mapDiv).css('top').replace('px', ''));      
-      console.log(jQuery(this.mapDiv).offset().top+' == '+jQuery(this.mapDiv).css('top'));
-      var zoomModifierOld = Math.pow(2, this.zoom - 1);
-      var mouseX = event.clientX;      
-      var mouseY = event.clientY;      
-      var constantX = (-leftOld + mouseX) / zoomModifierOld;
-      var constantY = (-topOld + mouseY) / zoomModifierOld;
-      
+    var zoomModifierOld = Math.pow(2, this.zoom - 1);
+    var percentageX = (mouseX -leftOld) / totalWidth;
+    var percentageY = (mouseY - topOld) / totalHeight;    
+    
+     
       // Constants OK
       //console.log(constantX+' # '+constantY);
           
     
     if(newZoom != this.zoom) {
-      console.log('Zoom '+this.zoom+' => '+newZoom+' , '+constantX+' # '+constantY);
+      console.log('Zoom '+this.zoom+' => '+newZoom+' , '+percentageX+' # '+percentageY);
       
 
-      this.zoom = newZoom;
-      var leftNew = mouseX - constantX * Math.pow(2, this.zoom - 1);
-      var topNew = mouseY - constantY * Math.pow(2, this.zoom - 1);
+      this.zoom = newZoom;      
+      var zoomModifierNew = Math.pow(2, this.zoom - 1);
+      var windowWidth = jQuery(this.mapDiv).width()/2;
+      var windowHeight = jQuery(this.mapDiv).height()/2;
+      var leftNew = /*windowWidth*/ - (totalWidth * percentageX / zoomModifierOld);
+      var topNew = /*windowHeight*/ - (totalHeight * percentageY / zoomModifierOld);
+      
       jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
-      console.log('NEW '+leftNew+' / '+topNew);
+      console.log('NEW '+windowWidth+' - '+jQuery(this.mapDiv).children().width() +' * '+percentageX+' = '+leftNew+' / '+topNew);
       
       // TODO : check this
       //function recenter() {
