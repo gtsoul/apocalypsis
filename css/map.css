@@ -1,9 +1,16 @@
 
 #mapWrapper {
-  width:1000px;
+  margin: 300px;
+  width:800px;
   height:400px;
   overflow:hidden;
   border:1px solid black;
+}
+
+.mapRoot {
+  display: block;
+  clear: both;
+  overflow: visible;
 }
 
 #map {
@@ -14,7 +21,7 @@
   cursor: move;
 }
 
-#map.zoom1 {
+#map.zoom1 .mapRoot {
   -moz-transform: scale(1);
   -webkit-transform: scale(1);
   -o-transform: scale(1);
@@ -22,7 +29,7 @@
   -ms-transform: scale(1);
 }
 
-#map.zoom1 .planets img {
+#map.zoom1 .mapRoot .planets img {
   -moz-transform: scale(1);
   -webkit-transform: scale(1);
   -o-transform: scale(1);
@@ -30,7 +37,7 @@
   -ms-transform: scale(1);
 }
 
-#map.zoom2 {
+#map.zoom2 .mapRoot {
   -moz-transform: scale(2);
   -webkit-transform: scale(2);
   -o-transform: scale(2);
@@ -38,7 +45,7 @@
   -ms-transform: scale(2);
 }
 
-#map.zoom2 .planets img {
+#map.zoom2 .mapRoot .planets img {
   -moz-transform: scale(0.5);
   -webkit-transform: scale(0.5);
   -o-transform: scale(0.5);
@@ -46,7 +53,7 @@
   -ms-transform: scale(0.5);
 }
 
-#map.zoom3 {
+#map.zoom3 .mapRoot {
   -moz-transform: scale(4);
   -webkit-transform: scale(4);
   -o-transform: scale(4);
@@ -54,7 +61,7 @@
   -ms-transform: scale(4);
 }
 
-#map.zoom3 .planets img {
+#map.zoom3 .mapRoot .planets img {
   -moz-transform: scale(0.25);
   -webkit-transform: scale(0.25);
   -o-transform: scale(0.25);

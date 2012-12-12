@@ -15,6 +15,9 @@ var Map = function(mapDiv) {
 	this.initY = 46;
   this.zoom = 1;
 	this.mapDiv = mapDiv;
+  this.mapRoot = jQuery(this.mapDiv).children('*:first');
+  this.offsetLeft = 0;
+  this.offsetTop = 0; 
 
   
 	this.init = function() {
@@ -68,8 +71,8 @@ var Map = function(mapDiv) {
     var topOld = jQuery(this.mapDiv).offset().top;
     //var leftOld = parseFloat(jQuery(this.mapDiv).css('left').replace('px', ''));
     //var topOld = parseFloat(jQuery(this.mapDiv).css('top').replace('px', ''));         
-    var totalWidth = jQuery(this.mapDiv).children().width();
-    var totalHeight = jQuery(this.mapDiv).children().width();
+    var totalWidth = this.mapRoot.width();
+    var totalHeight = this.mapRoot.width();
     
     var zoomModifierOld = Math.pow(2, this.zoom - 1);
     var percentageX = (mouseX -leftOld) / totalWidth;
@@ -84,24 +87,29 @@ var Map = function(mapDiv) {
       console.log('Zoom '+this.zoom+' => '+newZoom+' , '+percentageX+' # '+percentageY);
       
 
-      this.zoom = newZoom;      
+      this.zoom = newZoom;                  
+      jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
+      
       var zoomModifierNew = Math.pow(2, this.zoom - 1);
       var windowWidth = jQuery(this.mapDiv).width()/2;
       var windowHeight = jQuery(this.mapDiv).height()/2;
-      var leftNew = /*windowWidth*/ - (totalWidth * percentageX / zoomModifierOld);
-      var topNew = /*windowHeight*/ - (totalHeight * percentageY / zoomModifierOld);
+      this.offsetLeft = jQuery(this.mapDiv).offset().left - this.mapRoot.offset().left;
+      this.offsetTop = jQuery(this.mapDiv).offset().top - this.mapRoot.offset().top;
       
-      jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
-      console.log('NEW '+windowWidth+' - '+jQuery(this.mapDiv).children().width() +' * '+percentageX+' = '+leftNew+' / '+topNew);
+      var leftNew = this.offsetLeft;// - (totalWidth * percentageX / zoomModifierOld);
+      var topNew = this.offsetTop;// - (totalHeight * percentageY / zoomModifierOld);
+      console.log('NEW '+this.offsetLeft+' : '+this.offsetTop+' = '+leftNew+' : '+topNew);
       
       // TODO : check this
       //function recenter() {
-      //jQuery(this.mapDiv).css('left', leftNew+'px');
-      //jQuery(this.mapDiv).css('top', topNew+'px');
-      jQuery(this.mapDiv).offset({ top: topNew, left: leftNew});
+      jQuery(this.mapDiv).css('left', leftNew+'px');
+      jQuery(this.mapDiv).css('top', topNew+'px');
+      //jQuery(this.mapDiv).offset({ top: topNew, left: leftNew});
       //alert('center');
       //};
       //setTimeout(recenter, 2000);
+      /*jQuery(this.mapDiv).draggable("destroy");
+      this.enableDrag();*/
     }
   };    
   
