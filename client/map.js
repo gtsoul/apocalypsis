@@ -91,7 +91,7 @@ var Map = function(mapDiv) {
       jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
       
       var zoomModifierNew = Math.pow(2, this.zoom - 1);
-      var windowWidth = jQuery(this.mapDiv).width()/2;
+      /*var windowWidth = jQuery(this.mapDiv).width()/2;
       var windowHeight = jQuery(this.mapDiv).height()/2;
       this.offsetLeft = jQuery(this.mapDiv).offset().left - this.mapRoot.offset().left;
       this.offsetTop = jQuery(this.mapDiv).offset().top - this.mapRoot.offset().top;
@@ -103,14 +103,21 @@ var Map = function(mapDiv) {
       // TODO : check this
       //function recenter() {
       jQuery(this.mapDiv).css('left', parseInt(leftNew)+'px');
-      jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');
+      jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');*/
       
-      //jQuery(this.mapDiv).offset({ top: topNew, left: leftNew});
-      //alert('center');
-      //};
-      //setTimeout(recenter, 2000);
-      /*jQuery(this.mapDiv).draggable("destroy");
-      this.enableDrag();*/
+      var map = jQuery(this.mapDiv);
+      
+      var old_width = map.width();
+      var new_width = 400*Math.pow(2,newZoom);//ui.value;
+      var width_change = new_width - old_width;
+      var x_offset = ((map.position().left-200))/(old_width/2);
+      var y_offset = ((map.position().top-150))/(old_width/2);      
+      var css_properties = {
+          width: new_width,
+          left: (new_width * x_offset /2 ) + 200 + "px", 
+          top: (new_width * y_offset /2 ) + 150 + "px"
+      };
+      map.css(css_properties);
     }
   };    
   
