@@ -31,6 +31,12 @@
   -ms-transform-origin: 50% 50%;
 }
 
+#zoom_wrapper {
+  position:absolute;
+  z-index:5000;
+  left:30px;
+  top:30px;
+}
 #crosshairs{
   position: absolute;
   left: 250px;
