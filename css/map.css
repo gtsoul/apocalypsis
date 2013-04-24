@@ -31,7 +31,7 @@
   -ms-transform-origin: 50% 50%;
 }
 
-#zoom_wrapper {
+#tools_wrapper {
   position:absolute;
   z-index:5000;
   left:30px;
