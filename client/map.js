@@ -44,10 +44,75 @@ var Map = function(mapDiv) {
   };
   
 	Map.prototype.enableZoom = function() {
-    jQuery(this.mapDiv).bind('mousewheel', {map: this}, function(event, delta) {
+  
+    $(document).ready(function() {
+        var c = $('#viewport'), im = $('#image'), z = $('#zoom');
+        var imageHeight = 480,
+            imageWidth = 640,
+            contWidth = c.width(),
+            contHeight = c.height();
+        var ratio = Math.min(contWidth * 0.9 / imageWidth, contHeight * 0.9 / imageHeight);
+        im.css({
+            'height': imageHeight * ratio + 'px',
+            'width': imageWidth * ratio + 'px'
+        });
+        var currentScale = 1, currentLocation = {x: 180, y: 135}, mouseLocation = {x: 180, y: 135};
+        var minZoom = 0.1, maxZoom = 10, zoomFactor = 0.2, moveSmooth = 0.2;
+        //Increase moveSmooth for more moving intensity when zooming
+        //When moveSmooth = 1, pointed point is centered at every mousewheel impulsion
+        var zoomFactorInvertLog = 1 / Math.log(zoomFactor);
+        c.on('mousewheel', function(e, delta) {
+            var cOffset = c.offset();
+            mouseLocation.x = e.pageX - cOffset.left;
+            mouseLocation.y = e.pageY - cOffset.top;
+            var newZoom = Math.max(minZoom, Math.min(maxZoom, currentScale * (1 + delta * zoomFactor)));
+            var sliderVal = Math.log(newZoom) * zoomFactorInvertLog;
+            if(slidInvert) sliderVal = slidMin + slidMax - sliderVal;
+            z.slider('value', sliderVal);
+            zoom(newZoom);
+        });
+        var slidMin = Math.log(minZoom) * zoomFactorInvertLog, slidMax = Math.log(maxZoom) * zoomFactorInvertLog;
+        var slidInvert = (slidMin > slidMax);
+        z.slider({
+            orientation: 'vertical',
+            min: Math.min(slidMin, slidMax),
+            max: Math.max(slidMin, slidMax),
+            step: Math.abs(slidMin - slidMax) / 20,
+            value: slidMin + slidMax
+        }).on('slide slidechange', function (event, ui) {
+            var v = slidInvert ? slidMin + slidMax - ui.value : ui.value;
+            var newZoom = Math.pow(zoomFactor, v);
+            zoom(newZoom);
+        });
+        function zoom(scale)
+        {
+            if(scale <= 1)
+            {
+                currentLocation.x = im.width() / 2;
+              currentLocation.y = im.height() / 2;
+            }
+            else
+            {
+                currentLocation.x += moveSmooth * (mouseLocation.x - currentLocation.x) / currentScale;
+                currentLocation.y += moveSmooth * (mouseLocation.y - currentLocation.y) / currentScale;
+            }
+            var compat = ['-moz-', '-webkit-', '-o-', ''];
+            var newCss = {};
+            for(var i = compat.length - 1; i; i--)
+            {
+                newCss[compat[i]+'transform'] = 'scale('+scale+')';
+                newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px';
+            }
+            im.css(newCss);
+            currentScale = scale;
+        }
+    });
+  
+  
+    /*jQuery(this.mapDiv).bind('mousewheel', {map: this}, function(event, delta) {
       event.data.map.onZoomChange(event, delta);
     });
-    jQuery(this.mapDiv).attr('class', 'zoom1');
+    jQuery(this.mapDiv).attr('class', 'zoom1');*/
   };
   
   // Events
