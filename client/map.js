@@ -67,30 +67,41 @@ var Map = function(mapDiv) {
     
     var mouseX = event.clientX;      
     var mouseY = event.clientY;
-    var leftOld = jQuery(this.mapDiv).offset().left;
-    var topOld = jQuery(this.mapDiv).offset().top;
-    //var leftOld = parseFloat(jQuery(this.mapDiv).css('left').replace('px', ''));
-    //var topOld = parseFloat(jQuery(this.mapDiv).css('top').replace('px', ''));         
-    var totalWidth = this.mapRoot.width();
-    var totalHeight = this.mapRoot.width();
+    var totalWidth = this.mapRoot.width(); // constant
+    var totalHeight = this.mapRoot.height(); // constant
     
     var zoomModifierOld = Math.pow(2, this.zoom - 1);
-    var percentageX = (mouseX -leftOld) / totalWidth;
-    var percentageY = (mouseY - topOld) / totalHeight;    
     
-     
+    var leftOld = jQuery(this.mapDiv).offset().left + mouseX*zoomModifierOld; // TODO : garder l'offset ?
+    var topOld = jQuery(this.mapDiv).offset().top + mouseY*zoomModifierOld; // TODO : garder l'offset ?    
+    
+    var oldCenterX = zoomModifierOld*totalWidth/2;
+    var oldCenterY = zoomModifierOld*totalHeight/2;
+   
       // Constants OK
       //console.log(constantX+' # '+constantY);
           
     
     if(newZoom != this.zoom) {
-      console.log('Zoom '+this.zoom+' => '+newZoom+' , '+percentageX+' # '+percentageY);
+      console.log('Zoom '+this.zoom+' => '+newZoom+',  '+leftOld+' / '+topOld);
       
 
       this.zoom = newZoom;                  
       jQuery(this.mapDiv).attr('class', 'zoom'+this.zoom); 
       
       var zoomModifierNew = Math.pow(2, this.zoom - 1);
+      var newCenterX = zoomModifierNew*totalWidth/2;
+      var newCenterY = zoomModifierNew*totalHeight/2;
+      
+      var leftNew = newCenterX - (zoomModifierNew/zoomModifierOld) * (oldCenterX - leftOld);
+      var topNew = newCenterY - (zoomModifierNew/zoomModifierOld) * (oldCenterY - topOld);
+      console.log('delta = '+(leftOld - oldCenterX)/zoomModifierOld);
+      console.log(leftNew+' / '+topNew);
+      
+      
+      //jQuery(this.mapDiv).css('left', parseInt(leftNew)+'px');
+      //jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');
+      
       /*var windowWidth = jQuery(this.mapDiv).width()/2;
       var windowHeight = jQuery(this.mapDiv).height()/2;
       this.offsetLeft = jQuery(this.mapDiv).offset().left - this.mapRoot.offset().left;
@@ -103,7 +114,7 @@ var Map = function(mapDiv) {
       // TODO : check this
       //function recenter() {
       jQuery(this.mapDiv).css('left', parseInt(leftNew)+'px');
-      jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');*/
+      jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');
       
       /*var map = jQuery(this.mapDiv);
       
