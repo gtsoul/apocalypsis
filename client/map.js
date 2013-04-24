@@ -105,7 +105,7 @@ var Map = function(mapDiv) {
       jQuery(this.mapDiv).css('left', parseInt(leftNew)+'px');
       jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');*/
       
-      var map = jQuery(this.mapDiv);
+      /*var map = jQuery(this.mapDiv);
       
       var old_width = map.width();
       var new_width = 400*Math.pow(2,newZoom);//ui.value;
@@ -117,7 +117,7 @@ var Map = function(mapDiv) {
           left: (new_width * x_offset /2 ) + 200 + "px", 
           top: (new_width * y_offset /2 ) + 150 + "px"
       };
-      map.css(css_properties);
+      map.css(css_properties);*/
     }
   };    
   
