@@ -72,8 +72,8 @@ var Map = function(mapDiv) {
     
     var zoomModifierOld = Math.pow(2, this.zoom - 1);
     
-    var leftOld = jQuery(this.mapDiv).offset().left + mouseX*zoomModifierOld; // TODO : garder l'offset ?
-    var topOld = jQuery(this.mapDiv).offset().top + mouseY*zoomModifierOld; // TODO : garder l'offset ?    
+    var mouseXOld = /*jQuery(this.mapDiv).offset().left +*/ mouseX*zoomModifierOld; // TODO : garder l'offset ?
+    var mouseYOld = /*jQuery(this.mapDiv).offset().top +*/ mouseY*zoomModifierOld; // TODO : garder l'offset ?    
     
     var oldCenterX = zoomModifierOld*totalWidth/2;
     var oldCenterY = zoomModifierOld*totalHeight/2;
@@ -83,7 +83,7 @@ var Map = function(mapDiv) {
           
     
     if(newZoom != this.zoom) {
-      console.log('Zoom '+this.zoom+' => '+newZoom+',  '+leftOld+' / '+topOld);
+      console.log('Zoom '+this.zoom+' => '+newZoom+',  '+mouseXOld+' / '+mouseYOld);
       
 
       this.zoom = newZoom;                  
@@ -93,13 +93,19 @@ var Map = function(mapDiv) {
       var newCenterX = zoomModifierNew*totalWidth/2;
       var newCenterY = zoomModifierNew*totalHeight/2;
       
-      var leftNew = newCenterX - (zoomModifierNew/zoomModifierOld) * (oldCenterX - leftOld);
-      var topNew = newCenterY - (zoomModifierNew/zoomModifierOld) * (oldCenterY - topOld);
-      console.log('delta = '+(leftOld - oldCenterX)/zoomModifierOld);
-      console.log(leftNew+' / '+topNew);
+      //var leftNew = newCenterX - (zoomModifierNew/zoomModifierOld) * (oldCenterX - mouseXOld);
+      //var topNew = newCenterY - (zoomModifierNew/zoomModifierOld) * (oldCenterY - mouseYOld);
+      //console.log('delta = '+(mouseXOld - oldCenterX)/zoomModifierOld);
+      var deltaX = ((mouseXOld - oldCenterX)/zoomModifierOld);
+      var deltaY = ((mouseYOld - oldCenterY)/zoomModifierOld);
       
+      console.log('offsetX = '+deltaX+' * '+zoomModifierNew);
+      var oldOffsetX = parseInt(jQuery(this.mapDiv).css('left').replace('px', ''));
+      var newOffsetX = oldOffsetX - (deltaX*zoomModifierNew); // - viewport center TODO
       
-      //jQuery(this.mapDiv).css('left', parseInt(leftNew)+'px');
+      console.log(oldOffsetX+' => '+newOffsetX);
+      
+      //jQuery(this.mapDiv).css('left', parseInt(newOffsetX)+'px');
       //jQuery(this.mapDiv).css('top', parseInt(topNew)+'px');
       
       /*var windowWidth = jQuery(this.mapDiv).width()/2;
