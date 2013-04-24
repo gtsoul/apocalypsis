@@ -44,15 +44,13 @@ var Map = function(mapDiv) {
   };
   
 	Map.prototype.enableZoom = function() {
-    var c = $('#viewport'), im = $('#image'),  wr = $('#map'), z = $('#zoom');
-    var imageHeight = 480,
-        imageWidth = 640,
-        contWidth = c.width(),
-        contHeight = c.height();
-    var ratio = Math.min(contWidth * 0.9 / imageWidth, contHeight * 0.9 / imageHeight);
+    var c = $('#viewport'),  wr = $('#map'), z = $('#zoom');
+    var viewPortHeight = 480,
+        viewPortWidth = 640;
+    var ratio = 1;
     wr.css({
-        'height': imageHeight * ratio + 'px',
-        'width': imageWidth * ratio + 'px'
+        'height': viewPortHeight * ratio + 'px',
+        'width': viewPortWidth * ratio + 'px'
     });
     var currentScale = 1, currentLocation = {x: 180, y: 135}, mouseLocation = {x: 180, y: 135};
     var minZoom = 0.1, maxZoom = 20, zoomFactor = 0.2, moveSmooth = 0.2;
