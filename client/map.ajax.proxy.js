@@ -4,6 +4,7 @@ console.log('Loading map ajax proxy classes');
 var MapAjaxProxy = function(servicesContext) {
   this.context = servicesContext;
   this.services = {'universe-knowledge' : 'universe-knowledge.php'};
+  this.systems = {};
   
 	this.init = function() {
     // TODO 
@@ -15,7 +16,12 @@ var MapAjaxProxy = function(servicesContext) {
   };
   
   MapAjaxProxy.prototype.__getUniverseKnowledgeCB = function (data) {
-    console.log(data);
+    var proxy = this;
+    $.each(data, function(key, datum) {
+      if(key == 'system') {
+        var system = new EntitySystem(datum);
+      }
+    });
   };
   
   MapAjaxProxy.prototype.__ajaxGet = function(serviceName, callback, parameters) {
