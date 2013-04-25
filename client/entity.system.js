@@ -3,7 +3,7 @@ var EntitySystem = function(json) {
   this.pos;
   this.width;
   this.height;
-  this.planets;
+  this.planets = new Array();
   this.sun;
   
 	this.init = function() {
@@ -16,7 +16,7 @@ var EntitySystem = function(json) {
     this.pos = json.pos;
     this.width = json.width;
     this.height = json.height;
-    this.planets = {};
+    this.planets = new Array();
     this.sun = undefined;    
     if(json.subElements != undefined) {
       $.each(json.subElements.coords, function(key, datum) {    
