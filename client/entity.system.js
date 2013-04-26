@@ -3,7 +3,7 @@ var EntitySystem = function(json) {
   this.pos;
   this.width;
   this.height;
-  this.planets = new Array();
+  this.coords = new Array();
   this.sun;
   
 	this.init = function() {
@@ -16,13 +16,13 @@ var EntitySystem = function(json) {
     this.pos = json.pos;
     this.width = json.width;
     this.height = json.height;
-    this.planets = new Array();
+    this.coords = new Array();
     this.sun = undefined;    
     if(json.subElements != undefined) {
       $.each(json.subElements.coords, function(key, datum) {    
-        var planet = new EntityPlanet(datum, system);
-        if(planet != undefined && planet.pos != undefined) {
-          system.planets[planet.pos] = planet;
+        var coord = new EntityCoords(datum, system);
+        if(coord != undefined && coord.pos != undefined) {
+          system.coords[coord.pos] = coord;
         }
       });
       if(json.subElements.sun != undefined) {

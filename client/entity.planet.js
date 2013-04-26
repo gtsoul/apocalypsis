@@ -26,6 +26,7 @@ var EntitySun = function(json) {
 var EntityCoords = function(json) {
 
   EntityPlanet.prototype = new EntitySpaceElement(json);
+  this.planets = new Array();
   
 	this.init = function() {
     this.type = 'coords';
