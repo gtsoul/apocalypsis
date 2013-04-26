@@ -1,5 +1,5 @@
 
-var EntitySpaceElement = function(json) {
+var EntitySpaceElement = function(json, parent) {
   this.pos;
   this.image;
   this.x;
@@ -10,7 +10,7 @@ var EntitySpaceElement = function(json) {
   
 	this.init = function() {
     if(json != undefined) {
-      this.__loadJson(json);
+      this.__loadJson(json, parent);
     }
 		this.init = function() {};
 	}; 

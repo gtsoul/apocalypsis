@@ -1,7 +1,7 @@
 
-var EntityPlanet = function(json) {
+var EntityPlanet = function(json, parent) {
 
-  EntityPlanet.prototype = new EntitySpaceElement(json);
+  EntityPlanet.prototype = new EntitySpaceElement(json, parent);  
   
 	this.init = function() {
     this.type = 'planet';
@@ -11,9 +11,9 @@ var EntityPlanet = function(json) {
 	this.init();	
 };
 
-var EntitySun = function(json) {
+var EntitySun = function(json, parent) {
 
-  EntityPlanet.prototype = new EntitySpaceElement(json);
+  EntityPlanet.prototype = new EntitySpaceElement(json, parent);  
   
 	this.init = function() {
     this.type = 'sun';
@@ -23,12 +23,15 @@ var EntitySun = function(json) {
 	this.init();	
 };
 
-var EntityCoords = function(json) {
+var EntityCoords = function(json, parent) {
 
-  EntityPlanet.prototype = new EntitySpaceElement(json);
+  EntityPlanet.prototype = new EntitySpaceElement(json, parent);
   this.planets = new Array();
   
 	this.init = function() {
+    if(json != undefined) {
+      EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
+    }  
     this.type = 'coords';
 		this.init = function() {};
 	}; 
