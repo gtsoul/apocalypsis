@@ -26,7 +26,7 @@ var EntitySystem = function(json) {
         }
       });
       if(json.subElements.sun != undefined) {
-        this.sun = new EntityPlanet(json.subElements.sun, this);    
+        this.sun = new EntitySun(json.subElements.sun, this);    
       }
     }
   };

@@ -18,13 +18,13 @@ var MapAjaxProxy = function(servicesContext) {
   };
   
   MapAjaxProxy.prototype.__getUniverseKnowledgeCB = function (data, parameters) {
-    var proxy = this;
+    var proxy = parameters.context;
     $.each(data, function(key, datum) {
       if(key == 'system') {
         var system = new EntitySystem(datum);
         if(system != undefined && system.pos != undefined) {
-        console.log(proxy.sSystems);
           proxy.sSystems[system.pos] = system;
+          console.log(system);
         }
       }
     });
@@ -33,6 +33,7 @@ var MapAjaxProxy = function(servicesContext) {
   };
   
   MapAjaxProxy.prototype.__ajaxGet = function(serviceName, callback, parameters) {
+    var proxy = this;
     if(this.services[serviceName] == undefined) {
       log.warning('Unknown service '+serviceName);
     }
@@ -43,6 +44,7 @@ var MapAjaxProxy = function(servicesContext) {
       data: parameters
     }).done(function(data, textStatus, jqXHR) {
       if(callback != undefined) {
+        parameters.context = proxy;
         callback(data, parameters);
       }
     }).fail(function(jqXHR, textStatus, errorThrown) {
