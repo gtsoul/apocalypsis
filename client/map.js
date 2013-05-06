@@ -19,6 +19,16 @@ var Map = function(mapUi, mapAjaxProxy) {
 		this.init = function() {};
 	}; 
   
+  Map.prototype.refreshCoord = function (coord) {
+    var map = this;
+    this.proxy.getCoordKnowledge(coord.pos, function () {
+      console.log('coord updated, '+coord.pos);
+      // TODO
+      //map.ui.repaintCoord(coord);
+      console.log('repaint updated '+coord.pos);
+    });
+  };  
+  
   Map.prototype.refreshUniverse = function (galaxy, sector, system) {
     var map = this;
     this.proxy.getUniverseKnowledge(galaxy, sector, system, function () {

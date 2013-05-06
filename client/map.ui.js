@@ -104,7 +104,6 @@ var MapUi = function(mapContainer, viewport, tools) {
         }
         $('#target').css('left', (currentLocation.x-24)+'px');
         $('#target').css('top', (currentLocation.y-24)+'px');          
-        console.log(currentScale+' => '+scale+' ##  ('+(mouseLocation.x*(currentScale+scale)/2)+' , '+parseFloat(m.mapRoot.parent().css('left'))+', '+currentLocation.x+')');
         var compat = ['-moz-', '-webkit-', '-o-', ''];
         var newCss = {};
         var newCssNozoom = {};

@@ -36,25 +36,32 @@ var MapAjaxProxy = function(servicesContext) {
     return undefined;
   };  
   
-  MapAjaxProxy.prototype.getPlanetsInCoord = function (coordIt, callback) {
+  MapAjaxProxy.prototype.getCoordKnowledge = function (coordIt, callback) {
     var json = this.__ajaxGet('universe-knowledge', 
-                              this.__getPlanetsInCoordCB, 
+                              this.__getCoordKnowledgeCB, 
                               {'z_pos':coordIt, 'callback':callback});
   }; 
 
-  MapAjaxProxy.prototype.__getPlanetsInCoordCB = function (data, parameters) {
+  MapAjaxProxy.prototype.__getCoordKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
     var coord = proxy.getEntity(parameters.z_pos);
     coord.planets = new Array();
-    console.log(data);
-    /*$.each(data, function(key, datum) {
-      if(key == 'system') {
-        var system = new EntitySystem(datum);
-        if(system != undefined && system.pos != undefined) {
-          proxy.sSystems[system.pos] = system;
+    coord.fleets = new Array();
+    console.log(data.coord);
+    if(data.coord != undefined && data.coord.fleets != undefined) {
+      $.each(data.coord.fleets, function(key, datum) {
+        // TODO : save the fleets
+        //console.log(datum);
+      });
+    }
+    if(data.coord != undefined && data.coord.fleets != undefined) {
+      $.each(data.coord.fleets, function(key, datum) {
+        var planet = new EntityPlanet(datum);
+        if(planet != undefined && planet.pos != undefined) {
+          coord.planets[planet.pos] = planet;
         }
-      }
-    });   */
+      });
+    }    
     if(typeof(parameters.callback) != 'undefined') {
       parameters.callback();
     }
