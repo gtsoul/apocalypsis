@@ -29,6 +29,10 @@ var EntitySpaceElement = function(json, parent) {
       this.image = 'desertique_fg2.jpg'; // TODO
     }
   };
+  
+  EntitySpaceElement.prototype.getHtml = function () { 
+    console.warn('undefined function');
+  }
 
 	this.init();	
 };

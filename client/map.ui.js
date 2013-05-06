@@ -34,8 +34,13 @@ var MapUi = function(mapContainer, viewport, tools) {
   };
   
   MapUi.prototype.repaintSystem = function(system) {
-    console.log(system);
-    
+    if(system != undefined) {
+      var $oldSystem = $('#'+system.pos+'.system');
+      if($oldSystem.length > 0) {
+        $oldSystem.remove();
+      }
+      this.mapRoot.append(system.getHtml());
+    }  
   };
   
 	MapUi.prototype.enableZoom = function(zoomSlider) {
@@ -88,17 +93,17 @@ var MapUi = function(mapContainer, viewport, tools) {
       }
       var compat = ['-moz-', '-webkit-', '-o-', ''];
       var newCss = {};
-      var newCssImage = {};
+      var newCssNozoom = {};
       for(var i = compat.length - 1; i; i--) {
           newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
-          newCssImage[compat[i]+'transform'] = 'scale('+imgScale+')';
+          newCssNozoom[compat[i]+'transform'] = 'scale('+imgScale+')';
           newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px';
       }
       m.mapRoot.css(newCss);
-      m.mapRoot.find('.nozoom').css(newCssImage);
+      m.mapRoot.find('.nozoom').css(newCssNozoom);
       currentScale = m.zoom;
       
-      // TODO : adjust these values
+      // TODO : adjust these zoom values
       m.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
       if(m.zoom >= 1.1) {
         m.mapRoot.addClass('zoomOnPlanet');
