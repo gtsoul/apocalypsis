@@ -158,6 +158,6 @@
   -ms-transform: scale(512);
 }
 
-#map .planets .planet  {
+#map .planets .planet, #map  .system .sun, #map  .coords .coordPoint, #map  .sector .sectorPoint, #map  .system .systemPoint   {
   position: absolute;
 }

@@ -7,7 +7,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.1, maxZoom : 20, zoomFactor : 0.2, moveSmooth : 0.5};
+  this.zoomConfig = {minZoom : 0.05, maxZoom : 20, zoomFactor : 0.2, moveSmooth : 0.5};
 
   
 	this.init = function() {
@@ -35,6 +35,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   MapUi.prototype.repaintSystem = function(system) {
     console.log(system);
+    
   };
   
 	MapUi.prototype.enableZoom = function(zoomSlider) {
@@ -76,8 +77,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     {
       var scale = m.zoom;
       var imgScale = 1/m.zoom;
-      if(m.zoom <= 1)
-      {
+      if(m.zoom <= 1) {
         currentLocation.x = m.mapRoot.width() / 2;
         currentLocation.y = m.mapRoot.height() / 2;
       }
@@ -89,15 +89,26 @@ var MapUi = function(mapContainer, viewport, tools) {
       var compat = ['-moz-', '-webkit-', '-o-', ''];
       var newCss = {};
       var newCssImage = {};
-      for(var i = compat.length - 1; i; i--)
-      {
+      for(var i = compat.length - 1; i; i--) {
           newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
           newCssImage[compat[i]+'transform'] = 'scale('+imgScale+')';
           newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px';
       }
       m.mapRoot.css(newCss);
-      m.mapRoot.find('.planets img').css(newCssImage);
+      m.mapRoot.find('.nozoom').css(newCssImage);
       currentScale = m.zoom;
+      
+      // TODO : adjust these values
+      m.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSector').removeClass('zoomOnSystem');   
+      if(m.zoom >= 1.1) {
+        m.mapRoot.addClass('zoomOnPlanet');
+      } else if(m.zoom >= 0.2) {
+        m.mapRoot.addClass('zoomOnCoords');
+      } else if(m.zoom >= 0.08) {
+        m.mapRoot.addClass('zoomOnSector');
+      } else {
+        m.mapRoot.addClass('zoomOnSystem');
+      }      
     }
   };
   
