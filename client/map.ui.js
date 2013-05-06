@@ -33,13 +33,27 @@ var MapUi = function(mapContainer, viewport, tools) {
     console.log('done');
   };
   
-  MapUi.prototype.repaintSystem = function(system) {
+  MapUi.prototype.repaintSystem = function(system, systems) {
     if(system != undefined) {
       var $oldSystem = $('#'+system.pos+'.system');
-      if($oldSystem.length > 0) {
+      var $newSystem = system.getHtml();
+      if($oldSystem.length > 0 && false) { // TODO
+        $newSystem.attr('top', $oldSystem.attr('top'));
+        $newSystem.attr('left', $oldSystem.attr('left'));
         $oldSystem.remove();
+      } else {
+        nbSystemIt = systems.length;
+        while(system.x == undefined && system.y == undefined && 
+        var nbSide = Math.ceil(Math.sqrt(nbSystemIt));
+        var top = Math.ceil(nbSystemIt / nbSide);
+        var left = nbSystemIt - (nbSide * (top-1));
+        
+        
+        $newSystem.attr('top', $oldSystem.attr('top'));
+        $newSystem.attr('left', $oldSystem.attr('left'));      
+console.log(nbSystems+' ['+nbSide+'] : '+top+' / '+left);        
       }
-      this.mapRoot.append(system.getHtml());
+      this.mapRoot.append($newSystem);
     }  
   };
   

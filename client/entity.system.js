@@ -3,6 +3,8 @@ var EntitySystem = function(json) {
   this.pos;
   this.width;
   this.height;
+  this.x;
+  this.y;
   this.coords = new Array();
   this.sun;
   this.type = 'system';
