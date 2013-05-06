@@ -1,4 +1,9 @@
 
+/* TODO : only for tests */
+#target {
+  position: absolute;
+}
+
 #viewport {
 /*margin: 300px;*/
   width:800px;
@@ -39,8 +44,8 @@
 }
 #crosshairs{
   position: absolute;
-  left: 250px;
-  top: 150px;
+  left: 260px;
+  top: 160px;
   z-index: 5000;
   pointer-events: none;
 }
@@ -162,6 +167,10 @@
   position: absolute;
   width: 80px;
   height: 80px;
+}
+
+#map  .system .sun {
+  pointer-events: none;
 }
 
 /*#map  .mapRoot.zoomOnPlanet .coords .coordPoint, #map  .mapRoot.zoomOnPlanet .system .systemPoint {
