@@ -12,6 +12,7 @@ if (file_exists($file)) {
   readfile($file);
 } else {
   echo '"system": {}';
+  echo '{"error":"sector not reachable"}';
 }
 
 ?>

@@ -1,0 +1,56 @@
+{
+	"system": {
+		"pos": "2_15_7",
+		"width": 16,
+		"height": 12,
+		"subElements": {
+			"coords": [{
+				"pos": "2_15_7_1",
+				"x": "9",
+				"y": "6",
+				"width": 4,
+				"height": 4,
+				"known": true
+			},
+			{
+				"pos": "2_15_7_2",
+				"x": "0",
+				"y": "6",
+				"width": 4,
+				"height": 4,
+				"known": true
+			},
+			{
+				"pos": "2_15_7_3",
+				"x": "8",
+				"y": "0",
+				"width": 4,
+				"height": 4,
+				"known": true
+			},
+			{
+				"pos": "2_15_7_4",
+				"x": "5",
+				"y": "8",
+				"width": 4,
+				"height": 4,
+				"known": true
+			},
+			{
+				"pos": "2_15_7_5",
+				"x": "0",
+				"y": "1",
+				"width": 4,
+				"height": 4,
+				"known": true
+			}],
+			"sun": {
+				"x": "13",
+				"y": "9",
+				"width": 2,
+				"height": 2,
+				"image": "\/images\/universe\/soleil7.jpg"
+			}
+		}
+	}
+}

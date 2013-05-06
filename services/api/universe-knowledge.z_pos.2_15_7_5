@@ -1,0 +1,60 @@
+{
+	"coord": {
+		"pos": "2_15_7_5",
+		"width": 16,
+		"height": 12,
+		"subElements": {
+			"planets": [{
+				"pos": "2_15_7_5_1",
+				"x": "9",
+				"y": "8",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "CanHeart",
+				"image": "\/images\/universe\/temperee_fg1.jpg"
+			},
+			{
+				"pos": "2_15_7_5_2",
+				"x": "3",
+				"y": "0",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "amipueremo",
+				"image": "\/images\/universe\/glaciaire_fg1.jpg"
+			},
+			{
+				"pos": "2_15_7_5_3",
+				"x": "12",
+				"y": "3",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "masmaree",
+				"image": "\/images\/universe\/luxuriante_fg1.jpg"
+			},
+			{
+				"pos": "2_15_7_5_4",
+				"x": "0",
+				"y": "6",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "apalinee",
+				"image": "\/images\/universe\/aride_fg1.jpg"
+			}],
+			"pc": {
+				"x": 6,
+				"y": 4,
+				"width": 4,
+				"height": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		}]
+	}
+}

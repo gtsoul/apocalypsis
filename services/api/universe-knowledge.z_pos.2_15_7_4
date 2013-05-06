@@ -1,0 +1,73 @@
+{
+	"coord": {
+		"pos": "2_15_7_4",
+		"width": 16,
+		"height": 12,
+		"subElements": {
+			"planets": [{
+				"pos": "2_15_7_4_1",
+				"x": "10",
+				"y": "8",
+				"width": 4,
+				"height": 4,
+				"owner": {
+					"cap_id": "2002",
+					"cap_name": "cdt. Nero"
+				},
+				"name": "Adria",
+				"image": "\/images\/universe\/temperee_fg0.jpg"
+			},
+			{
+				"pos": "2_15_7_4_2",
+				"x": "3",
+				"y": "0",
+				"width": 4,
+				"height": 4,
+				"owner": {
+					"cap_id": "2002",
+					"cap_name": "cdt. Nero"
+				},
+				"name": "Maatria",
+				"image": "\/images\/universe\/desertique_fg0.jpg"
+			},
+			{
+				"pos": "2_15_7_4_3",
+				"x": "11",
+				"y": "2",
+				"width": 4,
+				"height": 4,
+				"owner": {
+					"cap_id": "2002",
+					"cap_name": "cdt. Nero"
+				},
+				"name": "Erodia",
+				"image": "\/images\/universe\/desertique_fg0.jpg"
+			},
+			{
+				"pos": "2_15_7_4_4",
+				"x": "0",
+				"y": "7",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "balineree",
+				"image": "\/images\/universe\/desertique_fg0.jpg"
+			}],
+			"pc": {
+				"x": 6,
+				"y": 4,
+				"width": 4,
+				"height": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		},
+		{
+			"cap_id": 2002,
+			"cap_name": "cdt. Nero"
+		}]
+	}
+}

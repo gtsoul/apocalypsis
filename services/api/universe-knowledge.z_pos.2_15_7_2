@@ -1,0 +1,71 @@
+{
+	"coord": {
+		"pos": "2_15_7_2",
+		"width": 16,
+		"height": 12,
+		"subElements": {
+			"planets": [{
+				"pos": "2_15_7_2_1",
+				"x": "12",
+				"y": "8",
+				"width": 4,
+				"height": 4,
+				"owner": {
+					"cap_id": "2019",
+					"cap_name": "cdt. Nanovitch3"
+				},
+				"name": "PLOP PLOP PLOP",
+				"image": "\/images\/universe\/temperee_fg2.jpg"
+			},
+			{
+				"pos": "2_15_7_2_2",
+				"x": "0",
+				"y": "2",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "aruereguye",
+				"image": "\/images\/universe\/luxuriante_fg2.jpg"
+			},
+			{
+				"pos": "2_15_7_2_3",
+				"x": "10",
+				"y": "0",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "aneruyegal",
+				"image": "\/images\/universe\/glaciaire_fg2.jpg"
+			},
+			{
+				"pos": "2_15_7_2_4",
+				"x": "0",
+				"y": "7",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "eremamipem",
+				"image": "\/images\/universe\/aride_fg2.jpg"
+			}],
+			"pc": {
+				"x": 6,
+				"y": 4,
+				"width": 4,
+				"height": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		},
+		{
+			"cap_id": 2002,
+			"cap_name": "cdt. Nero"
+		},
+		{
+			"cap_id": 2019,
+			"cap_name": "cdt. Nanovitch3"
+		}]
+	}
+}

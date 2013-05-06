@@ -1,0 +1,70 @@
+{
+	"coord": {
+		"pos": "2_15_7_3",
+		"width": 16,
+		"height": 12,
+		"subElements": {
+			"planets": [{
+				"pos": "2_15_7_3_1",
+				"x": "10",
+				"y": "8",
+				"width": 4,
+				"height": 4,
+				"owner": {
+					"cap_id": "1999",
+					"cap_name": "cdt. Anakine78"
+				},
+				"name": "Voldrago",
+				"image": "\/images\/universe\/temperee_fg3.jpg"
+			},
+			{
+				"pos": "2_15_7_3_2",
+				"x": "1",
+				"y": "2",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "casapapuer",
+				"image": "\/images\/universe\/glaciaire_fg3.jpg"
+			},
+			{
+				"pos": "2_15_7_3_3",
+				"x": "11",
+				"y": "1",
+				"width": 4,
+				"height": 4,
+				"owner": null,
+				"name": "asaquconeg",
+				"image": "\/images\/universe\/glaciaire_fg3.jpg"
+			},
+			{
+				"pos": "2_15_7_3_4",
+				"x": "0",
+				"y": "7",
+				"width": 4,
+				"height": 4,
+				"owner": {
+					"cap_id": "1999",
+					"cap_name": "cdt. Anakine78"
+				},
+				"name": "Glanuis",
+				"image": "\/images\/universe\/glaciaire_fg3.jpg"
+			}],
+			"pc": {
+				"x": 6,
+				"y": 4,
+				"width": 4,
+				"height": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		},
+		{
+			"cap_id": 1999,
+			"cap_name": "cdt. Anakine78"
+		}]
+	}
+}
