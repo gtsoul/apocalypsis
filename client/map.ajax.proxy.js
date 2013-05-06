@@ -35,7 +35,7 @@ var MapAjaxProxy = function(servicesContext) {
   MapAjaxProxy.prototype.__ajaxGet = function(serviceName, callback, parameters) {
     var proxy = this;
     if(this.services[serviceName] == undefined) {
-      log.warning('Unknown service '+serviceName);
+      console.warn('Unknown service '+serviceName);
     }
     jQuery.ajax({
       dataType: "json",
@@ -48,7 +48,7 @@ var MapAjaxProxy = function(servicesContext) {
         callback(data, parameters);
       }
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      log.warning('Error in service '+serviceName+" : "+errorThrown);
+      console.warn('Error in service '+serviceName+" : "+errorThrown);
     });
   };
   
