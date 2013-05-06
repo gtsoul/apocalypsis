@@ -33,6 +33,10 @@ var MapUi = function(mapContainer, viewport, tools) {
     console.log('done');
   };
   
+  MapUi.prototype.repaintSystem = function(system) {
+    console.log(system);
+  };
+  
 	MapUi.prototype.enableZoom = function(zoomSlider) {
     var m = this;
     var viewPortHeight = 480,

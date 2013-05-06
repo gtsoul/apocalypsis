@@ -14,7 +14,7 @@ var MapAjaxProxy = function(servicesContext) {
   MapAjaxProxy.prototype.getUniverseKnowledge = function (galaxy, sector, system, callback) {
     var json = this.__ajaxGet('universe-knowledge', 
                               this.__getUniverseKnowledgeCB, 
-                              {'galaxy':galaxy, 'sector':sector, 'system':system, 'callback':callback});
+                              {'z_pos':galaxy+'_'+sector+'_'+system, 'callback':callback});
   };
   
   MapAjaxProxy.prototype.__getUniverseKnowledgeCB = function (data, parameters) {
@@ -24,12 +24,12 @@ var MapAjaxProxy = function(servicesContext) {
         var system = new EntitySystem(datum);
         if(system != undefined && system.pos != undefined) {
           proxy.sSystems[system.pos] = system;
-          console.log(system);
         }
       }
-    });
-    
-    console.log(parameters);
+    });   
+    if(typeof(parameters.callback) != 'undefined') {
+      parameters.callback();
+    }
   };
   
   MapAjaxProxy.prototype.__ajaxGet = function(serviceName, callback, parameters) {
@@ -51,6 +51,15 @@ var MapAjaxProxy = function(servicesContext) {
       console.warn('Error in service '+serviceName+" : "+errorThrown);
     });
   };
+  
+  
+  MapAjaxProxy.prototype.getSystem = function(galaxy, sector, system) {
+    var systemKey = galaxy+'_'+sector+'_'+system;
+    if(this.sSystems != undefined && typeof(this.sSystems[systemKey]) != 'undefined') {
+      return this.sSystems[systemKey];
+    } 
+    return undefined;    
+  };  
   
 	this.init();	
 };

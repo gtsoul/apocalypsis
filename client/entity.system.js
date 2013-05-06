@@ -21,8 +21,7 @@ var EntitySystem = function(json) {
     this.sun = undefined;    
     if(json.subElements != undefined) {
       $.each(json.subElements.coords, function(key, datum) {    
-        var coord = new EntityCoords(datum, system);
-          console.log(coord.parent);        
+        var coord = new EntityCoords(datum, system);   
         if(coord != undefined && coord.pos != undefined) {
           system.coords[coord.pos] = coord;
         }

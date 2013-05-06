@@ -11,8 +11,8 @@ $file = 'universe-knowledge.z_pos.'.$z_pos;
 if (file_exists($file)) {
   readfile($file);
 } else {
-  echo '"system": {}';
-  echo '{"error":"sector not reachable"}';
+  //echo '"system": {}';
+  echo '{"error":"sector '.$z_pos.' not reachable"}';
 }
 
 ?>

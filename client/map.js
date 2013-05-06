@@ -20,7 +20,12 @@ var Map = function(mapUi, mapAjaxProxy) {
 	}; 
   
   Map.prototype.refreshUniverse = function (galaxy, sector, system) {
-    this.proxy.getUniverseKnowledge(galaxy, sector, system);
+    var map = this;
+    this.proxy.getUniverseKnowledge(galaxy, sector, system, function () {
+      console.log('data updated, '+galaxy+', '+sector+', '+system);
+      map.ui.repaintSystem(map.proxy.getSystem(galaxy, sector, system));
+      console.log('repaint updated '+galaxy+', '+sector+', '+system);
+    });
   };
   
 	this.init();	

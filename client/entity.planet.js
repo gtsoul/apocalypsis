@@ -34,6 +34,7 @@ var EntityCoords = function(json, parent) {
     }  
     this.type = 'coords';
 		this.init = function() {};
+    this.image = 'coordonnee_small.jpg';
 	}; 
 
 	this.init();	
