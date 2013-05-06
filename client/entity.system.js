@@ -8,7 +8,7 @@ var EntitySystem = function(json) {
   this.coords = new Array();
   this.sun;
   this.type = 'system';
-  this.image = 'systeme.jpg';
+  this.image = 'images/apocalypsis/systeme.jpg';
   
 	this.init = function() {
     this.__loadJson(json);
@@ -20,6 +20,8 @@ var EntitySystem = function(json) {
     this.pos = json.pos;
     this.width = json.width;
     this.height = json.height;
+    this.x = json.x;
+    this.y = json.y;
     this.coords = new Array();
     this.sun = undefined;    
     if(json.subElements != undefined) {
@@ -36,21 +38,32 @@ var EntitySystem = function(json) {
     }
   };
   
-  EntitySystem.prototype.getHtml = function () {
-    // TODO : complete
-    var $systemPoint = $('<img class="systemPoint nozoom" style="top:50px;left:50px;" src="images/apocalypsis/systeme.jpg"/>');
+  EntitySystem.prototype.getHtml = function (left, top) {
+    var $systemPoint = $('<img class="systemPoint nozoom" src="images/apocalypsis/systeme.jpg"/>');
     var $system = $('<div class="system"></div>');
     $system.attr('id', this.pos);
+    $systemPoint.css('left', Math.round(left + EntitySystem.prototype.WIDTH_PX/2)+'px');
+    $systemPoint.css('top', Math.round(top + EntitySystem.prototype.HEIGHT_PX/2)+'px');
+    $systemPoint.attr('src', this.image);
     $system.append($systemPoint);
     if(this.sun != undefined) {
-      $system.append(this.sun.getHtml());
+      $system.append(this.sun.getHtml(
+        left + (this.sun.x*EntitySystem.prototype.WIDTH_PX/this.width), 
+        top + (this.sun.y*EntitySystem.prototype.HEIGHT_PX/this.height)
+      ));
     }
     for(var coordIt in this.coords) {
       var coord = this.coords[coordIt];
-      $system.append(coord.getHtml());
+      $system.append(coord.getHtml(
+        left + (coord.x*EntitySystem.prototype.WIDTH_PX/this.width), 
+        top + (coord.y*EntitySystem.prototype.HEIGHT_PX/this.height)      
+      ));
     }
     return $system;
   };
+  
+  EntitySystem.prototype.WIDTH_PX = 100;
+  EntitySystem.prototype.HEIGHT_PX = 100;
 
 	this.init();	
 };

@@ -30,7 +30,7 @@ var EntitySpaceElement = function(json, parent) {
     }
   };
   
-  EntitySpaceElement.prototype.getHtml = function () { 
+  EntitySpaceElement.prototype.getHtml = function (left, top) { 
     console.warn('undefined function');
   }
 

@@ -21,10 +21,11 @@ var EntityPlanet = function(json, parent) {
 
 var EntitySun = function(json, parent) {
 
-  // TODO : complete
-  EntitySun.prototype.getHtml = function () {
+  EntitySun.prototype.getHtml = function (left, top) {
     var $sun = $('<img class="sun nozoom" style="top:200px;left:200px;" />');
     $sun.attr('src', this.image);
+    $sun.css('left', Math.round(left)+'px');
+    $sun.css('top', Math.round(top)+'px');
     return $sun;
   }; 
 
@@ -41,12 +42,14 @@ var EntitySun = function(json, parent) {
 var EntityCoords = function(json, parent) {
 
   // TODO : complete
-  EntityCoords.prototype.getHtml = function () {  
+  EntityCoords.prototype.getHtml = function (left, top) {  
     var $coords = $('<div class="coords" id="2_15_7_1">');
     $coords.attr('id', this.pos);    
     var $planets = $('<div class="planets"/>');
-    var $coordPoint = $('<img class="coordPoint nozoom" style="top:50px;left:50px;" />');
+    var $coordPoint = $('<img class="coordPoint nozoom" />');
     $coordPoint.attr('src', this.image);
+    $coordPoint.css('left', Math.round(left)+'px');
+    $coordPoint.css('top', Math.round(top)+'px');    
     $coords.append($coordPoint);
     $coords.append($planets);
     return $coords;

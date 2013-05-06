@@ -33,18 +33,15 @@ var MapUi = function(mapContainer, viewport, tools) {
     console.log('done');
   };
   
-  MapUi.prototype.repaintSystem = function(system, systems) {
+  MapUi.prototype.repaintSystem = function(system) {
     if(system != undefined) {
       var $oldSystem = $('#'+system.pos+'.system');
-      var $newSystem = system.getHtml();
+      var left = system.x * EntitySystem.prototype.WIDTH_PX;
+      var top = system.y * EntitySystem.prototype.HEIGHT_PX;
+      var $newSystem = system.getHtml(left, top);
       if($oldSystem.length > 0) {
-        $newSystem.attr('left', $oldSystem.attr('left'));
-        $newSystem.attr('top', $oldSystem.attr('top'));
         $oldSystem.remove();
-      } else {
-        $newSystem.attr('left', system.x * 100);
-        $newSystem.attr('top', system.y * 100);
-      }
+      }      
       this.mapRoot.append($newSystem);
     }  
   };

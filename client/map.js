@@ -23,7 +23,7 @@ var Map = function(mapUi, mapAjaxProxy) {
     var map = this;
     this.proxy.getUniverseKnowledge(galaxy, sector, system, function () {
       console.log('data updated, '+galaxy+', '+sector+', '+system);
-      map.ui.repaintSystem(map.proxy.getSystem(galaxy, sector, system), map.proxy.sSystems);
+      map.ui.repaintSystem(map.proxy.getSystem(galaxy, sector, system));
       console.log('repaint updated '+galaxy+', '+sector+', '+system);
     });
   };
