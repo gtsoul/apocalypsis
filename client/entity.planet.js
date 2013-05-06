@@ -43,7 +43,7 @@ var EntityCoords = function(json, parent) {
 
   // TODO : complete
   EntityCoords.prototype.getHtml = function (left, top) {  
-    var $coords = $('<div class="coords" id="2_15_7_1">');
+    var $coords = $('<div class="coords unloaded" id="2_15_7_1">');
     $coords.attr('id', this.pos);    
     var $planets = $('<div class="planets"/>');
     var $coordPoint = $('<img class="coordPoint nozoom" />');
@@ -52,11 +52,28 @@ var EntityCoords = function(json, parent) {
     $coordPoint.css('top', Math.round(top)+'px');    
     $coords.append($coordPoint);
     $coords.append($planets);
+    $coords.hover(function() {
+      var coord = globalMap.getEntity($(this).attr('id'));
+      if(coord != undefined && coord.planets == undefined) {
+        globalMap.proxy.getPlanetsInCoord(coord.pos);      
+      }
+    });
     return $coords;
   };
+  
+  EntityCoords.prototype.getPlanet = function(planetId) {
+    var planetKey = planetId;
+    if(planetKey.indexOf('_') < 0) {
+      planetKey = this.pos+'_'+planetId;
+    }
+    if(this.planets != undefined && typeof(this.planets[planetKey]) != 'undefined') {
+      return this.planets[planetKey];
+    } 
+    return undefined;    
+  };    
 
   EntityCoords.prototype = new EntitySpaceElement(json, parent);
-  this.planets = new Array();
+  this.planets;// = new Array();
   
 	this.init = function() {
     if(json != undefined) {

@@ -28,5 +28,9 @@ var Map = function(mapUi, mapAjaxProxy) {
     });
   };
   
+  Map.prototype.getEntity = function (entityId) {
+    return this.proxy.getEntity(entityId);
+  };  
+  
 	this.init();	
 };

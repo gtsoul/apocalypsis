@@ -173,8 +173,12 @@
   pointer-events: none;
 }
 
-/*#map  .mapRoot.zoomOnPlanet .coords .coordPoint, #map  .mapRoot.zoomOnPlanet .system .systemPoint {
+#map  .mapRoot.zoomOnPlanet .coords .coordPoint, #map  .mapRoot.zoomOnPlanet .system .systemPoint {
   display: none;
+}
+
+#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
+  display: block;
 }
 
 #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint {
@@ -183,5 +187,5 @@
 
 #map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .coords {
   display: none;
-}*/
+}
 

@@ -29,7 +29,6 @@ var EntitySystem = function(json) {
         var coord = new EntityCoords(datum, system);   
         if(coord != undefined && coord.pos != undefined) {
           system.coords[coord.pos] = coord;
-          console.log(coord);
         }
       });
       if(json.subElements.sun != undefined) {
@@ -61,6 +60,17 @@ var EntitySystem = function(json) {
     }
     return $system;
   };
+  
+  EntitySystem.prototype.getCoord = function(coordId) {
+    var coordKey = coordId;
+    if(coordKey.indexOf('_') < 0) {
+      coordKey = this.pos+'_'+coordId;
+    }
+    if(this.coords != undefined && typeof(this.coords[coordKey]) != 'undefined') {
+      return this.coords[coordKey];
+    } 
+    return undefined;    
+  };  
   
   EntitySystem.prototype.WIDTH_PX = 100;
   EntitySystem.prototype.HEIGHT_PX = 100;
