@@ -61,8 +61,6 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     m.viewport.on('mousewheel', function(e, delta) {
         m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, currentScale * (1 + delta * m.zoomConfig.zoomFactor)));
-        // TODO : TEST :
-        //m.zoom = 1.2;
         var vOffset = m.viewport.offset();
         var cOffset = m.mapRoot.offset();
         mouseLocation.x = (e.pageX - (vOffset.left + cOffset.left)) / currentScale;
@@ -84,15 +82,13 @@ var MapUi = function(mapContainer, viewport, tools) {
         value: slidMin + slidMax
     }).on('slide slidechange', function (event, ui) {
         var v = slidInvert ? slidMin + slidMax - ui.value : ui.value;
-        m.zoom = Math.pow(m.zoomConfig.zoomFactor, v);
-        // TODO : TEST :
-        //m.zoom = 1.2;        
+        m.zoom = Math.pow(m.zoomConfig.zoomFactor, v);       
         if(!zoomMutex) {
           var cOffset = m.mapRoot.offset();      
           mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
           mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / currentScale;        
-        }
-        zoom();        
+          zoom();           
+        }      
     });
     function zoom() {
       var scale = m.zoom;
@@ -105,15 +101,8 @@ var MapUi = function(mapContainer, viewport, tools) {
           currentLocation.x = m.mapRoot.width() / 2 - cOffset.left;
           currentLocation.y = m.mapRoot.height() / 2 - cOffset.top;
         } else {
-            /*currentLocation.x += m.zoomConfig.moveSmooth * (mouseLocation.x / currentScale - currentLocation.x / currentScale);
-            currentLocation.y += m.zoomConfig.moveSmooth * (mouseLocation.y / currentScale - currentLocation.y / currentScale);*/
-            currentLocation.x = m.zoomConfig.moveSmooth * (mouseLocation.x);
-            currentLocation.y = m.zoomConfig.moveSmooth * (mouseLocation.y);
-            
-            /*currentLocation.x = parseFloat(m.mapRoot.parent().css('left')) - m.zoomConfig.moveSmooth * (mouseLocation.x*(currentScale+scale)/2);
-            currentLocation.y = parseFloat(m.mapRoot.parent().css('top')) - m.zoomConfig.moveSmooth * (mouseLocation.y*(currentScale+scale)/2);*/
-            /*currentLocation.x += (mouseLocation.x / currentScale);
-            currentLocation.y += (mouseLocation.y / currentScale);*/
+          currentLocation.x = m.zoomConfig.moveSmooth * (mouseLocation.x) - (1 - m.zoomConfig.moveSmooth) * currentLocation.x;
+          currentLocation.y = m.zoomConfig.moveSmooth * (mouseLocation.y) - (1 - m.zoomConfig.moveSmooth) * currentLocation.y;
         }
         $('#target').css('left', (currentLocation.x-24)+'px');
         $('#target').css('top', (currentLocation.y-24)+'px');          
