@@ -60,11 +60,13 @@ var MapUi = function(mapContainer, viewport, tools) {
     var zoomMutex = false;
     
     m.viewport.on('mousewheel', function(e, delta) {
+        m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, currentScale * (1 + delta * m.zoomConfig.zoomFactor)));
+        // TODO : TEST :
+        m.zoom = 1.2;
         var vOffset = m.viewport.offset();
         var cOffset = m.mapRoot.offset();
-        mouseLocation.x = e.pageX - (vOffset.left + cOffset.left);
-        mouseLocation.y = e.pageY - (vOffset.top + cOffset.top);
-        m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, currentScale * (1 + delta * m.zoomConfig.zoomFactor)));
+        mouseLocation.x = (e.pageX - (vOffset.left + cOffset.left)) / m.zoom;
+        mouseLocation.y = (e.pageY - (vOffset.top + cOffset.top)) / m.zoom;        
         var sliderVal = Math.log(m.zoom) * zoomFactorInvertLog;
         if(slidInvert) sliderVal = slidMin + slidMax - sliderVal;
         zoomMutex = true;
@@ -83,18 +85,19 @@ var MapUi = function(mapContainer, viewport, tools) {
     }).on('slide slidechange', function (event, ui) {
         var v = slidInvert ? slidMin + slidMax - ui.value : ui.value;
         m.zoom = Math.pow(m.zoomConfig.zoomFactor, v);
+        // TODO : TEST :
+        m.zoom = 1.2;        
         if(!zoomMutex) {
           var cOffset = m.mapRoot.offset();      
-          mouseLocation.x = viewPortWidth / 2 - cOffset.left;          
-          mouseLocation.y = viewPortHeight / 2 - cOffset.top;        
-          console.log();
+          mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / m.zoom;          
+          mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / m.zoom;        
           zoom();
         }
     });
     function zoom()
     {
       var scale = m.zoom;
-      if(scale != currentScale) { // TODO
+      if(scale != currentScale || true) { // TODO
         console.log('zoom();');
         var imgScale = 1/m.zoom;
         console.log(m.zoom);
@@ -120,8 +123,8 @@ var MapUi = function(mapContainer, viewport, tools) {
         var newCss = {};
         var newCssNozoom = {};
         for(var i = compat.length - 1; i; i--) {
-            //newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
-            //newCssNozoom[compat[i]+'transform'] = 'scale('+imgScale+')';
+            newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
+            newCssNozoom[compat[i]+'transform'] = 'scale('+imgScale+')';
             newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px'; // TODO
         }
         m.mapRoot.css(newCss);
