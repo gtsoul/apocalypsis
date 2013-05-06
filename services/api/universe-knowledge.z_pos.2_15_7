@@ -3,6 +3,8 @@
 		"pos": "2_15_7",
 		"width": 16,
 		"height": 12,
+    "x": "9",
+    "y": "6",
 		"subElements": {
 			"coords": [{
 				"pos": "2_15_7_1",
