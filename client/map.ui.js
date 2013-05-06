@@ -99,18 +99,19 @@ var MapUi = function(mapContainer, viewport, tools) {
       currentScale = m.zoom;
       
       // TODO : adjust these values
-      m.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSector').removeClass('zoomOnSystem');   
+      m.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
       if(m.zoom >= 1.1) {
         m.mapRoot.addClass('zoomOnPlanet');
       } else if(m.zoom >= 0.2) {
         m.mapRoot.addClass('zoomOnCoords');
-      } else if(m.zoom >= 0.08) {
-        m.mapRoot.addClass('zoomOnSector');
-      } else {
+      } else /*if(m.zoom >= 0.08)*/ {
         m.mapRoot.addClass('zoomOnSystem');
-      }      
+      } /*else {
+        m.mapRoot.addClass('zoomOnSector');
+      }  */    
     }
   };
+
   
   // Events
  

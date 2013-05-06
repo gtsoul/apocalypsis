@@ -6,6 +6,7 @@ var EntitySystem = function(json) {
   this.coords = new Array();
   this.sun;
   this.type = 'system';
+  this.image = 'systeme.jpg';
   
 	this.init = function() {
     this.__loadJson(json);

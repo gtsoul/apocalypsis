@@ -161,3 +161,15 @@
 #map .planets .planet, #map  .system .sun, #map  .coords .coordPoint, #map  .sector .sectorPoint, #map  .system .systemPoint   {
   position: absolute;
 }
+
+#map  .mapRoot.zoomOnPlanet .coords .coordPoint, #map  .mapRoot.zoomOnPlanet .system .systemPoint {
+  display: none;
+}
+
+#map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint {
+  display: none;
+}
+
+#map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .coords {
+  display: none;
+}
