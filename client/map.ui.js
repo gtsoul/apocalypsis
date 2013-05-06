@@ -62,11 +62,11 @@ var MapUi = function(mapContainer, viewport, tools) {
     m.viewport.on('mousewheel', function(e, delta) {
         m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, currentScale * (1 + delta * m.zoomConfig.zoomFactor)));
         // TODO : TEST :
-        m.zoom = 1.2;
+        //m.zoom = 1.2;
         var vOffset = m.viewport.offset();
         var cOffset = m.mapRoot.offset();
-        mouseLocation.x = (e.pageX - (vOffset.left + cOffset.left)) / m.zoom;
-        mouseLocation.y = (e.pageY - (vOffset.top + cOffset.top)) / m.zoom;        
+        mouseLocation.x = (e.pageX - (vOffset.left + cOffset.left)) / currentScale;
+        mouseLocation.y = (e.pageY - (vOffset.top + cOffset.top)) / currentScale;        
         var sliderVal = Math.log(m.zoom) * zoomFactorInvertLog;
         if(slidInvert) sliderVal = slidMin + slidMax - sliderVal;
         zoomMutex = true;
@@ -86,16 +86,15 @@ var MapUi = function(mapContainer, viewport, tools) {
         var v = slidInvert ? slidMin + slidMax - ui.value : ui.value;
         m.zoom = Math.pow(m.zoomConfig.zoomFactor, v);
         // TODO : TEST :
-        m.zoom = 1.2;        
+        //m.zoom = 1.2;        
         if(!zoomMutex) {
           var cOffset = m.mapRoot.offset();      
-          mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / m.zoom;          
-          mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / m.zoom;        
-          zoom();
+          mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
+          mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / currentScale;        
         }
+        zoom();        
     });
-    function zoom()
-    {
+    function zoom() {
       var scale = m.zoom;
       if(scale != currentScale || true) { // TODO
         console.log('zoom();');
