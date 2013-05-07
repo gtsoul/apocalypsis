@@ -47,7 +47,6 @@ var MapAjaxProxy = function(servicesContext) {
     var coord = proxy.getEntity(parameters.z_pos);
     coord.planets = new Array();
     coord.fleets = new Array();
-    console.log(data.coord);
     if(data.coord != undefined && data.coord.fleets != undefined) {
       $.each(data.coord.fleets, function(key, datum) {
         // TODO : save the fleets

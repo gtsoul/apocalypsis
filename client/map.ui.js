@@ -52,11 +52,11 @@ var MapUi = function(mapContainer, viewport, tools) {
       var left = parseFloat($oldCoord.css('left'));
       var top = parseFloat($oldCoord.css('top'));
       if($oldCoord.length > 0) {
-        console.log(coord);
         var $newCoord = coord.getHtml(left, top);      
         $oldCoord.html($newCoord.html());
         $oldCoord.removeClass('unloaded');
-      }      
+      }
+      this.tools.find('.zoom').slider();
     }  
   };  
   

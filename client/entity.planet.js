@@ -56,7 +56,8 @@ var EntityCoords = function(json, parent) {
     $coordPoint.css('top', Math.round(this.top)+'px');    
     if(this.planets != undefined) {
       for(var planetId in this.planets) {
-        $planets.append(this.planets[planetId].getHtml(this.left, this.top));
+        var planet = this.planets[planetId];
+        $planets.append(planet.getHtml(this.left + (planet.x*this.widthPx/this.width), this.top + (planet.y*this.widthPx/this.width)));
       }
     }
     $coords.append($coordPoint);
