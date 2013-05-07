@@ -34,12 +34,13 @@ var MapUi = function(mapContainer, viewport, tools) {
     console.log('done');
   };
   
-  MapUi.prototype.centerOn = function($element) {
+  MapUi.prototype.centerOnElement = function($element) {
     if($element.length > 0) {
       this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) + 'px');
       this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) + 'px');
+      this.applyZoomOnMap();
     }
-  }
+  };
   
   MapUi.prototype.repaintSystem = function(system) {
     if(system != undefined) {

@@ -36,14 +36,25 @@ var Map = function(mapUi, mapAjaxProxy) {
         console.log('data updated, '+galaxy+', '+sector+', '+system);
         map.ui.repaintSystem(newSystem);
         console.log('repaint updated '+galaxy+', '+sector+', '+system);
-        map.ui.centerOn($('#'+newSystem.pos+'.system .systemPoint'));
-        map.ui.applyZoomOnMap();
+        map.centerOnEntity(newSystem);
       }
     });
   };
   
   Map.prototype.getEntity = function (entityId) {
     return this.proxy.getEntity(entityId);
+  }; 
+
+  Map.prototype.centerOnEntity = function(entity) {
+    if(entity != undefined && entity.type != undefined) {
+      if(entity.type == 'system') {
+        this.ui.centerOnElement($('#'+entity.pos+'.system .systemPoint'));
+      } else if(entity.type == 'coords') {
+        // TODO
+      } else if(entity.type == 'planet') {
+        // TODO
+      }
+    }
   };  
   
 	this.init();	
