@@ -9,7 +9,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.05, maxZoom : 20, zoomFactor : 0.2, moveSmooth : 0.75};
+  this.zoomConfig = {minZoom : 0.2, maxZoom : 15, zoomFactor : 0.3, moveSmooth : 0.8};
 
   
 	this.init = function() {
@@ -110,7 +110,7 @@ var MapUi = function(mapContainer, viewport, tools) {
       var scale = m.zoom;
       if(scale != currentScale) {
         var imgScale = 1/m.zoom;
-        if(m.zoom <= 1 && false) { // TODO : test it
+        if(m.zoom <= 0.5) { // TODO : test it
           var cOffset = m.mapRoot.offset();       
           currentLocation.x = (m.mapRoot.width() / 2 - cOffset.left) / currentScale;
           currentLocation.y = (m.mapRoot.height() / 2 - cOffset.top) / currentScale;
