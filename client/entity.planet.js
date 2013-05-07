@@ -51,23 +51,24 @@ var EntitySun = function(json, parent) {
 };
 
 /* ------------------------------------------------------------------- */
-/* ------------------------- EntityPC -------------------------------- */
+/* ------------------------- EntityPc -------------------------------- */
 /* ------------------------------------------------------------------- */
 
-var EntityPC = function(json, parent) {
+var EntityPc = function(json, parent) {
 
-  EntityPC.prototype.getHtml = function (left, top) {
-    var $sun = $('<img class="pc nozoom" />');
-    $sun.attr('src', this.image);
-    $sun.css('left', Math.round(left)+'px');
-    $sun.css('top', Math.round(top)+'px');
-    return $sun;
+  EntityPc.prototype.getHtml = function (left, top) {
+    var $pc = $('<img class="coordPoint nozoom" />');
+    $pc.attr('src', this.image);
+    $pc.css('left', Math.round(left)+'px');
+    $pc.css('top', Math.round(top)+'px');
+    return $pc;
   }; 
 
-  EntityPC.prototype = new EntitySpaceElement(json, parent);  
+  EntityPc.prototype = new EntitySpaceElement(json, parent);  
   
 	this.init = function() {
-    this.type = 'sun';
+    this.type = 'pc';
+    this.image = 'images/apocalypsis/pc.jpg'
 		this.init = function() {};
 	}; 
   
@@ -86,7 +87,7 @@ var EntityCoords = function(json, parent) {
     var $coords = $('<div class="coords unloaded" id="2_15_7_1">');
     $coords.attr('id', this.pos);    
     var $planets = $('<div class="planets"/>');
-    var $coordPoint = $('<img class="coordPoint nozoom" />');
+    var $coordPoint = this.pc.getHtml(this.left + this.widthPx/2, this.top + this.widthPx/2);
     $coordPoint.attr('src', this.image);
     $coordPoint.css('left', Math.round(this.left)+'px');
     $coordPoint.css('top', Math.round(this.top)+'px');    
@@ -107,7 +108,8 @@ var EntityCoords = function(json, parent) {
     if(this.known == true) {
       htmlEl.mouseover(function() {
         var coord = globalMap.getEntity($(this).attr('id'));
-        if(coord != undefined && coord.planets == undefined) {
+        if(coord != undefined && coord.planets == undefined && coord.known == true) {
+          coord.planets = new Array();
           globalMap.refreshCoord(coord);      
         }
       });
@@ -128,6 +130,7 @@ var EntityCoords = function(json, parent) {
   EntityCoords.prototype = new EntitySpaceElement(json, parent);
   this.planets = undefined;
   this.fleets = undefined;
+  this.pc;
   this.widthPx = 1;
   this.heightPx = 1; 
   
@@ -136,6 +139,7 @@ var EntityCoords = function(json, parent) {
       EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
       this.widthPx = this.width * parent.widthPx / parent.width;
       this.heightPx = this.height * parent.heightPx / parent.height;      
+      this.pc = new EntityPc(this, [undefined, parent]);
     }  
     this.type = 'coords';
     this.image = 'images/apocalypsis/coords.png';
