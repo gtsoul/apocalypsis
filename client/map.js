@@ -51,8 +51,10 @@ var Map = function(mapUi, mapAjaxProxy) {
         this.ui.centerOnElement($('#'+entity.pos+'.system .systemPoint'));
       } else if(entity.type == 'coords') {
         // TODO
+        console.error('To be implemented');
       } else if(entity.type == 'planet') {
         // TODO
+        console.error('To be implemented');
       }
     }
   };  

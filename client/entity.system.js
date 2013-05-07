@@ -10,7 +10,7 @@ var EntitySystem = function(json) {
   this.coords = new Array();
   this.sun;
   this.type = 'system';
-  this.image = 'images/apocalypsis/systeme.jpg';
+  this.image = 'images/universe/system_fg'+(Math.round(Math.random()*3))+'.jpg';
   
 	this.init = function() {
     this.widthPx = EntitySystem.prototype.WIDTH_PX;
@@ -42,7 +42,7 @@ var EntitySystem = function(json) {
   };
   
   EntitySystem.prototype.getHtml = function (left, top) {
-    var $systemPoint = $('<img class="systemPoint nozoom" src="images/apocalypsis/systeme.jpg"/>');
+    var $systemPoint = $('<img class="systemPoint nozoom" />');
     var $system = $('<div class="system"></div>');
     $system.attr('id', this.pos);
     $systemPoint.css('left', Math.round(left + this.widthPx/2)+'px');

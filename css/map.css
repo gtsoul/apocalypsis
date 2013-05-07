@@ -53,8 +53,8 @@
 
 #map .planets .planet, #map  .system .sun, #map  .coords .coordPoint, #map  .sector .sectorPoint, #map  .system .systemPoint   {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
 }
 
@@ -90,10 +90,18 @@
   z-index : 10;
 }
 
+#map  .coords  .coordPoint.extended {
+  width: 150px;
+  height: 110px;
+}
+
 #map  .sector .sectorPoint {
   z-index : 15;
 }
 
+  
 #map  .system .systemPoint {
   z-index : 20;
+  width: 130px;
+  height: 110px;
 }
