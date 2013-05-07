@@ -31,9 +31,14 @@ var Map = function(mapUi, mapAjaxProxy) {
   Map.prototype.refreshUniverse = function (galaxy, sector, system) {
     var map = this;
     this.proxy.getUniverseKnowledge(galaxy, sector, system, function () {
-      console.log('data updated, '+galaxy+', '+sector+', '+system);
-      map.ui.repaintSystem(map.proxy.getSystem(galaxy, sector, system));
-      console.log('repaint updated '+galaxy+', '+sector+', '+system);
+      var newSystem = map.proxy.getSystem(galaxy, sector, system);
+      if(newSystem != undefined) {
+        console.log('data updated, '+galaxy+', '+sector+', '+system);
+        map.ui.repaintSystem(newSystem);
+        console.log('repaint updated '+galaxy+', '+sector+', '+system);
+        map.ui.centerOn($('#'+newSystem.pos+'.system .systemPoint'));
+        map.ui.applyZoomOnMap();
+      }
     });
   };
   

@@ -9,9 +9,8 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.2, maxZoom : 15, zoomFactor : 0.3, moveSmooth : 0.8};
+  this.zoomConfig = {minZoom : 1, maxZoom : 15, zoomFactor : 0.3, moveSmooth : 0.8, zoomOnPlanet : 4, zoomOnCoords : 1.1};
 
-  
 	this.init = function() {
     this.enableDrag();
     this.enableZoom(this.tools.find('.zoom'));
@@ -34,6 +33,13 @@ var MapUi = function(mapContainer, viewport, tools) {
     });
     console.log('done');
   };
+  
+  MapUi.prototype.centerOn = function($element) {
+    if($element.length > 0) {
+      this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) + 'px');
+      this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) + 'px');
+    }
+  }
   
   MapUi.prototype.repaintSystem = function(system) {
     if(system != undefined) {
@@ -110,7 +116,7 @@ var MapUi = function(mapContainer, viewport, tools) {
       var scale = m.zoom;
       if(scale != currentScale) {
         var imgScale = 1/m.zoom;
-        if(m.zoom <= 0.5) { // TODO : test it
+        if(m.zoom <= m.zoomConfig.zoomOnCoords) {
           var cOffset = m.mapRoot.offset();       
           currentLocation.x = (m.mapRoot.width() / 2 - cOffset.left) / currentScale;
           currentLocation.y = (m.mapRoot.height() / 2 - cOffset.top) / currentScale;
@@ -141,9 +147,9 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     // TODO : adjust these zoom values
     this.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
-    if(this.zoom >= 4) {
+    if(this.zoom >= this.zoomConfig.zoomOnPlanet) {
       this.mapRoot.addClass('zoomOnPlanet');
-    } else if(this.zoom >= 0.2) {
+    } else if(this.zoom >= this.zoomConfig.zoomOnCoords) {
       this.mapRoot.addClass('zoomOnCoords');
     } else /*if(this.zoom >= 0.08)*/ {
       this.mapRoot.addClass('zoomOnSystem');
