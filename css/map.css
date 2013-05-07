@@ -2,6 +2,7 @@
 /* TODO : only for tests */
 #target {
   position: absolute;
+  pointer-events: none;
 }
 
 #viewport {

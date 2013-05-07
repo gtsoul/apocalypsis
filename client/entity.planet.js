@@ -1,4 +1,8 @@
 
+/* ------------------------------------------------------------------- */
+/* ---------------------- EntityPlanet ------------------------------- */
+/* ------------------------------------------------------------------- */
+
 var EntityPlanet = function(json, parent) {
 
   EntityPlanet.prototype = new EntitySpaceElement(json, parent);  
@@ -22,17 +26,21 @@ var EntityPlanet = function(json, parent) {
 	this.init();	
 };
 
+/* ------------------------------------------------------------------- */
+/* ------------------------ EntitySun -------------------------------- */
+/* ------------------------------------------------------------------- */
+
 var EntitySun = function(json, parent) {
 
   EntitySun.prototype.getHtml = function (left, top) {
-    var $sun = $('<img class="sun nozoom" style="top:200px;left:200px;" />');
+    var $sun = $('<img class="sun nozoom"/>');
     $sun.attr('src', this.image);
     $sun.css('left', Math.round(left)+'px');
     $sun.css('top', Math.round(top)+'px');
     return $sun;
   }; 
 
-  EntityPlanet.prototype = new EntitySpaceElement(json, parent);  
+  EntitySun.prototype = new EntitySpaceElement(json, parent);  
   
 	this.init = function() {
     this.type = 'sun';
@@ -41,6 +49,34 @@ var EntitySun = function(json, parent) {
   
 	this.init();	
 };
+
+/* ------------------------------------------------------------------- */
+/* ------------------------- EntityPC -------------------------------- */
+/* ------------------------------------------------------------------- */
+
+var EntityPC = function(json, parent) {
+
+  EntityPC.prototype.getHtml = function (left, top) {
+    var $sun = $('<img class="pc nozoom" />');
+    $sun.attr('src', this.image);
+    $sun.css('left', Math.round(left)+'px');
+    $sun.css('top', Math.round(top)+'px');
+    return $sun;
+  }; 
+
+  EntityPC.prototype = new EntitySpaceElement(json, parent);  
+  
+	this.init = function() {
+    this.type = 'sun';
+		this.init = function() {};
+	}; 
+  
+	this.init();	
+};
+
+/* ------------------------------------------------------------------- */
+/* ----------------------- EntityCoords ------------------------------ */
+/* ------------------------------------------------------------------- */
 
 var EntityCoords = function(json, parent) {
 
@@ -62,14 +98,20 @@ var EntityCoords = function(json, parent) {
     }
     $coords.append($coordPoint);
     $coords.append($planets);
-    $coords.mouseover(function() {
-      var coord = globalMap.getEntity($(this).attr('id'));
-      if(coord != undefined && coord.planets == undefined) {
-        globalMap.refreshCoord(coord);      
-      }
-    });    
+    this.__addEvents($coords);
     // TODO : add fleets
     return $coords;
+  };
+  
+  EntityCoords.prototype.__addEvents = function(htmlEl) {
+    if(this.known == true) {
+      htmlEl.mouseover(function() {
+        var coord = globalMap.getEntity($(this).attr('id'));
+        if(coord != undefined && coord.planets == undefined) {
+          globalMap.refreshCoord(coord);      
+        }
+      });
+    }
   };
   
   EntityCoords.prototype.getPlanet = function(planetId) {

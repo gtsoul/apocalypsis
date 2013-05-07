@@ -141,7 +141,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     // TODO : adjust these zoom values
     this.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
-    if(this.zoom >= 1.1) {
+    if(this.zoom >= 4) {
       this.mapRoot.addClass('zoomOnPlanet');
     } else if(this.zoom >= 0.2) {
       this.mapRoot.addClass('zoomOnCoords');
