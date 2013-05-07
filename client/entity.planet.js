@@ -86,23 +86,27 @@ var EntityCoords = function(json, parent) {
     if(this.top == undefined) { this.top = top};
     var $coords = $('<div class="coords unloaded" id="2_15_7_1">');
     $coords.attr('id', this.pos);    
-    var $planets = $('<div class="planets"/>');
+    // coordPoint
     var $coordPoint = this.pc.getHtml(this.left + this.widthPx/2, this.top + this.widthPx/2);
     $coordPoint.css('left', Math.round(this.left)+'px');
     $coordPoint.css('top', Math.round(this.top)+'px'); 
     var $coordPointPc = $coordPoint.clone();    
-    $coordPoint.attr('src', this.image);    
+    $coordPoint.attr('src', this.image);   
+    $coords.append($coordPoint.addClass('extended'));
+    $coords.append($coordPointPc.addClass('pc'));    
+    // planets    
+    var $planets = $('<div class="planets"/>');
     if(this.planets != undefined) {
       for(var planetId in this.planets) {
         var planet = this.planets[planetId];
-        $planets.append(planet.getHtml(this.left + (planet.x*this.widthPx/this.width), this.top + (planet.y*this.widthPx/this.width)));
+        var $planet = planet.getHtml(this.left + (planet.x*this.widthPx/this.width), this.top + (planet.y*this.widthPx/this.width))
+        var line = new UiLine($coordPoint, $planet, this.pos+'#'+planet.pos, 'coord_to_planet');        
+        $planets.append($planet);
       }
     }
-    $coords.append($coordPoint.addClass('extended'));
-    $coords.append($coordPointPc.addClass('pc'));
     $coords.append($planets);
+    // TODO : add fleets    
     this.__addEvents($coords);
-    // TODO : add fleets
     return $coords;
   };
   
