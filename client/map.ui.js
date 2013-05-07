@@ -3,6 +3,8 @@ console.log('Loading map ui classes');
 
 var MapUi = function(mapContainer, viewport, tools) {
   this.zoom = 1;
+  this.newCss = {};
+  this.newCssNozoom = {};  
 	this.mapContainer = jQuery(mapContainer);
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
@@ -56,7 +58,7 @@ var MapUi = function(mapContainer, viewport, tools) {
         $oldCoord.html($newCoord.html());
         $oldCoord.removeClass('unloaded');
       }
-      this.tools.find('.zoom').slider();
+      this.applyZoomOnMap();
     }  
   };  
   
@@ -119,30 +121,34 @@ var MapUi = function(mapContainer, viewport, tools) {
         $('#target').css('left', (currentLocation.x-24)+'px');
         $('#target').css('top', (currentLocation.y-24)+'px');          
         var compat = ['-moz-', '-webkit-', '-o-', ''];
-        var newCss = {};
-        var newCssNozoom = {};
+        m.newCss = {};
+        m.newCssNozoom = {};
         for(var i = compat.length - 1; i; i--) {
-            newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
-            newCssNozoom[compat[i]+'transform'] = 'scale('+imgScale+')';
-            newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px'; // TODO
+            m.newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
+            m.newCssNozoom[compat[i]+'transform'] = 'scale('+imgScale+')';
+            m.newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px'; // TODO
         }
-        m.mapRoot.css(newCss);
-        m.mapRoot.find('.nozoom').css(newCssNozoom);
         currentScale = m.zoom;
-        
-        // TODO : adjust these zoom values
-        m.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
-        if(m.zoom >= 1.1) {
-          m.mapRoot.addClass('zoomOnPlanet');
-        } else if(m.zoom >= 0.2) {
-          m.mapRoot.addClass('zoomOnCoords');
-        } else /*if(m.zoom >= 0.08)*/ {
-          m.mapRoot.addClass('zoomOnSystem');
-        }  
+        m.applyZoomOnMap();
       }
     }
   };
 
+  MapUi.prototype.applyZoomOnMap = function() {
+    this.mapRoot.css(this.newCss);
+    this.mapRoot.find('.nozoom').css(this.newCssNozoom);
+
+    
+    // TODO : adjust these zoom values
+    this.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
+    if(this.zoom >= 1.1) {
+      this.mapRoot.addClass('zoomOnPlanet');
+    } else if(this.zoom >= 0.2) {
+      this.mapRoot.addClass('zoomOnCoords');
+    } else /*if(this.zoom >= 0.08)*/ {
+      this.mapRoot.addClass('zoomOnSystem');
+    } 
+  };
   
   // Events
  
