@@ -54,8 +54,8 @@ var MapAjaxProxy = function(servicesContext) {
         //console.log(datum);
       });
     }
-    if(data.coord != undefined && data.coord.fleets != undefined) {
-      $.each(data.coord.fleets, function(key, datum) {
+    if(data.coord != undefined && data.coord.subElements != undefined && data.coord.subElements.planets != undefined) {
+      $.each(data.coord.subElements.planets, function(key, datum) {
         var planet = new EntityPlanet(datum);
         if(planet != undefined && planet.pos != undefined) {
           coord.planets[planet.pos] = planet;

@@ -8,11 +8,14 @@ var EntityPlanet = function(json, parent) {
 		this.init = function() {};
 	}; 
   
-  // TODO : complete
-  EntityPlanet.prototype.getHtml = function () {
-    var $planet = $('<img class="planet nozoom" style="top:200px;left:200px;" />');
+  EntityPlanet.prototype.getHtml = function (left, top) {
+    if(this.left == undefined) { this.left = left};
+    if(this.top == undefined) { this.top = top};
+    var $planet = $('<img class="planet nozoom" />');
     $planet.attr('id', this.pos);
     $planet.attr('src', this.image);
+    $planet.css('left', left+'px');
+    $planet.css('top', top+'px');
     return $planet;
   };    
 
@@ -42,13 +45,20 @@ var EntitySun = function(json, parent) {
 var EntityCoords = function(json, parent) {
 
   EntityCoords.prototype.getHtml = function (left, top) {  
+    if(this.left == undefined) { this.left = left};
+    if(this.top == undefined) { this.top = top};
     var $coords = $('<div class="coords unloaded" id="2_15_7_1">');
     $coords.attr('id', this.pos);    
     var $planets = $('<div class="planets"/>');
     var $coordPoint = $('<img class="coordPoint nozoom" />');
     $coordPoint.attr('src', this.image);
-    $coordPoint.css('left', Math.round(left)+'px');
-    $coordPoint.css('top', Math.round(top)+'px');    
+    $coordPoint.css('left', Math.round(this.left)+'px');
+    $coordPoint.css('top', Math.round(this.top)+'px');    
+    if(this.planets != undefined) {
+      for(var planetId in this.planets) {
+        $planets.append(this.planets[planetId].getHtml(this.left, this.top));
+      }
+    }
     $coords.append($coordPoint);
     $coords.append($planets);
     $coords.mouseover(function() {
@@ -56,7 +66,8 @@ var EntityCoords = function(json, parent) {
       if(coord != undefined && coord.planets == undefined) {
         globalMap.refreshCoord(coord);      
       }
-    });
+    });    
+    // TODO : add fleets
     return $coords;
   };
   
@@ -74,10 +85,14 @@ var EntityCoords = function(json, parent) {
   EntityCoords.prototype = new EntitySpaceElement(json, parent);
   this.planets = undefined;
   this.fleets = undefined;
+  this.widthPx = 1;
+  this.heightPx = 1; 
   
 	this.init = function() {
     if(json != undefined) {
       EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
+      this.widthPx = this.width * parent.widthPx / parent.width;
+      this.heightPx = this.height * parent.heightPx / parent.height;      
     }  
     this.type = 'coords';
     this.image = 'images/apocalypsis/coords.png';

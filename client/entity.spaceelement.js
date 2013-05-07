@@ -4,6 +4,8 @@ var EntitySpaceElement = function(json, parent) {
   this.image;
   this.x;
   this.y;
+  this.left;
+  this.top;  
   this.known;
   this.parent;
   this.type;
@@ -25,8 +27,8 @@ var EntitySpaceElement = function(json, parent) {
     if(this.known == undefined) { // sun
       this.known = false;
     }
-    if(this.image == undefined) {
-      this.image = 'desertique_fg2.jpg'; // TODO
+    if(this.image != undefined) {
+      this.image = this.image.replace(/^\//, '');
     }
   };
   

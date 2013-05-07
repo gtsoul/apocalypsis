@@ -3,6 +3,8 @@ var EntitySystem = function(json) {
   this.pos;
   this.width;
   this.height;
+  this.widthPx;
+  this.heightPx;  
   this.x;
   this.y;
   this.coords = new Array();
@@ -11,6 +13,8 @@ var EntitySystem = function(json) {
   this.image = 'images/apocalypsis/systeme.jpg';
   
 	this.init = function() {
+    this.widthPx = EntitySystem.prototype.WIDTH_PX;
+    this.heightPx = EntitySystem.prototype.HEIGHT_PX;   
     this.__loadJson(json);
 		this.init = function() {};
 	}; 
@@ -41,21 +45,21 @@ var EntitySystem = function(json) {
     var $systemPoint = $('<img class="systemPoint nozoom" src="images/apocalypsis/systeme.jpg"/>');
     var $system = $('<div class="system"></div>');
     $system.attr('id', this.pos);
-    $systemPoint.css('left', Math.round(left + EntitySystem.prototype.WIDTH_PX/2)+'px');
-    $systemPoint.css('top', Math.round(top + EntitySystem.prototype.HEIGHT_PX/2)+'px');
+    $systemPoint.css('left', Math.round(left + this.widthPx/2)+'px');
+    $systemPoint.css('top', Math.round(top + this.heightPx/2)+'px');
     $systemPoint.attr('src', this.image);
     $system.append($systemPoint);
     if(this.sun != undefined) {
       $system.append(this.sun.getHtml(
-        left + (this.sun.x*EntitySystem.prototype.WIDTH_PX/this.width), 
-        top + (this.sun.y*EntitySystem.prototype.HEIGHT_PX/this.height)
+        left + (this.sun.x*this.widthPx/this.width), 
+        top + (this.sun.y*this.heightPx/this.height)
       ));
     }
     for(var coordIt in this.coords) {
       var coord = this.coords[coordIt];
       $system.append(coord.getHtml(
-        left + (coord.x*EntitySystem.prototype.WIDTH_PX/this.width), 
-        top + (coord.y*EntitySystem.prototype.HEIGHT_PX/this.height)      
+        left + (coord.x*this.widthPx/this.width), 
+        top + (coord.y*this.heightPx/this.height)      
       ));
     }
     return $system;

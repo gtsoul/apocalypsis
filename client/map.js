@@ -23,8 +23,7 @@ var Map = function(mapUi, mapAjaxProxy) {
     var map = this;
     this.proxy.getCoordKnowledge(coord.pos, function () {
       console.log('coord updated, '+coord.pos);
-      // TODO
-      //map.ui.repaintCoord(coord);
+      map.ui.repaintCoord(coord);
       console.log('repaint updated '+coord.pos);
     });
   };  
