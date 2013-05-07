@@ -62,28 +62,20 @@
   pointer-events: none;
 }
 
-#map  .mapRoot.zoomOnPlanet .system .systemPoint {
+#map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint {
   display: none;
 }
 
-#map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
+#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint.extended, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
   display: block;
 }
 
-#map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint {
+#map  .mapRoot.zoomOnCoords .coords .coordPoint.pc, #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint {
   display: none;
 }
 
 #map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .coords {
   display: none;
-}
-
-#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint {
-  background-position: 0px 0px;
-}
-
-#map  .mapRoot.zoomOnPlanet .coords .coordPoint {
-  background-position: -50px 0px;
 }
 
 #map  .system .sun {

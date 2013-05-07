@@ -88,16 +88,18 @@ var EntityCoords = function(json, parent) {
     $coords.attr('id', this.pos);    
     var $planets = $('<div class="planets"/>');
     var $coordPoint = this.pc.getHtml(this.left + this.widthPx/2, this.top + this.widthPx/2);
-    $coordPoint.attr('src', this.image);
     $coordPoint.css('left', Math.round(this.left)+'px');
-    $coordPoint.css('top', Math.round(this.top)+'px');    
+    $coordPoint.css('top', Math.round(this.top)+'px'); 
+    var $coordPointPc = $coordPoint.clone();    
+    $coordPoint.attr('src', this.image);    
     if(this.planets != undefined) {
       for(var planetId in this.planets) {
         var planet = this.planets[planetId];
         $planets.append(planet.getHtml(this.left + (planet.x*this.widthPx/this.width), this.top + (planet.y*this.widthPx/this.width)));
       }
     }
-    $coords.append($coordPoint);
+    $coords.append($coordPoint.addClass('extended'));
+    $coords.append($coordPointPc.addClass('pc'));
     $coords.append($planets);
     this.__addEvents($coords);
     // TODO : add fleets
