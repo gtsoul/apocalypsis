@@ -27,6 +27,7 @@ var UiLine = function($origin, $end, id, classes) {
   
   UiLine.prototype.draw = function () {
     // TODO : improve
+    var $line = $('#'+this.id);
     var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
     var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
     var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
@@ -43,9 +44,10 @@ var UiLine = function($origin, $end, id, classes) {
     if(this.classes != undefined) {
       $line.addClass(this.classes);
     }
-    $line.css('height', length)
-      .css('left', originX+'px')
-      .css('top', originY+'px')
+    $line.attr('id', this.id)
+      .css('height', length)
+      .css('left', originX + 30 +'px')
+      .css('top', originY + 30 +'px')
       .css('-webkit-transform', 'rotate(' + angle + 'deg)')
       .css('-moz-transform', 'rotate(' + angle + 'deg)')
       .css('-o-transform', 'rotate(' + angle + 'deg)')

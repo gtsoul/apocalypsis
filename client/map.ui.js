@@ -9,7 +9,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 1, maxZoom : 15, zoomFactor : 0.3, moveSmooth : 0.8, zoomOnPlanet : 4, zoomOnCoords : 1.1};
+  this.zoomConfig = {minZoom : 0.5, maxZoom : 15, zoomFactor : 0.3, moveSmooth : 0.8, zoomOnPlanet : 4, zoomOnCoords : 1.1};
 
 	this.init = function() {
     this.enableDrag();

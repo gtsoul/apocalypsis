@@ -19,12 +19,54 @@
   <body>
     <div id="viewport">
       <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt="" />
-      <div id="map">
+      <div id="map">     
         <div class="mapRoot" style="width:1200px;height:700px;">      
-          <div >
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;">
+          <defs>
+            <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" >
+              <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+            </filter>
+          </defs> 
+   
+            <g filter="url(#blur)">
+              
+              
+              <!--animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="180" begin="1s" dur="60s" repeatCount="indefinite" /--> 
+              <circle cx="200" cy="50" r="7" stroke="black" stroke-width="2" fill="grey">
+                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="12s" begin="3s" repeatCount="indefinite" />
+                <animate attributeType="XML" attributeName="r" from="10" to="0" dur="3s" begin="0s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="150" cy="120" r="5" stroke="black" stroke-width="2" fill="grey">
+                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="8s" begin="2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="180" cy="80" r="3" stroke="black" stroke-width="2" fill="grey">
+                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
+              </circle>              
+            </g>
+          </svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="400" width="450" style="position:absolute;">
+            <path d="M 100 350 q 150 -100 300 0" stroke="blue" stroke-width="5" fill="none" />
+            <!-- Mark relevant points -->
+            <g stroke="black" stroke-width="3" fill="black">
+              <circle id="pointA" cx="100" cy="350" r="3" />
+              <circle id="pointC" cx="400" cy="350" r="3" />
+            </g>
+            <!-- Label the points -->
+            <g font-size="30" font="sans-serif" fill="black" stroke="none" text-anchor="middle">
+              <text x="100" y="350" dx="-30">A</text>
+              <text x="250" y="50" dy="-10">B</text>
+              <text x="400" y="350" dx="30">C</text>
+            </g>
+          </svg>          
+
+  
+          
+          <div >      
             <img src="images/apocalypsis/debuggrid.png" style="width:2400px;height:1400px;"/>
           </div>
-          <div id="lines"> </div>
+        
+          <div id="lines"> </div>             
           <!--div class="system" id="2_15_7">
             <img class="systemPoint nozoom" style="top:50px;left:50px;" src="images/apocalypsis/systeme.jpg"/>
             <img class="sun nozoom" style="top:200px;left:200px;" src="images/apocalypsis/soleil7.jpg"/>

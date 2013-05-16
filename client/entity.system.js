@@ -57,6 +57,7 @@ var EntitySystem = function(json) {
     }
     for(var coordIt in this.coords) {
       var coord = this.coords[coordIt];
+       // TODO : fix it
       $system.append(coord.getHtml(
         left + (coord.x*this.widthPx/this.width), 
         top + (coord.y*this.heightPx/this.height)      
