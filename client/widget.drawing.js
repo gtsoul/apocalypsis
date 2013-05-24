@@ -39,22 +39,35 @@ var UiStar = function(x, y) {
               <circle cx="180" cy="80" r="3" stroke="black" stroke-width="2" fill="grey">
                 <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
               </circle>    */
-    var r = Math.random()*5;
-    var opacity = $(SVG('animate'))
-        .attr('attributeType', 'CSS')
-        .attr('attributeName', 'opacity')
+    var r = Math.random()*4;
+    var opacity = $(SVG('animate', {
+          'attributeType': 'CSS',
+          'attributeName': 'opacity',
+          'repeatCount': 'indefinite',
+        }))
         .attr('from', 1)
         .attr('to', 0)
-        .attr('dur', Math.floor(Math.random()*15)+'s')
-        .attr('begin', Math.floor(Math.random()*5)+'s')
-        .attr('repeatCount', 'indefinite');
+        .attr('dur', Math.floor(Math.random()*20+10)+'s')
+        .attr('begin', Math.floor(Math.random()*5)+'s');
+    var size = $(SVG('animate', {
+          'attributeType': 'XML',
+          'attributeName': 'r',
+          'repeatCount': 'indefinite',
+        }))
+        .attr('from', r)
+        .attr('to', 0)
+        .attr('dur', Math.floor(Math.random()*20+10)+'s')
+        .attr('begin', Math.floor(Math.random()*5)+'s');        
     var star = $(SVG('circle'))
         .attr('cx', this.x)
         .attr('cy', this.y)
         .attr('r', r)
-        .attr('stroke', 'red')
-        .attr('stroke-width', 2);
-        //.attr('fill', 'red');
+        .attr('stroke', 'grey')
+        .attr('stroke-width', r/2)
+        .attr('fill', 'white');
+    if(size > 2) {
+      size.appendTo(star);
+    }
     opacity.appendTo(star);
     star.appendTo($('#svgRoot #stars'));       
   };
@@ -101,10 +114,10 @@ var UiLink = function($origin, $end, /*id,*/ type, classes) {
               .attr('x2', endX)
               .attr('y1', originY)
               .attr('y2', endY)
-              .attr('stroke', 'yellow')
-              .attr('stroke-width', 0.1)
+              .attr('stroke', '#b5f0ff')
+              .attr('stroke-width', 0.2)
               .attr('fill', 'none')
-              .attr('stroke-dasharray', '0.1,0.5,0.2,0.4')
+              .attr('stroke-dasharray', '0.2,1,0.4,0.8')
               .attr('stroke-linecap', 'round')
               .appendTo($('#svgRoot #lines'));
     } else if (this.type == 'path') {
@@ -115,10 +128,10 @@ var UiLink = function($origin, $end, /*id,*/ type, classes) {
       
       $(SVG('path'))
           .attr('d', 'M '+originX+' '+originY+' q '+qX+' '+qY+' '+dX+' '+dY)
-          .attr('stroke', 'yellow')
-          .attr('stroke-width', 0.1)
+          .attr('stroke', '#b5f0ff')
+          .attr('stroke-width', 0.2)
           .attr('fill', 'none')
-          .attr('stroke-dasharray', '0.1,0.5,0.2,0.4')
+          .attr('stroke-dasharray', '0.2,1,0.4,0.8')
           .attr('stroke-linecap', 'round')
           .appendTo($('#svgRoot #lines'));  
     }      

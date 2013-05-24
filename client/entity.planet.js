@@ -95,8 +95,8 @@ var EntityCoords = function(json, parent) {
     $coordPoint.css('left', Math.round(this.left)+'px');
     $coordPoint.css('top', Math.round(this.top)+'px'); 
     var $coordPointPc = $coordPoint.clone();    
-    $coordPoint.attr('src', this.image);   
-    $coords.append($coordPoint.addClass('extended'));
+    $coordPoint.attr('src', this.image);  
+    $coords.append($coordPoint.addClass('extended').css('width','150').css('height','110'));
     $coords.append($coordPointPc.addClass('pc'));    
     // planets    
     var $planets = $('<div class="planets"/>');
@@ -147,8 +147,8 @@ var EntityCoords = function(json, parent) {
 	this.init = function() {
     if(json != undefined) {
       EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
-      this.widthPx = this.width * parent.widthPx / parent.width;
-      this.heightPx = this.height * parent.heightPx / parent.height;      
+      this.widthPx = this.width * parent.widthPx / parent.width * 0.5;
+      this.heightPx = this.height * parent.heightPx / parent.height * 0.5;      
       this.pc = new EntityPc(this, [undefined, parent]);
     }  
     this.type = 'coords';
