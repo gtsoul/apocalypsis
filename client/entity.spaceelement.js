@@ -21,8 +21,8 @@ var EntitySpaceElement = function(json, parent) {
   
   EntitySpaceElement.prototype.__loadJson = function (json, parent) {
     this.pos = json.pos;
-    this.x = json.x;
-    this.y = json.y;
+    this.x = parseInt(json.x);
+    this.y = parseInt(json.y);
     this.width = json.width;
     this.height = json.height;
     this.known = json.known;

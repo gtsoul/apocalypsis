@@ -4,13 +4,6 @@
 /* ------------------------------------------------------------------- */
 
 var EntityPlanet = function(json, parent) {
-
-  EntityPlanet.prototype = new EntitySpaceElement(json, parent);  
-  
-	this.init = function() {
-    this.type = 'planet';
-		this.init = function() {};
-	}; 
   
   EntityPlanet.prototype.getHtml = function (left, top) {
     if(this.left == undefined) { this.left = left};
@@ -22,7 +15,15 @@ var EntityPlanet = function(json, parent) {
     $planet.css('top', top+'px');
     return $planet;
   };    
-
+ 
+  EntityPlanet.prototype = new EntitySpaceElement(json, parent); 
+ 
+	this.init = function() {
+    EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
+    this.type = 'planet';
+		this.init = function() {};
+	}; 
+  
 	this.init();	
 };
 
@@ -40,14 +41,16 @@ var EntitySun = function(json, parent) {
     return $sun;
   }; 
 
-  EntitySun.prototype = new EntitySpaceElement(json, parent);  
+    
+  EntitySun.prototype = new EntitySpaceElement(json, parent);
   
 	this.init = function() {
+    EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     this.type = 'sun';
 		this.init = function() {};
 	}; 
   
-	this.init();	
+	this.init();
 };
 
 /* ------------------------------------------------------------------- */
@@ -62,16 +65,17 @@ var EntityPc = function(json, parent) {
     $pc.css('left', Math.round(left)+'px');
     $pc.css('top', Math.round(top)+'px');
     return $pc;
-  }; 
-
-  EntityPc.prototype = new EntitySpaceElement(json, parent);  
+  };   
+  
+  EntityPc.prototype = new EntitySpaceElement(json, parent);
   
 	this.init = function() {
+    EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     this.type = 'pc';
     this.image = 'images/apocalypsis/pc.jpg'
 		this.init = function() {};
-	}; 
-  
+	};  
+
 	this.init();	
 };
 
@@ -100,7 +104,7 @@ var EntityCoords = function(json, parent) {
       for(var planetId in this.planets) {
         var planet = this.planets[planetId];
         var $planet = planet.getHtml(this.left + (planet.x*this.widthPx/this.width), this.top + (planet.y*this.widthPx/this.width))
-        var line = new UiLine($coordPoint, $planet, this.pos+'#'+planet.pos, 'coord_to_planet');        
+        var line = new UiLine($coordPointPc, $planet, this.pos+'#'+planet.pos, 'coord_to_planet');        
         $planets.append($planet);
       }
     }

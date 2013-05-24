@@ -2,11 +2,13 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="css/jquery.svg.css" rel="stylesheet"/>
     <link href="css/dot-luv/jquery-ui-1.9.2.custom.css" rel="stylesheet"/>
     <link href="css/map.css" rel="stylesheet"/>
     <script src="js/jquery-1.8.3.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.js"></script>
     <script src="js/jquery.mousewheel.min.js"></script>
+    <script src="js/jquery.svg.min.js"></script>
     <script src="client/widget.drawing.js"></script>
     <script src="client/entity.spaceelement.js"></script>
     <script src="client/entity.planet.js"></script>
@@ -21,13 +23,14 @@
       <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt="" />
       <div id="map">     
         <div class="mapRoot" style="width:1200px;height:700px;">      
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;" width="2400" height="1400" id="svgRoot">
           <defs>
             <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" >
               <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
             </filter>
           </defs> 
-   
+            <line id="xAxis" x1="0" x2="1200" y1="0" y2="0" stroke-width="2"/>
+            <line id="yAxis" x1="0" x2="0" y1="0" y2="700" stroke-width="2"/>
             <g filter="url(#blur)">
               
               
@@ -43,44 +46,17 @@
                 <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
               </circle>              
             </g>
-          </svg>
-          
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="400" width="450" style="position:absolute;">
-            <path d="M 100 350 q 150 -100 300 0" stroke="blue" stroke-width="5" fill="none" />
-            <!-- Mark relevant points -->
-            <g stroke="black" stroke-width="3" fill="black">
-              <circle id="pointA" cx="100" cy="350" r="3" />
-              <circle id="pointC" cx="400" cy="350" r="3" />
-            </g>
-            <!-- Label the points -->
-            <g font-size="30" font="sans-serif" fill="black" stroke="none" text-anchor="middle">
-              <text x="100" y="350" dx="-30">A</text>
-              <text x="250" y="50" dy="-10">B</text>
-              <text x="400" y="350" dx="30">C</text>
-            </g>
-          </svg>          
+            <g id="lines"> 
+              <!--path d="M 100 310 q 150 -100 300 70" stroke="red" stroke-width="3" fill="none" stroke-dasharray="3,20" stroke-linecap="round" /-->
+            </g> 
+          </svg>   
 
   
           
-          <div >      
+          <!--div >      
             <img src="images/apocalypsis/debuggrid.png" style="width:2400px;height:1400px;"/>
-          </div>
-        
-          <div id="lines"> </div>             
-          <!--div class="system" id="2_15_7">
-            <img class="systemPoint nozoom" style="top:50px;left:50px;" src="images/apocalypsis/systeme.jpg"/>
-            <img class="sun nozoom" style="top:200px;left:200px;" src="images/apocalypsis/soleil7.jpg"/>
-            <div class="coords" id="2_15_7_1">
-              <img class="coordPoint nozoom" style="top:50px;left:50px;" src="images/apocalypsis/coords.png"/>
-              <div class="planets">
-                <img class="planet nozoom" id="2_15_7_1_1" style="top:50px;left:50px;" src="images/apocalypsis/aride_fg3.jpg"/>
-                <img class="planet nozoom" id="2_15_7_1_2" style="top:300px;left:50px;" src="images/apocalypsis/glaciaire_fg1.jpg"/>
-                <img class="planet nozoom" id="2_15_7_1_3" style="top:50px;left:300px;" src="images/apocalypsis/luxuriante_fg2.jpg"/>
-                <img class="planet nozoom" id="2_15_7_1_4" style="top:300px;left:300px;" src="images/apocalypsis/desertique_fg2.jpg"/>
-              </div>
-            </div>
-
           </div-->
+
           <img id="target" class="nozoom" src="images/apocalypsis/target.png" alt="" />
         </div>
       </div>
