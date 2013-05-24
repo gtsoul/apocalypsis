@@ -69,13 +69,10 @@ var UiLine = function($origin, $end, id, classes) {
   UiLine.prototype.draw = function () {
     // TODO : improve
     var $line = $('#'+this.id);
-    var adjust = 25;
-    console.log(this.origin);
-    var originX = parseFloat(this.origin.css('left')) + adjust;// + this.origin.outerWidth() / 2;
-    var originY = parseFloat(this.origin.css('top')) + adjust;// + this.origin.outerHeight() / 2;
-    var endX = parseFloat(this.end.css('left')) + adjust;// + this.end.outerWidth() / 2;
-    var endY = parseFloat(this.end.css('top')) + adjust;// + this.end.outerHeight() / 2;
-
+    var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
+    var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
+    var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
+    var endY = parseFloat(this.end.css('top')) + this.end.outerHeight() / 2;
     
     /* // <path d="M 100 310 q 150 -100 300 70" stroke="red" stroke-width="3" fill="none" stroke-dasharray="3,20" stroke-linecap="round" />
     console.log(originX+'/'+originY+' => '+endX+'/'+endY);

@@ -8,7 +8,7 @@ var EntityPlanet = function(json, parent) {
   EntityPlanet.prototype.getHtml = function (left, top) {
     if(this.left == undefined) { this.left = left};
     if(this.top == undefined) { this.top = top};
-    var $planet = $('<img class="planet nozoom" />');
+    var $planet = $('<img class="planet nozoom" style="width:50px;height:50px;"/>');
     $planet.attr('id', this.pos);
     $planet.attr('src', this.image);
     $planet.css('left', left+'px');
@@ -34,7 +34,7 @@ var EntityPlanet = function(json, parent) {
 var EntitySun = function(json, parent) {
 
   EntitySun.prototype.getHtml = function (left, top) {
-    var $sun = $('<img class="sun nozoom"/>');
+    var $sun = $('<img class="sun nozoom" style="width:80px;height:80px;"/>');
     $sun.attr('src', this.image);
     $sun.css('left', Math.round(left)+'px');
     $sun.css('top', Math.round(top)+'px');
@@ -60,7 +60,7 @@ var EntitySun = function(json, parent) {
 var EntityPc = function(json, parent) {
 
   EntityPc.prototype.getHtml = function (left, top) {
-    var $pc = $('<img class="coordPoint nozoom" />');
+    var $pc = $('<img class="coordPoint nozoom" style="width:80px;height:80px;"/>');
     $pc.attr('src', this.image);
     $pc.css('left', Math.round(left)+'px');
     $pc.css('top', Math.round(top)+'px');
@@ -88,7 +88,7 @@ var EntityCoords = function(json, parent) {
   EntityCoords.prototype.getHtml = function (left, top) {  
     if(this.left == undefined) { this.left = left};
     if(this.top == undefined) { this.top = top};
-    var $coords = $('<div class="coords unloaded" id="2_15_7_1">');
+    var $coords = $('<div class="coords unloaded" style="width:50px;height:50px;"/>');
     $coords.attr('id', this.pos);    
     // coordPoint
     var $coordPoint = this.pc.getHtml(this.left + this.widthPx/2, this.top + this.widthPx/2);
