@@ -1,6 +1,6 @@
 
 /* ------------------------------------------------------------------- */
-/* -------------------------- UiLine --------------------------------- */
+/* -------------------------- UiLink --------------------------------- */
 /* ------------------------------------------------------------------- */
 
 
@@ -44,16 +44,17 @@ $(document).ready(function() {
       .appendTo($('#svgRoot #lines'));
 });
 
-var UiLine = function($origin, $end, id, classes) {
+var UiLink = function($origin, $end, id, type, classes) {
   this.id;
   this.origin;
   this.end;
   this.classes;
-  this.type ='line';
+  this.type;
   
 	this.init = function() {
     this.origin = $origin;
     this.end = $end;
+    this.type = type; // line, path ellipse
     this.classes = classes;
     if(id == undefined) {
       this.id = this.origin.attr('id')+'#'+this.end.attr('id');    
@@ -66,40 +67,40 @@ var UiLine = function($origin, $end, id, classes) {
 		this.init = function() {};
 	}; 
   
-  UiLine.prototype.draw = function () {
-    // TODO : improve
+  UiLink.prototype.draw = function () {
     var $line = $('#'+this.id);
     var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
     var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
     var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
     var endY = parseFloat(this.end.css('top')) + this.end.outerHeight() / 2;
     
-    /* // <path d="M 100 310 q 150 -100 300 70" stroke="red" stroke-width="3" fill="none" stroke-dasharray="3,20" stroke-linecap="round" />
-    console.log(originX+'/'+originY+' => '+endX+'/'+endY);
-    $(SVG('path'))
-        //.attr('d', 'M 100 310 q 150 -100 300 70')
-        .attr('d', 'M '+originX+' '+originY+' q 150 -100 '+(endX-originX)+' '+(endY-originY))
-        .attr('stroke', 'red')
-        .attr('stroke-width', 3)
-        .attr('fill', 'none')
-        //.attr('stroke-dasharray', '3,20')
-        .attr('stroke-linecap', 'round')
-        .appendTo($('#svgRoot #lines'));  */ 
-        
-    // <line id="xAxis" x1="0" x2="1200" y1="0" y2="0" stroke-width="2"/>
-    //console.log(originX+'/'+originY+' => '+endX+'/'+endY);
-    $(SVG('line'))
-        //.attr('d', 'M 100 310 q 150 -100 300 70')
-        .attr('x1', originX)
-        .attr('x2', endX)
-        .attr('y1', originY)
-        .attr('y2', endY)
-        .attr('stroke', 'red')
-        .attr('stroke-width', 3)
-        .attr('fill', 'none')
-        //.attr('stroke-dasharray', '3,20')
-        .attr('stroke-linecap', 'round')
-        .appendTo($('#svgRoot #lines'));         
+    if(this.type == 'line') {
+      $(SVG('line'))
+              .attr('x1', originX)
+              .attr('x2', endX)
+              .attr('y1', originY)
+              .attr('y2', endY)
+              .attr('stroke', 'red')
+              .attr('stroke-width', 0.1)
+              .attr('fill', 'none')
+              .attr('stroke-dasharray', '0.1,0.5,0.2,0.4')
+              .attr('stroke-linecap', 'round')
+              .appendTo($('#svgRoot #lines'));
+    } else if (this.type == 'path') {
+      var dX = endX - originX;
+      var dY = endY - originY;
+      var qX = Math.floor((Math.random()*dX*3) - 1.5*dX); 
+      var qY = Math.floor((Math.random()*dY*3) - 1.5*dY); 
+      
+      $(SVG('path'))
+          .attr('d', 'M '+originX+' '+originY+' q '+qX+' '+qY+' '+dX+' '+dY)
+          .attr('stroke', 'red')
+          .attr('stroke-width', 0.1)
+          .attr('fill', 'none')
+          .attr('stroke-dasharray', '0.1,0.5,0.2,0.4')
+          .attr('stroke-linecap', 'round')
+          .appendTo($('#svgRoot #lines'));  
+    }      
   };
 
 	this.init();	
