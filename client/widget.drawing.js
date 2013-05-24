@@ -39,7 +39,7 @@ var UiStar = function(x, y) {
               <circle cx="180" cy="80" r="3" stroke="black" stroke-width="2" fill="grey">
                 <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
               </circle>    */
-    var r = Math.random()*4;
+    var r = Math.random()*3;
     var opacity = $(SVG('animate', {
           'attributeType': 'CSS',
           'attributeName': 'opacity',

@@ -20,8 +20,9 @@ var MapUi = function(mapContainer, viewport, tools) {
 	MapUi.prototype.enableDrag = function() {
     this.mapContainer.draggable({
       cursor: "move", 
-      /*scroll: true,
-      distance: 50,
+      distance: 5,
+      scroll: true
+      /*distance: 50,
       start: function() {
 
       },
