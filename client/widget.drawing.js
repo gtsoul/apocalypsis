@@ -1,25 +1,4 @@
 
-/* ------------------------------------------------------------------- */
-/* -------------------------- UiLink --------------------------------- */
-/* ------------------------------------------------------------------- */
-
-
-/*function drawIntro() { 
-    var svg = $('#svgload').svg('get');
-    console.log('Svg loaded');
-    console.log(svg);
-    svg.circle(75, 75, 50, 
-        {fill: 'none', stroke: 'red', strokeWidth: 3}); 
-    var g = svg.group({stroke: 'black', strokeWidth: 2}); 
-    svg.line(g, 15, 75, 135, 75); 
-    svg.line(g, 75, 15, 75, 135); 
-}
-
-$('#svgload').svg({
-  'onLoad': function(svg) {
-    alert('plop');
-  }
-});*/
 
 // TODO
 function SVG(tag, attrs) {
@@ -32,20 +11,63 @@ function SVG(tag, attrs) {
   return el;
 }
 
-$(document).ready(function() {
- 
-  $(SVG('circle'))
-      .attr('cx', 130)
-      .attr('cy', 75)
-      .attr('r', 50)
-      .attr('fill', 'none')
-      .attr('stroke', 'orange')
-      .attr('stroke-width', 3)
-      .appendTo($('#svgRoot #lines'));
-});
+/* ------------------------------------------------------------------- */
+/* -------------------------- UiStar --------------------------------- */
+/* ------------------------------------------------------------------- */
 
-var UiLink = function($origin, $end, id, type, classes) {
-  this.id;
+var UiStar = function(x, y) {
+  this.x;
+  this.y;
+  
+	this.init = function() {
+    this.x = x;
+    this.y = y;
+    this.draw();
+		this.init = function() {};
+	}; 
+  
+  UiStar.prototype.draw = function () {
+  
+  /*
+              <circle cx="200" cy="50" r="7" stroke="black" stroke-width="2" fill="grey">
+                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="12s" begin="3s" repeatCount="indefinite" />
+                <animate attributeType="XML" attributeName="r" from="10" to="0" dur="3s" begin="0s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="150" cy="120" r="5" stroke="black" stroke-width="2" fill="grey">
+                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="8s" begin="2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="180" cy="80" r="3" stroke="black" stroke-width="2" fill="grey">
+                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
+              </circle>    */
+    var r = Math.random()*5;
+    var opacity = $(SVG('animate'))
+        .attr('attributeType', 'CSS')
+        .attr('attributeName', 'opacity')
+        .attr('from', 1)
+        .attr('to', 0)
+        .attr('dur', Math.floor(Math.random()*15)+'s')
+        .attr('begin', Math.floor(Math.random()*5)+'s')
+        .attr('repeatCount', 'indefinite');
+    var star = $(SVG('circle'))
+        .attr('cx', this.x)
+        .attr('cy', this.y)
+        .attr('r', r)
+        .attr('stroke', 'red')
+        .attr('stroke-width', 2);
+        //.attr('fill', 'red');
+    opacity.appendTo(star);
+    star.appendTo($('#svgRoot #stars'));       
+  };
+
+	this.init();	
+};
+
+/* ------------------------------------------------------------------- */
+/* -------------------------- UiLink --------------------------------- */
+/* ------------------------------------------------------------------- */
+
+var UiLink = function($origin, $end, /*id,*/ type, classes) {
+  //this.id;
   this.origin;
   this.end;
   this.classes;
@@ -56,11 +78,11 @@ var UiLink = function($origin, $end, id, type, classes) {
     this.end = $end;
     this.type = type; // line, path ellipse
     this.classes = classes;
-    if(id == undefined) {
+    /*if(id == undefined) {
       this.id = this.origin.attr('id')+'#'+this.end.attr('id');    
     } else {
       this.id = id;
-    }
+    }*/
     if(this.origin != undefined && this.end != undefined) {
       this.draw();
     }
@@ -68,19 +90,18 @@ var UiLink = function($origin, $end, id, type, classes) {
 	}; 
   
   UiLink.prototype.draw = function () {
-    var $line = $('#'+this.id);
     var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
     var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
     var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
     var endY = parseFloat(this.end.css('top')) + this.end.outerHeight() / 2;
-    
+
     if(this.type == 'line') {
       $(SVG('line'))
               .attr('x1', originX)
               .attr('x2', endX)
               .attr('y1', originY)
               .attr('y2', endY)
-              .attr('stroke', 'red')
+              .attr('stroke', 'yellow')
               .attr('stroke-width', 0.1)
               .attr('fill', 'none')
               .attr('stroke-dasharray', '0.1,0.5,0.2,0.4')
@@ -94,7 +115,7 @@ var UiLink = function($origin, $end, id, type, classes) {
       
       $(SVG('path'))
           .attr('d', 'M '+originX+' '+originY+' q '+qX+' '+qY+' '+dX+' '+dY)
-          .attr('stroke', 'red')
+          .attr('stroke', 'yellow')
           .attr('stroke-width', 0.1)
           .attr('fill', 'none')
           .attr('stroke-dasharray', '0.1,0.5,0.2,0.4')

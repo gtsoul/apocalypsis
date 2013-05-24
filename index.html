@@ -2,13 +2,11 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link href="css/jquery.svg.css" rel="stylesheet"/>
     <link href="css/dot-luv/jquery-ui-1.9.2.custom.css" rel="stylesheet"/>
     <link href="css/map.css" rel="stylesheet"/>
     <script src="js/jquery-1.8.3.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.js"></script>
     <script src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/jquery.svg.min.js"></script>
     <script src="client/widget.drawing.js"></script>
     <script src="client/entity.spaceelement.js"></script>
     <script src="client/entity.planet.js"></script>
@@ -24,39 +22,17 @@
       <div id="map">     
         <div class="mapRoot" style="width:1200px;height:700px;">      
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;" width="2400" height="1400" id="svgRoot">
-          <defs>
-            <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" >
-              <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
-            </filter>
-          </defs> 
-            <line id="xAxis" x1="0" x2="1200" y1="0" y2="0" stroke-width="2"/>
-            <line id="yAxis" x1="0" x2="0" y1="0" y2="700" stroke-width="2"/>
-            <g filter="url(#blur)">
-              
-              
-              <!--animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="180" begin="1s" dur="60s" repeatCount="indefinite" /--> 
-              <circle cx="200" cy="50" r="7" stroke="black" stroke-width="2" fill="grey">
-                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="12s" begin="3s" repeatCount="indefinite" />
-                <animate attributeType="XML" attributeName="r" from="10" to="0" dur="3s" begin="0s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="150" cy="120" r="5" stroke="black" stroke-width="2" fill="grey">
-                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="8s" begin="2s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="180" cy="80" r="3" stroke="black" stroke-width="2" fill="grey">
-                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
-              </circle>              
+            <defs>
+              <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" >
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+              </filter>
+            </defs> 
+            <g filter="url(#blur)" id="stars">                 
             </g>
             <g id="lines"> 
-              <!--path d="M 100 310 q 150 -100 300 70" stroke="red" stroke-width="3" fill="none" stroke-dasharray="3,20" stroke-linecap="round" /-->
             </g> 
           </svg>   
-
-  
           
-          <!--div >      
-            <img src="images/apocalypsis/debuggrid.png" style="width:2400px;height:1400px;"/>
-          </div-->
-
           <img id="target" class="nozoom" src="images/apocalypsis/target.png" alt="" />
         </div>
       </div>

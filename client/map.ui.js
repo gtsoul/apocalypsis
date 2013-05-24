@@ -48,6 +48,12 @@ var MapUi = function(mapContainer, viewport, tools) {
       var left = system.x * EntitySystem.prototype.WIDTH_PX;
       var top = system.y * EntitySystem.prototype.HEIGHT_PX;
       var $newSystem = system.getHtml(left, top);
+      var nbStars = system.widthPx * system.heightPx / 1000;
+
+      for(var i=0; i<nbStars; i++) {
+        var star = new UiStar(Math.floor((Math.random()*(system.widthPx + EntitySystem.prototype.WIDTH_PX)) + left - EntitySystem.prototype.WIDTH_PX/2), 
+                              Math.floor((Math.random()*(system.heightPx + EntitySystem.prototype.HEIGHT_PX)) + top - EntitySystem.prototype.HEIGHT_PX/2));
+      }
       if($oldSystem.length > 0) {
         $oldSystem.remove();
       }      

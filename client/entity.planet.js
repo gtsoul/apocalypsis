@@ -104,7 +104,7 @@ var EntityCoords = function(json, parent) {
       for(var planetId in this.planets) {
         var planet = this.planets[planetId];
         var $planet = planet.getHtml(this.left + (planet.x*this.widthPx/this.width), this.top + (planet.y*this.widthPx/this.width))
-        var line = new UiLink($coordPointPc, $planet, this.pos+'#'+planet.pos, 'path', 'coord_to_planet');        
+        var line = new UiLink($coordPointPc, $planet, /*this.pos+'#'+planet.pos,*/ 'path', 'coord_to_planet');        
         $planets.append($planet);
       }
     }
