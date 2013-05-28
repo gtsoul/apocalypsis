@@ -97,6 +97,13 @@ var EntityCoords = function(json, parent) {
     var $coordPointPc = $coordPoint.clone();    
     $coordPoint.attr('src', this.image);  
     $coords.append($coordPoint.addClass('extended').css('width','150').css('height','110'));
+    if(this.fleets != undefined) {
+      var nbFleets = 0;
+      for(var fleetId in this.fleets) {
+        nbFleets++;
+      }
+      $coordPointPc.attr('fleets', nbFleets); 
+    }
     $coords.append($coordPointPc.addClass('pc'));    
     // planets    
     var $planets = $('<div class="planets"/>');
@@ -118,8 +125,9 @@ var EntityCoords = function(json, parent) {
     if(this.known == true) {
       htmlEl.mouseover(function() {
         var coord = globalMap.getEntity($(this).attr('id'));
-        if(coord != undefined && coord.planets == undefined && coord.known == true) {
+        if(coord != undefined && coord.planets == undefined && coord.fleets == undefined && coord.known == true) {
           coord.planets = new Array();
+          coord.fleets = new Array();
           globalMap.refreshCoord(coord);      
         }
       });

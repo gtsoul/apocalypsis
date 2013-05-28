@@ -53,8 +53,10 @@ var MapAjaxProxy = function(servicesContext) {
     }    
     if(data.coord != undefined && data.coord.fleets != undefined) {
       $.each(data.coord.fleets, function(key, datum) {
-        // TODO : save the fleets
-        //console.log(datum);
+        var fleet = new EntityFleet(datum, coord);
+        if(fleet != undefined && fleet.pos != undefined) {
+          coord.fleets[fleet.pos] = fleet;
+        }        
       });
     }
     if(data.coord != undefined && data.coord.subElements != undefined && data.coord.subElements.planets != undefined) {
