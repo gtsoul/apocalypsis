@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 
-#map  .coords  .coordPoint, #map  .system .sun {
+#map  .coords  .coordPoint.pc, #map  .system .sun {
   position: absolute;
   /*width: 90px;
   height: 90px;*/
@@ -70,15 +70,15 @@
   pointer-events: none;
 }
 
-#map  .mapRoot.zoomOnPlanet .coords .coordPoint .extended, #map .mapRoot .coords.unloaded .coordPoint .pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars {
+#map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars {
   display: none;
 }
 
-#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint .extended, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
+#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint.extended, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
   display: block;
 }
 
-#map  .mapRoot.zoomOnCoords .coords .coordPoint .pc, #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint, #map  .mapRoot.zoomOnCoords #svgRoot #lines {
+#map  .mapRoot.zoomOnCoords .coords .coordPoint.pc, #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint, #map  .mapRoot.zoomOnCoords #svgRoot #lines {
   display: none;
 }
 
@@ -99,7 +99,7 @@
 }
 
 
-#map  .coords  .coordPoint .extended {
+#map  .coords  .coordPoint.extended {
   width: 150px;
   height: 110px;
 }
