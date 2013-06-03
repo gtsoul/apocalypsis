@@ -20,7 +20,7 @@
 				"y": "6",
 				"width": 4,
 				"height": 4,
-				"known": true
+				"known": false
 			},
 			{
 				"pos": "2_15_7_3",
@@ -28,7 +28,7 @@
 				"y": "0",
 				"width": 4,
 				"height": 4,
-				"known": true
+				"known": false
 			},
 			{
 				"pos": "2_15_7_4",
@@ -36,7 +36,7 @@
 				"y": "8",
 				"width": 4,
 				"height": 4,
-				"known": true
+				"known": false
 			},
 			{
 				"pos": "2_15_7_5",
@@ -44,7 +44,7 @@
 				"y": "1",
 				"width": 4,
 				"height": 4,
-				"known": true
+				"known": false
 			}],
 			"sun": {
 				"x": "13",
