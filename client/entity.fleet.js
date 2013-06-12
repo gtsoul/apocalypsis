@@ -27,24 +27,31 @@ var EntityFleet = function(json, parent) {
   };
   
   EntityFleet.prototype.getHtmlIdle = function (nbFleets) { 
+    nbFleetsLn = Math.min(16, Math.pow(nbFleets, 1/3));
     var $fleets = $('<div class="fleets"/>'); 
     var $fleet = $('<img class="fleet nozoom fleetStatic" style="width:'+EntityFleet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityFleet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     $fleet.attr('src', this.image);
-    var left = Math.round(this.spaceElement.x + this.spaceElement.width/2);// - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
-    var top = Math.round(this.spaceElement.y + this.spaceElement.height/2);// - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);
-    var side = Math.ceil(Math.sqrt(nbFleets));
+    //var left = Math.round(this.spaceElement.x + this.spaceElement.width/2 - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
+    //var top = Math.round(this.spaceElement.y + this.spaceElement.height/2 - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);    
+    //var left = Math.round(this.spaceElement.x + this.spaceElement.width/2);// - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
+    //var top = Math.round(this.spaceElement.y + this.spaceElement.height/2);// - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);
+    var left = Math.round(this.spaceElement.x + this.spaceElement.width/2 - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
+    var top = Math.round(this.spaceElement.y + this.spaceElement.height/2 - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);    
+    var side = Math.ceil(Math.sqrt(nbFleetsLn));
+    console.log(left+' / '+top+' / '+side);
+
     
-    left -= EntityFleet.prototype.WIDTH_PX_DEFAULT/2 * side;
-    top -= EntityFleet.prototype.HEIGHT_PX_DEFAULT/2 * side;
+    left -= (EntityFleet.prototype.INTERVAL_PX/2 * side);
+    top -= (EntityFleet.prototype.INTERVAL_PX/2 * side);
     
     for(var ity=0; ity<side; ity++) {
       var itx = 0;
-      var it = ity*side+itx;
       while(itx<side) {
-        if(it<nbFleets) {
+        var it = ity*side+itx;      
+        if(it<nbFleetsLn) {
           var $fleetTmp = $fleet.clone();
-          $fleetTmp.css('left', Math.round(left + EntityFleet.prototype.WIDTH_PX_DEFAULT*itx)+'px');
-          $fleetTmp.css('top', Math.round(left + EntityFleet.prototype.HEIGHT_PX_DEFAULT*ity)+'px');
+          $fleetTmp.css('left', Math.round(left + EntityFleet.prototype.INTERVAL_PX*itx)+'px');
+          $fleetTmp.css('top', Math.round(top + EntityFleet.prototype.INTERVAL_PX*ity)+'px'); 
           $fleets.append($fleetTmp);
         }
         itx++;
@@ -53,8 +60,9 @@ var EntityFleet = function(json, parent) {
     return $fleets;
   }
   
-  EntityFleet.prototype.WIDTH_PX_DEFAULT = 20;
-  EntityFleet.prototype.HEIGHT_PX_DEFAULT = 20;  
+  EntityFleet.prototype.WIDTH_PX_DEFAULT = 10;
+  EntityFleet.prototype.HEIGHT_PX_DEFAULT = 10;  
+  EntityFleet.prototype.INTERVAL_PX = 1;
   EntityFleet.prototype.STATE_IDLE = 'idle';
   EntityFleet.prototype.STATE_FLY = 'fly';
   EntityFleet.prototype.STATE_FIGHT = 'fight';

@@ -58,11 +58,30 @@
 			}
 		},
 		"fleets": [{
+			"cap_id": 1,
+			"cap_name": "brigands"
+		},		{
 			"cap_id": 2,
+			"cap_name": "cdt. Nanovitch4"
+		},{
+			"cap_id": 3,
 			"cap_name": "brigands"
 		},
 		{
-			"cap_id": 2420,
+			"cap_id": 4,
+			"cap_name": "cdt. Nanovitch4"
+		},{
+			"cap_id": 5,
+			"cap_name": "brigands"
+		},		{
+			"cap_id": 6,
+			"cap_name": "cdt. Nanovitch4"
+		},{
+			"cap_id": 7,
+			"cap_name": "brigands"
+		},
+		{
+			"cap_id": 8,
 			"cap_name": "cdt. Nanovitch4"
 		}]
 	},

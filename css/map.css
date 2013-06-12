@@ -78,11 +78,11 @@
   display: block;
 }
 
-#map  .mapRoot.zoomOnCoords .coords .coordPoint.pc, #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint, #map  .mapRoot.zoomOnCoords #svgRoot #lines {
+#map  .mapRoot.zoomOnCoords .fleets, #map  .mapRoot.zoomOnCoords .coords .coordPoint.pc, #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint, #map  .mapRoot.zoomOnCoords #svgRoot #lines {
   display: none;
 }
 
-#map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .sun, #map  .mapRoot.zoomOnSystem .coords, #map  .mapRoot.zoomOnSystem #svgRoot #lines {
+#map  .mapRoot.zoomOnSystem .fleets, #map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .sun, #map  .mapRoot.zoomOnSystem .coords, #map  .mapRoot.zoomOnSystem #svgRoot #lines {
   display: none;
 }
 
