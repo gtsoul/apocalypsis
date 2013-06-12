@@ -38,11 +38,11 @@ var EntitySystem = function(json) {
   };
   
   EntitySystem.prototype.getHtml = function () {
-    var $systemPoint = $('<img class="systemPoint nozoom" style="height: 110px;width: 130px;"/>');
+    var $systemPoint = $('<img class="systemPoint nozoom" style="height:'+EntitySystem.prototype.WIDTH_PX+'px;width: '+EntitySystem.prototype.HEIGHT_PX+'px;"/>');
     var $system = $('<div class="system"></div>');
     $system.attr('id', this.pos);
-    $systemPoint.css('left', Math.round(this.x + this.width/2 - 65)+'px');
-    $systemPoint.css('top', Math.round(this.y + this.height/2 - 55)+'px');
+    $systemPoint.css('left', Math.round(this.x + this.width/2 - EntitySystem.prototype.WIDTH_PX/2)+'px');
+    $systemPoint.css('top', Math.round(this.y + this.height/2 - EntitySystem.prototype.HEIGHT_PX/2)+'px');
     $systemPoint.attr('src', this.image);
     $system.append($systemPoint);
     if(this.sun != undefined) {
@@ -66,8 +66,8 @@ var EntitySystem = function(json) {
     return undefined;    
   };  
   
-  EntitySystem.prototype.WIDTH_PX = 100;
-  EntitySystem.prototype.HEIGHT_PX = 100;
+  EntitySystem.prototype.WIDTH_PX = 110;
+  EntitySystem.prototype.HEIGHT_PX = 130;
 
 	this.init();	
 };

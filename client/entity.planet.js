@@ -6,7 +6,7 @@
 var EntityPlanet = function(json, parent) {
   
   EntityPlanet.prototype.getHtml = function () {
-    var $planet = $('<img class="planet nozoom" style="width:50px;height:50px;"/>');
+    var $planet = $('<img class="planet nozoom" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     $planet.attr('id', this.pos);
     $planet.attr('src', this.image);
     $planet.css('left', Math.round(this.x + this.width/2 - 25)+'px');
@@ -22,6 +22,9 @@ var EntityPlanet = function(json, parent) {
 		this.init = function() {};
 	}; 
   
+  EntityPlanet.prototype.WIDTH_PX_DEFAULT = 50;
+  EntityPlanet.prototype.HEIGHT_PX_DEFAULT = 50;  
+  
 	this.init();	
 };
 
@@ -32,10 +35,10 @@ var EntityPlanet = function(json, parent) {
 var EntitySun = function(json, parent) {
 
   EntitySun.prototype.getHtml = function () {
-    var $sun = $('<img class="sun nozoom" style="width:80px;height:80px;"/>');
+    var $sun = $('<img class="sun nozoom" style="width:'+EntitySun.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntitySun.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     $sun.attr('src', this.image);
-    $sun.css('left', Math.round(this.x + this.width/2 - 40)+'px');
-    $sun.css('top', Math.round(this.y + this.height/2 - 40)+'px');
+    $sun.css('left', Math.round(this.x + this.width/2 - EntitySun.prototype.WIDTH_PX_DEFAULT/2)+'px');
+    $sun.css('top', Math.round(this.y + this.height/2 - EntitySun.prototype.HEIGHT_PX_DEFAULT/2)+'px');
     return $sun;
   }; 
     
@@ -47,6 +50,9 @@ var EntitySun = function(json, parent) {
 		this.init = function() {};
 	}; 
   
+  EntitySun.prototype.WIDTH_PX_DEFAULT = 80;
+  EntitySun.prototype.HEIGHT_PX_DEFAULT = 80;
+  
 	this.init();
 };
 
@@ -57,18 +63,18 @@ var EntitySun = function(json, parent) {
 var EntityPc = function(json, parent) {
 
   EntityPc.prototype.getHtmlPc = function () {
-    var $pc = $('<img class="coordPoint pc nozoom" style="width:80px;height:80px;"/>');
+    var $pc = $('<img class="coordPoint pc nozoom" style="width:'+EntityPc.prototype.WIDTH_PX+'px;height:'+EntityPc.prototype.HEIGHT_PX+'px;"/>');
     $pc.attr('src', this.image);
-    $pc.css('left', Math.round(this.x + this.width/2 - 40)+'px');
-    $pc.css('top', Math.round(this.y + this.height/2 - 40)+'px');
+    $pc.css('left', Math.round(this.x + this.width/2 - EntityPc.prototype.WIDTH_PX/2)+'px');
+    $pc.css('top', Math.round(this.y + this.height/2 - EntityPc.prototype.HEIGHT_PX/2)+'px');
     return $pc;
   };
 
   EntityPc.prototype.getHtmlExt = function () {
-    var $pc = $('<img class="coordPoint extended nozoom" style="width:150px;height:110px;"/>');
+    var $pc = $('<img class="coordPoint extended nozoom" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     $pc.attr('src', this.image);
-    $pc.css('left', Math.round(this.x + this.width/2 - 75)+'px');
-    $pc.css('top', Math.round(this.y + this.height/2 - 55)+'px');
+    $pc.css('left', Math.round(this.x + this.width/2 - EntityCoords.prototype.WIDTH_PX_DEFAULT/2)+'px');
+    $pc.css('top', Math.round(this.y + this.height/2 - EntityCoords.prototype.HEIGHT_PX_DEFAULT/2)+'px');
 
     return $pc;
   };    
@@ -80,14 +86,21 @@ var EntityPc = function(json, parent) {
     if(isNaN(this.x) || isNaN(this.y)) {
       this.x = Math.round(json.x + json.width/2);
       this.y = Math.round(json.y + json.height/2);
-      this.width = 4; //json.width; TODO
-      this.height = 4; //json.height; TODO
+      this.width = EntityPc.prototype.WIDTH_DEFAULT;
+      this.height = EntityPc.prototype.HEIGHT_DEFAULT;
     }
     this.type = 'pc';
-    this.image = 'images/apocalypsis/pc.jpg'
+    this.image = EntityPc.prototype.IMAGE_DEFAULT;
 		this.init = function() {};
 	};  
 
+  
+  EntityPc.prototype.WIDTH_PX = 50;
+  EntityPc.prototype.HEIGHT_PX = 50;  
+  EntityPc.prototype.WIDTH_DEFAULT = 4;
+  EntityPc.prototype.HEIGHT_DEFAULT = 4;  
+  EntityPc.prototype.IMAGE_DEFAULT = 'images/apocalypsis/pc.jpg';   
+ 
 	this.init();	
 };
 
@@ -98,7 +111,7 @@ var EntityPc = function(json, parent) {
 var EntityCoords = function(json, parent) {
 
   EntityCoords.prototype.getHtml = function () {  
-    var $coords = $('<div class="coords unloaded" style="width:50px;height:50px;"/>');
+    var $coords = $('<div class="coords unloaded" />');
     $coords.attr('id', this.pos);    
     // coordPoint
     var $coordPointExt = this.pc.getHtmlExt();
@@ -169,7 +182,10 @@ var EntityCoords = function(json, parent) {
     this.type = 'coords';
     this.image = 'images/apocalypsis/coords.png';
 		this.init = function() {};    
-	};
+	};  
+  
+  EntityCoords.prototype.WIDTH_PX_DEFAULT = 150;
+  EntityCoords.prototype.HEIGHT_PX_DEFAULT = 110;     
   
 	this.init();	
 };
