@@ -56,14 +56,22 @@ var EntitySun = function(json, parent) {
 
 var EntityPc = function(json, parent) {
 
-  EntityPc.prototype.getHtml = function (left, top) {
-    var $pc = $('<img class="coordPoint nozoom" style="width:80px;height:80px;"/>');
+  EntityPc.prototype.getHtmlPc = function () {
+    var $pc = $('<img class="coordPoint pc nozoom" style="width:80px;height:80px;"/>');
     $pc.attr('src', this.image);
-    console.log(this);
     $pc.css('left', Math.round(this.x + this.width/2 - 40)+'px');
     $pc.css('top', Math.round(this.y + this.height/2 - 40)+'px');
     return $pc;
-  };   
+  };
+
+  EntityPc.prototype.getHtmlExt = function () {
+    var $pc = $('<img class="coordPoint extended nozoom" style="width:150px;height:110px;"/>');
+    $pc.attr('src', this.image);
+    $pc.css('left', Math.round(this.x + this.width/2 - 75)+'px');
+    $pc.css('top', Math.round(this.y + this.height/2 - 55)+'px');
+
+    return $pc;
+  };    
   
   EntityPc.prototype = new EntitySpaceElement(json, parent);
   
@@ -72,8 +80,8 @@ var EntityPc = function(json, parent) {
     if(isNaN(this.x) || isNaN(this.y)) {
       this.x = Math.round(json.x + json.width/2);
       this.y = Math.round(json.y + json.height/2);
-      this.width = json.width;
-      this.height = json.height;
+      this.width = 4; //json.width; TODO
+      this.height = 4; //json.height; TODO
     }
     this.type = 'pc';
     this.image = 'images/apocalypsis/pc.jpg'
@@ -93,11 +101,12 @@ var EntityCoords = function(json, parent) {
     var $coords = $('<div class="coords unloaded" style="width:50px;height:50px;"/>');
     $coords.attr('id', this.pos);    
     // coordPoint
-    var $coordPoint = this.pc.getHtml();
-    var $coordPointPc = $coordPoint.clone();    
-    $coordPoint.attr('src', this.image);  
-    $coords.append($coordPoint.addClass('extended').css('width','150').css('height','110'));
-    $coords.append($coordPointPc.addClass('pc'));   
+    var $coordPointExt = this.pc.getHtmlExt();
+    var $coordPointPc = this.pc.getHtmlPc();
+    
+    $coordPointExt.attr('src', this.image);  
+    $coords.append($coordPointExt);
+    $coords.append($coordPointPc);   
     
     if(this.fleets != undefined) {
       var nbFleets = 0;
