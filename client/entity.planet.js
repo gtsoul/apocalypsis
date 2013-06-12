@@ -32,14 +32,12 @@ var EntityPlanet = function(json, parent) {
 var EntitySun = function(json, parent) {
 
   EntitySun.prototype.getHtml = function () {
-    console.log(this);
     var $sun = $('<img class="sun nozoom" style="width:80px;height:80px;"/>');
     $sun.attr('src', this.image);
     $sun.css('left', Math.round(this.x + this.width/2 - 40)+'px');
     $sun.css('top', Math.round(this.y + this.height/2 - 40)+'px');
     return $sun;
   }; 
-
     
   EntitySun.prototype = new EntitySpaceElement(json, parent);
   
@@ -61,6 +59,7 @@ var EntityPc = function(json, parent) {
   EntityPc.prototype.getHtml = function (left, top) {
     var $pc = $('<img class="coordPoint nozoom" style="width:80px;height:80px;"/>');
     $pc.attr('src', this.image);
+    console.log(this);
     $pc.css('left', Math.round(this.x + this.width/2 - 40)+'px'); // TODO
     $pc.css('top', Math.round(this.y + this.height/2 - 40)+'px');    // TODO
     return $pc;
@@ -70,6 +69,10 @@ var EntityPc = function(json, parent) {
   
 	this.init = function() {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
+    if(isNaN(this.x) || isNaN(this.y)) {
+      this.x = Math.round(json.x + json.width/2);
+      this.y = Math.round(json.u + json.height/2);
+    }
     this.type = 'pc';
     this.image = 'images/apocalypsis/pc.jpg'
 		this.init = function() {};
