@@ -1,0 +1,69 @@
+{
+	"coord": {
+		"pos": "2_17_1_5",
+		"capAbsoluteX": 28,
+		"capAbsoluteY": 28,
+		"absoluteWidth": 16,
+		"absoluteHeight": 16,
+		"subElements": {
+			"planets": [{
+				"pos": "2_17_1_5_1",
+				"capAbsoluteX": 39,
+				"capAbsoluteY": 36,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "argolintte",
+				"image": "\/images\/universe\/desertique_fg1.jpg"
+			},
+			{
+				"pos": "2_17_1_5_2",
+				"capAbsoluteX": 30,
+				"capAbsoluteY": 28,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "emalsamape",
+				"image": "\/images\/universe\/temperee_fg1.jpg"
+			},
+			{
+				"pos": "2_17_1_5_3",
+				"capAbsoluteX": 39,
+				"capAbsoluteY": 31,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "antttttuer",
+				"image": "\/images\/universe\/luxuriante_fg1.jpg"
+			},
+			{
+				"pos": "2_17_1_5_4",
+				"capAbsoluteX": 28,
+				"capAbsoluteY": 36,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "teralipulz",
+				"image": "\/images\/universe\/aride_fg1.jpg"
+			}],
+			"pc": {
+				"capAbsoluteX": 34,
+				"capAbsoluteY": 32,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		}]
+	},
+	"cap": {
+		"minVisiblePosLevel": 4,
+		"absoluteGrid": {
+			"width": 64,
+			"height": 64
+		}
+	}
+}

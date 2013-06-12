@@ -1,0 +1,69 @@
+{
+	"coord": {
+		"pos": "2_17_1_4",
+		"capAbsoluteX": 40,
+		"capAbsoluteY": 8,
+		"absoluteWidth": 16,
+		"absoluteHeight": 16,
+		"subElements": {
+			"planets": [{
+				"pos": "2_17_1_4_1",
+				"capAbsoluteX": 52,
+				"capAbsoluteY": 14,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "calzanemie",
+				"image": "\/images\/universe\/luxuriante_fg0.jpg"
+			},
+			{
+				"pos": "2_17_1_4_2",
+				"capAbsoluteX": 40,
+				"capAbsoluteY": 8,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "gucapanee",
+				"image": "\/images\/universe\/glaciaire_fg0.jpg"
+			},
+			{
+				"pos": "2_17_1_4_3",
+				"capAbsoluteX": 50,
+				"capAbsoluteY": 8,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "aqueguyerg",
+				"image": "\/images\/universe\/temperee_fg0.jpg"
+			},
+			{
+				"pos": "2_17_1_4_4",
+				"capAbsoluteX": 40,
+				"capAbsoluteY": 14,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "berganiaru",
+				"image": "\/images\/universe\/luxuriante_fg0.jpg"
+			}],
+			"pc": {
+				"capAbsoluteX": 46,
+				"capAbsoluteY": 12,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		}]
+	},
+	"cap": {
+		"minVisiblePosLevel": 4,
+		"absoluteGrid": {
+			"width": 64,
+			"height": 64
+		}
+	}
+}

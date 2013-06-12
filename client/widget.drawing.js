@@ -27,18 +27,6 @@ var UiStar = function(x, y) {
 	}; 
   
   UiStar.prototype.draw = function () {
-  
-  /*
-              <circle cx="200" cy="50" r="7" stroke="black" stroke-width="2" fill="grey">
-                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="12s" begin="3s" repeatCount="indefinite" />
-                <animate attributeType="XML" attributeName="r" from="10" to="0" dur="3s" begin="0s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="150" cy="120" r="5" stroke="black" stroke-width="2" fill="grey">
-                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="8s" begin="2s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="180" cy="80" r="3" stroke="black" stroke-width="2" fill="grey">
-                <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="16s" begin="1s" repeatCount="indefinite" />
-              </circle>    */
     var r = Math.random()*3;
     var opacity = $(SVG('animate', {
           'attributeType': 'CSS',
@@ -79,23 +67,15 @@ var UiStar = function(x, y) {
 /* -------------------------- UiLink --------------------------------- */
 /* ------------------------------------------------------------------- */
 
-var UiLink = function($origin, $end, /*id,*/ type, classes) {
-  //this.id;
+var UiLink = function($origin, $end, type) {
   this.origin;
   this.end;
-  this.classes;
   this.type;
   
 	this.init = function() {
     this.origin = $origin;
     this.end = $end;
     this.type = type; // line, path ellipse
-    this.classes = classes;
-    /*if(id == undefined) {
-      this.id = this.origin.attr('id')+'#'+this.end.attr('id');    
-    } else {
-      this.id = id;
-    }*/
     if(this.origin != undefined && this.end != undefined) {
       this.draw();
     }
@@ -139,3 +119,44 @@ var UiLink = function($origin, $end, /*id,*/ type, classes) {
 
 	this.init();	
 };
+
+
+/* ------------------------------------------------------------------- */
+/* -------------------------- UiFleet --------------------------------- */
+/* ------------------------------------------------------------------- */
+
+/*var UiFleet = function($origin, $end, nb, state) {
+  this.origin;
+  this.end;
+  this.state;
+  
+	this.init = function() {
+    this.origin = $origin;
+    this.end = $end;
+    this.nb = nb;
+    this.state = state; // idle, fly, fight
+    if(this.origin != undefined && this.state != undefined) {
+      this.draw();
+    }
+		this.init = function() {};
+	}; 
+  
+  UiFleet.prototype.draw = function () {
+    var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
+    var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
+
+    if(this.state == EntityFleet.prototype.STATE_IDLE) {
+    var star = $(SVG('circle'))
+        .attr('cx', originX)
+        .attr('cy', originY)
+        .attr('r', 10)
+        .attr('stroke', 'yellow')
+        .attr('stroke-width', 3)
+        .attr('fill', 'red')
+        //.attr('class', 'nozoom')
+        .appendTo($('#svgRoot #fleets'));  
+    }
+  };
+
+	this.init();	
+};*/

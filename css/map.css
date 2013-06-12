@@ -128,3 +128,12 @@
   -ms-transform-origin: top left;
   transform-origin: top left;
 }
+
+/*-------- Fleets -------------*/
+.fleets .fleet {
+  position: absolute;
+  /*rotation-point:50% 50%;*/
+}
+.fleetStatic {
+  pointer-events: none;
+}

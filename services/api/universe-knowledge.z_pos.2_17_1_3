@@ -1,0 +1,69 @@
+{
+	"coord": {
+		"pos": "2_17_1_3",
+		"capAbsoluteX": 44,
+		"capAbsoluteY": 28,
+		"absoluteWidth": 16,
+		"absoluteHeight": 16,
+		"subElements": {
+			"planets": [{
+				"pos": "2_17_1_3_1",
+				"capAbsoluteX": 53,
+				"capAbsoluteY": 36,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "mitueree",
+				"image": "\/images\/universe\/temperee_fg3.jpg"
+			},
+			{
+				"pos": "2_17_1_3_2",
+				"capAbsoluteX": 45,
+				"capAbsoluteY": 29,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "egolalarga",
+				"image": "\/images\/universe\/glaciaire_fg3.jpg"
+			},
+			{
+				"pos": "2_17_1_3_3",
+				"capAbsoluteX": 55,
+				"capAbsoluteY": 29,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "eminipulas",
+				"image": "\/images\/universe\/glaciaire_fg3.jpg"
+			},
+			{
+				"pos": "2_17_1_3_4",
+				"capAbsoluteX": 44,
+				"capAbsoluteY": 36,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "bremamonte",
+				"image": "\/images\/universe\/aride_fg3.jpg"
+			}],
+			"pc": {
+				"capAbsoluteX": 50,
+				"capAbsoluteY": 32,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		}]
+	},
+	"cap": {
+		"minVisiblePosLevel": 4,
+		"absoluteGrid": {
+			"width": 64,
+			"height": 64
+		}
+	}
+}
