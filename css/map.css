@@ -82,7 +82,7 @@
   display: none;
 }
 
-#map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .coords, #map  .mapRoot.zoomOnSystem #svgRoot #lines {
+#map  .mapRoot.zoomOnSystem .planets, #map  .mapRoot.zoomOnSystem .sun, #map  .mapRoot.zoomOnSystem .coords, #map  .mapRoot.zoomOnSystem #svgRoot #lines {
   display: none;
 }
 

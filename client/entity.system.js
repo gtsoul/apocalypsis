@@ -3,8 +3,6 @@ var EntitySystem = function(json) {
   this.pos;
   this.width;
   this.height;
-  this.widthPx;
-  this.heightPx;  
   this.x;
   this.y;
   this.coords = new Array();
@@ -12,9 +10,7 @@ var EntitySystem = function(json) {
   this.type = 'system';
   this.image = 'images/universe/system_fg'+(Math.round(Math.random()*3))+'.jpg';
   
-	this.init = function() {
-    this.widthPx = EntitySystem.prototype.WIDTH_PX;
-    this.heightPx = EntitySystem.prototype.HEIGHT_PX;   
+	this.init = function() { 
     this.__loadJson(json);
 		this.init = function() {};
 	}; 
@@ -22,10 +18,10 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.__loadJson = function (json) {
     var system = this;
     this.pos = json.pos;
-    this.width = json.width;
-    this.height = json.height;
-    this.x = json.x;
-    this.y = json.y;
+    this.width = json.absoluteWidth;
+    this.height = json.absoluteHeight;
+    this.x = json.capAbsoluteX;
+    this.y = json.capAbsoluteY;
     this.coords = new Array();
     this.sun = undefined;    
     if(json.subElements != undefined) {
@@ -41,27 +37,20 @@ var EntitySystem = function(json) {
     }
   };
   
-  EntitySystem.prototype.getHtml = function (left, top) {
+  EntitySystem.prototype.getHtml = function () {
     var $systemPoint = $('<img class="systemPoint nozoom" />');
     var $system = $('<div class="system"></div>');
     $system.attr('id', this.pos);
-    $systemPoint.css('left', Math.round(left + this.widthPx/2)+'px');
-    $systemPoint.css('top', Math.round(top + this.heightPx/2)+'px');
+    $systemPoint.css('left', Math.round(this.x + this.width/2)+'px');
+    $systemPoint.css('top', Math.round(this.y + this.height/2)+'px');
     $systemPoint.attr('src', this.image);
     $system.append($systemPoint);
     if(this.sun != undefined) {
-      $system.append(this.sun.getHtml(
-        left + (this.sun.x*this.widthPx/this.width), 
-        top + (this.sun.y*this.heightPx/this.height)
-      ));
+      $system.append(this.sun.getHtml());
     }
     for(var coordIt in this.coords) {
       var coord = this.coords[coordIt];
-       // TODO : fix it
-      $system.append(coord.getHtml(
-        left + (coord.x*this.widthPx/this.width), 
-        top + (coord.y*this.heightPx/this.height)      
-      ));
+      $system.append(coord.getHtml());    
     }
     return $system;
   };

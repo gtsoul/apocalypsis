@@ -6,8 +6,6 @@ var EntitySpaceElement = function(json, parent) {
   this.height;
   this.x;
   this.y;
-  this.left;
-  this.top;  
   this.known;
   this.parent;
   this.type;
@@ -21,10 +19,10 @@ var EntitySpaceElement = function(json, parent) {
   
   EntitySpaceElement.prototype.__loadJson = function (json, parent) {
     this.pos = json.pos;
-    this.x = parseInt(json.x);
-    this.y = parseInt(json.y);
-    this.width = json.width;
-    this.height = json.height;
+    this.x = parseInt(json.capAbsoluteX);
+    this.y = parseInt(json.capAbsoluteY);
+    this.width = json.absoluteWidth;
+    this.height = json.absoluteHeight;
     this.known = json.known;
     this.image = json.image;
     this.parent = parent;
