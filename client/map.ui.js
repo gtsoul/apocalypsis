@@ -48,7 +48,7 @@ var MapUi = function(mapContainer, viewport, tools) {
       var $oldSystem = $('#'+system.pos+'.system');
       var left = system.x * EntitySystem.prototype.WIDTH_PX;
       var top = system.y * EntitySystem.prototype.HEIGHT_PX;
-      var $newSystem = system.getHtml(left, top);
+      var $newSystem = system.getHtml();
       var nbStars = system.widthPx * system.heightPx / 400;
 
       for(var i=0; i<nbStars; i++) {
@@ -68,7 +68,7 @@ var MapUi = function(mapContainer, viewport, tools) {
       var left = parseFloat($oldCoord.css('left'));
       var top = parseFloat($oldCoord.css('top'));
       if($oldCoord.length > 0) {
-        var $newCoord = coord.getHtml(left, top);      
+        var $newCoord = coord.getHtml();      
         $oldCoord.html($newCoord.html());
         $oldCoord.removeClass('unloaded');
       }
