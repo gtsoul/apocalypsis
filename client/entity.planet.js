@@ -60,8 +60,8 @@ var EntityPc = function(json, parent) {
     var $pc = $('<img class="coordPoint nozoom" style="width:80px;height:80px;"/>');
     $pc.attr('src', this.image);
     console.log(this);
-    $pc.css('left', Math.round(this.x + this.width/2 - 40)+'px'); // TODO
-    $pc.css('top', Math.round(this.y + this.height/2 - 40)+'px');    // TODO
+    $pc.css('left', Math.round(this.x + this.width/2 - 40)+'px');
+    $pc.css('top', Math.round(this.y + this.height/2 - 40)+'px');
     return $pc;
   };   
   
@@ -71,7 +71,9 @@ var EntityPc = function(json, parent) {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     if(isNaN(this.x) || isNaN(this.y)) {
       this.x = Math.round(json.x + json.width/2);
-      this.y = Math.round(json.u + json.height/2);
+      this.y = Math.round(json.y + json.height/2);
+      this.width = json.width;
+      this.height = json.height;
     }
     this.type = 'pc';
     this.image = 'images/apocalypsis/pc.jpg'
