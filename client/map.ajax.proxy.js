@@ -53,7 +53,7 @@ var MapAjaxProxy = function(servicesContext) {
     }    
     if(data.coord != undefined && data.coord.fleets != undefined) {
       $.each(data.coord.fleets, function(key, datum) {
-        var fleet = new EntityFleet(datum, coord);
+        var fleet = new EntityFleet(datum, coord.pc);
         if(fleet != undefined && fleet.pos != undefined) {
           coord.fleets[fleet.pos] = fleet;
         }        

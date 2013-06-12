@@ -120,14 +120,18 @@ var EntityCoords = function(json, parent) {
     $coordPointExt.attr('src', this.image);  
     $coords.append($coordPointExt);
     $coords.append($coordPointPc);   
-    
+      
     if(this.fleets != undefined) {
       var nbFleets = 0;
+      var $fleet;
       for(var fleetId in this.fleets) {
         nbFleets++;
+        $fleet = this.fleets[fleetId];
       }
-      $coordPointPc.attr('fleets', nbFleets); // TODO : remove
-      //var fleet = new UiFleet($coordPointPc, undefined, nbFleets, EntityFleet.prototype.STATE_IDLE);        
+      if(nbFleets > 0) {
+        $coords.append($fleet.getHtmlIdle(nbFleets));
+      }
+      $coordPointPc.attr('fleets', nbFleets); // TODO : remove      
     }
  
     // planets    
