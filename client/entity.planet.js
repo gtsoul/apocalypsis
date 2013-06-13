@@ -11,6 +11,7 @@ var EntityPlanet = function(json, parent) {
     $planet.attr('src', this.image);
     $planet.css('left', Math.round(this.x + this.width/2 - 25)+'px');
     $planet.css('top', Math.round(this.y + this.height/2 - 25)+'px');
+    var $name = $('<div class="name nozoom">'+this.name+'</div>')
     return $planet;
   };    
  
