@@ -30,6 +30,23 @@ var Map = function(mapUi, mapAjaxProxy) {
   
   Map.prototype.refreshUniverse = function (galaxy, sector, system) {
     var map = this;
+    // Support parameters as galaxy_sector_system ou galaxy,sector,system
+    if(typeof(galaxy) == 'string' && galaxy.indexOf('_') > 0 && sector == undefined &&  system == undefined) {
+      var pos = galaxy.split('_');
+      galaxy = undefined;
+      sector = undefined;
+      system = undefined;
+      if(pos.length >= 3) {      
+        galaxy = pos[0];
+        sector = pos[1];
+        system = pos[2];
+      } else if(pos.length == 2) {
+        galaxy = pos[0];
+        sector = pos[1];
+      } else if(pos.length == 1) {
+        galaxy = pos[0];
+      }
+    }
     this.proxy.getUniverseKnowledge(galaxy, sector, system, function () {
       var newSystem = map.proxy.getSystem(galaxy, sector, system);
       if(newSystem != undefined) {

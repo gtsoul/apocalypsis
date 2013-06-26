@@ -46,7 +46,12 @@ var MapAjaxProxy = function(servicesContext) {
     var proxy = parameters.context;
     var coord = proxy.getEntity(parameters.z_pos);
     coord.planets = new Array();
-    coord.fleets = new Array();
+    coord.fleets = new Array();  
+
+    if(data.error != undefined) {
+      console.warn(data.error);
+      // TODO : set class unknown on coord
+    }
 
     if(data.coord != undefined && data.coord.subElements != undefined && data.coord.subElements.pc != undefined) {
       coord.pc = new EntityPc(data.coord.subElements.pc, coord);    
@@ -67,18 +72,59 @@ var MapAjaxProxy = function(servicesContext) {
         }
       });
     }    
-    if(typeof(parameters.callback) != 'undefined') {
+    if(typeof(parameters.callback) != 'undefined' && data.error != undefined) {
       parameters.callback();
     }
   };
   
   MapAjaxProxy.prototype.getUniverseKnowledge = function (galaxy, sector, system, callback) {
-    var json = this.__ajaxGet('universe-knowledge', 
-                              this.__getUniverseKnowledgeCB, 
-                              {'z_pos':galaxy+'_'+sector+'_'+system, 'callback':callback});
-  };
-  
+    if(galaxy != undefined && sector != undefined && system != undefined) {
+      var json = this.__ajaxGet('universe-knowledge', 
+                                this.__getSystemKnowledgeCB, 
+                                {'z_pos':galaxy+'_'+sector+'_'+system, 'callback':callback});
+    } else if(galaxy != undefined && sector != undefined) {
+      var json = this.__ajaxGet('universe-knowledge', 
+                                this.__getSectorKnowledgeCB, 
+                                {'z_pos':galaxy+'_'+sector, 'callback':callback});
+    } else if(galaxy != undefined) {
+      var json = this.__ajaxGet('universe-knowledge', 
+                                this.__getGalaxyKnowledgeCB, // TODO
+                                {'z_pos':galaxy, 'callback':callback});
+    } else {
+      var json = this.__ajaxGet('universe-knowledge', 
+                                this.__getUniverseKnowledgeCB, // TODO
+                                {'z_pos': 'universe', 'callback':callback});
+    }
+  };  
+
   MapAjaxProxy.prototype.__getUniverseKnowledgeCB = function (data, parameters) {
+    console.warn('__getUniverseKnowledgeCB not implemented');
+  };  
+  
+  MapAjaxProxy.prototype.__getGalaxyKnowledgeCB = function (data, parameters) {
+    console.warn('__getGalaxyKnowledgeCB not implemented');
+  };  
+  
+  MapAjaxProxy.prototype.__getSectorKnowledgeCB = function (data, parameters) {
+    var proxy = parameters.context;
+   
+    if(data != undefined && data.sector != undefined && data.sector.subElements != undefined && data.sector.subElements.systems != undefined) {
+      $.each(data.sector.subElements.systems, function(key, datum) {
+        console.log(datum.pos);
+        globalMap.refreshUniverse(datum.pos);        
+      });
+    } 
+
+    if(data != undefined && data.cap != undefined) {
+      // TODO 
+    }    
+   
+    if(typeof(parameters.callback) != 'undefined') {
+      parameters.callback();
+    }
+  };  
+ 
+  MapAjaxProxy.prototype.__getSystemKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
     $.each(data, function(key, datum) {
       if(key == 'system') {

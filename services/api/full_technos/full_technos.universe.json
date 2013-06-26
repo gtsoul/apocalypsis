@@ -1,0 +1,58 @@
+{
+
+    "universe": {
+        "pos": "",
+        "capAbsoluteX": 0,
+        "capAbsoluteY": 0,
+        "absoluteWidth": 32768,
+        "absoluteHeight": 32768,
+        "subElements": {
+            "galaxies": [
+                {
+                    "pos": 0,
+                    "capAbsoluteX": 5120,
+                    "capAbsoluteY": 4096,
+                    "absoluteWidth": 4096,
+                    "absoluteHeight": 4096,
+                    "image": "/images/universe/galaxy_fg0.jpg",
+                    "known": true
+                },
+                {
+                    "pos": 1,
+                    "capAbsoluteX": 12288,
+                    "capAbsoluteY": 3072,
+                    "absoluteWidth": 4096,
+                    "absoluteHeight": 4096,
+                    "image": "/images/universe/galaxy_fg1.jpg",
+                    "known": true
+                },
+                {
+                    "pos": 2,
+                    "capAbsoluteX": 0,
+                    "capAbsoluteY": 0,
+                    "absoluteWidth": 4096,
+                    "absoluteHeight": 4096,
+                    "image": "/images/universe/galaxy_fg2.jpg",
+                    "known": true
+                },
+                {
+                    "pos": 3,
+                    "capAbsoluteX": 9216,
+                    "capAbsoluteY": 15360,
+                    "absoluteWidth": 4096,
+                    "absoluteHeight": 4096,
+                    "image": "/images/universe/galaxy_fg3.jpg",
+                    "known": true
+                }
+            ]
+        }
+    },
+    "cap": {
+        "minVisiblePosLevel": 1,
+        "absoluteGrid": {
+            "width": 32768,
+            "height": 32768
+        }
+    }
+
+}

@@ -1,0 +1,70 @@
+{
+
+    "coord": {
+        "pos": "0_1_1_2",
+        "capAbsoluteX": 5996,
+        "capAbsoluteY": 5164,
+        "absoluteWidth": 16,
+        "absoluteHeight": 16,
+        "subElements": {
+            "planets": [
+                {
+                    "pos": "0_1_1_2_1",
+                    "capAbsoluteX": 6007,
+                    "capAbsoluteY": 5169,
+                    "absoluteWidth": 4,
+                    "absoluteHeight": 4,
+                    "owner": null,
+                    "name": "SNCF Ice Desert",
+                    "image": "/images/universe/glaciaire_fg2.jpg"
+                },
+                {
+                    "pos": "0_1_1_2_2",
+                    "capAbsoluteX": 5999,
+                    "capAbsoluteY": 5164,
+                    "absoluteWidth": 4,
+                    "absoluteHeight": 4,
+                    "owner": null,
+                    "name": "EPIALES",
+                    "image": "/images/universe/desertique_dead.jpg"
+                },
+                {
+                    "pos": "0_1_1_2_3",
+                    "capAbsoluteX": 6006,
+                    "capAbsoluteY": 5164,
+                    "absoluteWidth": 4,
+                    "absoluteHeight": 4,
+                    "owner": null,
+                    "name": "[1].1.1.1 EREBE",
+                    "image": "/images/universe/aride_fg2.jpg"
+                },
+                {
+                    "pos": "0_1_1_2_4",
+                    "capAbsoluteX": 5996,
+                    "capAbsoluteY": 5171,
+                    "absoluteWidth": 4,
+                    "absoluteHeight": 4,
+                    "owner": null,
+                    "name": "Black Eagle",
+                    "image": "/images/universe/temperee_fg2.jpg"
+                }
+            ],
+            "pc": {
+                "capAbsoluteX": 6002,
+                "capAbsoluteY": 5168,
+                "absoluteWidth": 4,
+                "absoluteHeight": 4,
+                "image": "/images/universe/coordonnee.jpg"
+            }
+        },
+        "fleets": [ ]
+    },
+    "cap": {
+        "minVisiblePosLevel": 1,
+        "absoluteGrid": {
+            "width": 32768,
+            "height": 32768
+        }
+    }
+
+}

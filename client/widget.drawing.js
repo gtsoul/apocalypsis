@@ -95,9 +95,9 @@ var UiLink = function($origin, $end, type) {
               .attr('y1', originY)
               .attr('y2', endY)
               .attr('stroke', '#b5f0ff')
-              .attr('stroke-width', 0.2)
+              .attr('stroke-width', 0.1)
               .attr('fill', 'none')
-              .attr('stroke-dasharray', '0.02,0.05')
+              .attr('stroke-dasharray', '0.1,0.2')
               .attr('stroke-linecap', 'round')
               .appendTo($('#svgRoot #lines'));
     } else if (this.type == 'path') {
@@ -109,9 +109,9 @@ var UiLink = function($origin, $end, type) {
       $(SVG('path'))
           .attr('d', 'M '+originX+' '+originY+' q '+qX+' '+qY+' '+dX+' '+dY)
           .attr('stroke', '#b5f0ff')
-          .attr('stroke-width', 0.2)
+          .attr('stroke-width', 0.1)
           .attr('fill', 'none')
-          .attr('stroke-dasharray', '0.2,1,0.4,0.8')
+          .attr('stroke-dasharray', '0.1,0.2')
           .attr('stroke-linecap', 'round')
           .appendTo($('#svgRoot #lines'));  
     }      

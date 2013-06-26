@@ -1,0 +1,65 @@
+{
+	"system": {
+		"pos": "3_3_15",
+		"capAbsoluteX": 256,
+		"capAbsoluteY": 288,
+		"absoluteWidth": 64,
+		"absoluteHeight": 64,
+		"subElements": {
+			"coords": [{
+				"pos": "3_3_15_1",
+				"capAbsoluteX": 276,
+				"capAbsoluteY": 320,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_3_15_2",
+				"capAbsoluteX": 256,
+				"capAbsoluteY": 288,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_3_15_3",
+				"capAbsoluteX": 296,
+				"capAbsoluteY": 336,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_3_15_4",
+				"capAbsoluteX": 272,
+				"capAbsoluteY": 336,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_3_15_5",
+				"capAbsoluteX": 284,
+				"capAbsoluteY": 304,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			}],
+			"sun": {
+				"capAbsoluteX": 300,
+				"capAbsoluteY": 308,
+				"absoluteWidth": 8,
+				"absoluteHeight": 8,
+				"image": "/images/universe/soleil3.jpg"
+			}
+		}
+	},
+	"cap": {
+		"minVisiblePosLevel": 3,
+		"absoluteGrid": {
+			"width": 512,
+			"height": 512
+		}
+	}
+}

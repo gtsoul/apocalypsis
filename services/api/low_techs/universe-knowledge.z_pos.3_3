@@ -1,0 +1,72 @@
+{
+	"sector": {
+		"pos": "3_3",
+		"capAbsoluteX": 0,
+		"capAbsoluteY": 0,
+		"absoluteWidth": 512,
+		"absoluteHeight": 512,
+		"subElements": {
+			"systems": [{
+				"pos": "3_3_0",
+				"capAbsoluteX": 352,
+				"capAbsoluteY": 288,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "/images/universe/system_fg0.jpg",
+				"known": false
+			},
+			{
+				"pos": "3_3_4",
+				"capAbsoluteX": 288,
+				"capAbsoluteY": 400,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "/images/universe/system_fg4.jpg",
+				"known": false
+			},
+			{
+				"pos": "3_3_10",
+				"capAbsoluteX": 256,
+				"capAbsoluteY": 176,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "/images/universe/system_fg10.jpg",
+				"known": false
+			},
+			{
+				"pos": "3_3_13",
+				"capAbsoluteX": 352,
+				"capAbsoluteY": 352,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "/images/universe/system_fg1.jpg",
+				"known": false
+			},
+			{
+				"pos": "3_3_15",
+				"capAbsoluteX": 256,
+				"capAbsoluteY": 288,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "/images/universe/system_fg3.jpg",
+				"known": true
+			},
+			{
+				"pos": "3_3_18",
+				"capAbsoluteX": 176,
+				"capAbsoluteY": 176,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "/images/universe/system_fg6.jpg",
+				"known": false
+			}]
+		}
+	},
+	"cap": {
+		"minVisiblePosLevel": 3,
+		"absoluteGrid": {
+			"width": 512,
+			"height": 512
+		}
+	}
+}

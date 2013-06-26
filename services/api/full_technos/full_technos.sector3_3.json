@@ -1,0 +1,202 @@
+{
+
+    "sector": {
+        "pos": "3_3",
+        "capAbsoluteX": 9984,
+        "capAbsoluteY": 18048,
+        "absoluteWidth": 512,
+        "absoluteHeight": 512,
+        "subElements": {
+            "systems": [
+                {
+                    "pos": "3_3_0",
+                    "capAbsoluteX": 10336,
+                    "capAbsoluteY": 18336,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg0.jpg",
+                    "known": true
+                },
+                {
+                    "pos": "3_3_1",
+                    "capAbsoluteX": 10336,
+                    "capAbsoluteY": 18064,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg1.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_2",
+                    "capAbsoluteX": 10240,
+                    "capAbsoluteY": 18048,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg2.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_3",
+                    "capAbsoluteX": 10400,
+                    "capAbsoluteY": 18416,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg3.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_4",
+                    "capAbsoluteX": 10272,
+                    "capAbsoluteY": 18448,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg4.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_5",
+                    "capAbsoluteX": 10384,
+                    "capAbsoluteY": 18496,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg5.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_6",
+                    "capAbsoluteX": 10400,
+                    "capAbsoluteY": 18352,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg6.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_7",
+                    "capAbsoluteX": 10016,
+                    "capAbsoluteY": 18448,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg7.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_8",
+                    "capAbsoluteX": 10064,
+                    "capAbsoluteY": 18160,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg8.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_9",
+                    "capAbsoluteX": 10176,
+                    "capAbsoluteY": 18144,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg9.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_10",
+                    "capAbsoluteX": 10240,
+                    "capAbsoluteY": 18224,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg10.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_11",
+                    "capAbsoluteX": 10016,
+                    "capAbsoluteY": 18224,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg11.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_12",
+                    "capAbsoluteX": 10016,
+                    "capAbsoluteY": 18288,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg0.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_13",
+                    "capAbsoluteX": 10336,
+                    "capAbsoluteY": 18400,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg1.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_14",
+                    "capAbsoluteX": 10096,
+                    "capAbsoluteY": 18464,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg2.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_15",
+                    "capAbsoluteX": 10240,
+                    "capAbsoluteY": 18336,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg3.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_16",
+                    "capAbsoluteX": 10048,
+                    "capAbsoluteY": 18096,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg4.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_17",
+                    "capAbsoluteX": 10368,
+                    "capAbsoluteY": 18144,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg5.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_18",
+                    "capAbsoluteX": 10160,
+                    "capAbsoluteY": 18224,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg6.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "3_3_19",
+                    "capAbsoluteX": 10256,
+                    "capAbsoluteY": 18144,
+                    "absoluteWidth": 64,
+                    "absoluteHeight": 64,
+                    "image": "/images/universe/system_fg7.jpg",
+                    "known": false
+                }
+            ]
+        }
+    },
+    "cap": {
+        "minVisiblePosLevel": 1,
+        "absoluteGrid": {
+            "width": 32768,
+            "height": 32768
+        }
+    }
+
+}

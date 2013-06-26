@@ -1,0 +1,245 @@
+{
+
+    "galaxy": {
+        "pos": 0,
+        "capAbsoluteX": 5120,
+        "capAbsoluteY": 4096,
+        "absoluteWidth": 4096,
+        "absoluteHeight": 4096,
+        "subElements": {
+            "sectors": [
+                {
+                    "pos": "0_0",
+                    "capAbsoluteX": 6400,
+                    "capAbsoluteY": 4736,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg0.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_1",
+                    "capAbsoluteX": 5504,
+                    "capAbsoluteY": 5120,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg1.jpg",
+                    "known": true
+                },
+                {
+                    "pos": "0_2",
+                    "capAbsoluteX": 5888,
+                    "capAbsoluteY": 6144,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg2.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_3",
+                    "capAbsoluteX": 7424,
+                    "capAbsoluteY": 4096,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg3.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_4",
+                    "capAbsoluteX": 5248,
+                    "capAbsoluteY": 6016,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg4.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_5",
+                    "capAbsoluteX": 6528,
+                    "capAbsoluteY": 5376,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg5.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_6",
+                    "capAbsoluteX": 7424,
+                    "capAbsoluteY": 5632,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg6.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_7",
+                    "capAbsoluteX": 8192,
+                    "capAbsoluteY": 6144,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg7.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_8",
+                    "capAbsoluteX": 8704,
+                    "capAbsoluteY": 6528,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg8.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_9",
+                    "capAbsoluteX": 7040,
+                    "capAbsoluteY": 6400,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg9.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_10",
+                    "capAbsoluteX": 7040,
+                    "capAbsoluteY": 4608,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg0.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_11",
+                    "capAbsoluteX": 8704,
+                    "capAbsoluteY": 5888,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg1.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_12",
+                    "capAbsoluteX": 5888,
+                    "capAbsoluteY": 4480,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg2.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_13",
+                    "capAbsoluteX": 8320,
+                    "capAbsoluteY": 4480,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg3.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_14",
+                    "capAbsoluteX": 7680,
+                    "capAbsoluteY": 6144,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg4.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_15",
+                    "capAbsoluteX": 5120,
+                    "capAbsoluteY": 4096,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg5.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_16",
+                    "capAbsoluteX": 8448,
+                    "capAbsoluteY": 5248,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg6.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_17",
+                    "capAbsoluteX": 5760,
+                    "capAbsoluteY": 6656,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg7.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_18",
+                    "capAbsoluteX": 7552,
+                    "capAbsoluteY": 4864,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg8.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_19",
+                    "capAbsoluteX": 6400,
+                    "capAbsoluteY": 6272,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg9.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_20",
+                    "capAbsoluteX": 7936,
+                    "capAbsoluteY": 5632,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg0.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_21",
+                    "capAbsoluteX": 6912,
+                    "capAbsoluteY": 5888,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg1.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_22",
+                    "capAbsoluteX": 8064,
+                    "capAbsoluteY": 6656,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg2.jpg",
+                    "known": false
+                },
+                {
+                    "pos": "0_23",
+                    "capAbsoluteX": 5120,
+                    "capAbsoluteY": 6528,
+                    "absoluteWidth": 512,
+                    "absoluteHeight": 512,
+                    "image": "/images/universe/sector_fg3.jpg",
+                    "known": false
+                }
+            ],
+            "blackhole": {
+                "capAbsoluteX": 6912,
+                "capAbsoluteY": 4096,
+                "absoluteWidth": 512,
+                "absoluteHeight": 512,
+                "image": "/images/universe/blackhole.jpg"
+            }
+        }
+    },
+    "cap": {
+        "minVisiblePosLevel": 1,
+        "absoluteGrid": {
+            "width": 32768,
+            "height": 32768
+        }
+    }
+
+}

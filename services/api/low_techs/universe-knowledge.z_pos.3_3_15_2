@@ -1,0 +1,90 @@
+{
+	"coord": {
+		"pos": "3_3_15_2",
+		"capAbsoluteX": 256,
+		"capAbsoluteY": 288,
+		"absoluteWidth": 16,
+		"absoluteHeight": 16,
+		"subElements": {
+			"planets": [{
+				"pos": "3_3_15_2_1",
+				"capAbsoluteX": 266,
+				"capAbsoluteY": 296,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "2252",
+					"cap_name": "cdt. Telkar Yu&#039;Shaa"
+				},
+				"name": "brulsaruls",
+				"image": "/images/universe/aride_fg2.jpg"
+			},
+			{
+				"pos": "3_3_15_2_2",
+				"capAbsoluteX": 259,
+				"capAbsoluteY": 288,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": null,
+				"name": "minintulaq",
+				"image": "/images/universe/glaciaire_fg2.jpg"
+			},
+			{
+				"pos": "3_3_15_2_3",
+				"capAbsoluteX": 267,
+				"capAbsoluteY": 289,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "2245",
+					"cap_name": "cdt. Bj&ouml;rn Temp&ecirc;te"
+				},
+				"name": "aramiaruye",
+				"image": "/images/universe/glaciaire_fg2.jpg"
+			},
+			{
+				"pos": "3_3_15_2_4",
+				"capAbsoluteX": 256,
+				"capAbsoluteY": 293,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "2494",
+					"cap_name": "cdt. franximus"
+				},
+				"name": "gaia95",
+				"image": "/images/universe/temperee_fg2.jpg"
+			}],
+			"pc": {
+				"capAbsoluteX": 262,
+				"capAbsoluteY": 292,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"image": "/images/universe/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		},
+		{
+			"cap_id": 2245,
+			"cap_name": "cdt. Bj&ouml;rn Temp&ecirc;te"
+		},
+		{
+			"cap_id": 2250,
+			"cap_name": "cdt. Lorkhan"
+		},
+		{
+			"cap_id": 2494,
+			"cap_name": "cdt. franximus"
+		}]
+	},
+	"cap": {
+		"minVisiblePosLevel": 3,
+		"absoluteGrid": {
+			"width": 512,
+			"height": 512
+		}
+	}
+}
