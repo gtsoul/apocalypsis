@@ -20,6 +20,7 @@ var EntityPlanet = function(json, parent) {
 	this.init = function() {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     this.type = 'planet';
+    console.log(this);
 		this.init = function() {};
 	}; 
   
@@ -84,6 +85,7 @@ var EntityPc = function(json, parent) {
   
 	this.init = function() {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
+    // json is the parent Coords
     if(isNaN(this.x) || isNaN(this.y)) {
       this.x = Math.round(json.x + json.width/2);
       this.y = Math.round(json.y + json.height/2);
@@ -92,6 +94,7 @@ var EntityPc = function(json, parent) {
     }
     this.type = 'pc';
     this.image = EntityPc.prototype.IMAGE_DEFAULT;
+    console.log(json);
 		this.init = function() {};
 	};  
 
@@ -137,6 +140,8 @@ var EntityCoords = function(json, parent) {
  
     // planets    
     var $planets = $('<div class="planets"/>');
+    console.log('=================================================');
+    console.log(this.planets);    
     if(this.planets != undefined) {
       for(var planetId in this.planets) {
         var planet = this.planets[planetId];
@@ -186,6 +191,7 @@ var EntityCoords = function(json, parent) {
     }  
     this.type = 'coords';
     this.image = 'images/apocalypsis/coords.png';
+    console.log(this);
 		this.init = function() {};    
 	};  
   

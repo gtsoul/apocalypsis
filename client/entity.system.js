@@ -18,10 +18,10 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.__loadJson = function (json) {
     var system = this;
     this.pos = json.pos;
-    this.width = json.absoluteWidth;
-    this.height = json.absoluteHeight;
-    this.x = json.capAbsoluteX;
-    this.y = json.capAbsoluteY;
+    this.width = parseInt(json.absoluteWidth);
+    this.height = parseInt(json.absoluteHeight);
+    this.x = parseInt(json.capAbsoluteX);
+    this.y = parseInt(json.capAbsoluteY);
     this.coords = new Array();
     this.sun = undefined;    
     if(json.subElements != undefined) {
@@ -35,6 +35,7 @@ var EntitySystem = function(json) {
         this.sun = new EntitySun(json.subElements.sun, system);    
       }
     }
+    console.log(this);
   };
   
   EntitySystem.prototype.getHtml = function () {

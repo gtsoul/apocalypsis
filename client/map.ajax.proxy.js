@@ -44,9 +44,9 @@ var MapAjaxProxy = function(servicesContext) {
 
   MapAjaxProxy.prototype.__getCoordKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
-    var coord = proxy.getEntity(parameters.z_pos);
-    coord.planets = new Array();
-    coord.fleets = new Array();  
+    var myCoord = proxy.getEntity(parameters.z_pos);
+    myCoord.planets = new Array();
+    myCoord.fleets = new Array();  
 
     if(data.error != undefined) {
       console.warn(data.error);
@@ -54,13 +54,13 @@ var MapAjaxProxy = function(servicesContext) {
     }
 
     if(data.coord != undefined && data.coord.subElements != undefined && data.coord.subElements.pc != undefined) {
-      coord.pc = new EntityPc(data.coord.subElements.pc, coord);    
+      myCoord.pc = new EntityPc(data.coord.subElements.pc, myCoord);    
     }    
     if(data.coord != undefined && data.coord.fleets != undefined) {
       $.each(data.coord.fleets, function(key, datum) {
-        var fleet = new EntityFleet(datum, coord.pc);
+        var fleet = new EntityFleet(datum, myCoord.pc);
         if(fleet != undefined && fleet.pos != undefined) {
-          coord.fleets[fleet.pos] = fleet;
+          myCoord.fleets[fleet.pos] = fleet;
         }        
       });
     }
@@ -68,10 +68,10 @@ var MapAjaxProxy = function(servicesContext) {
       $.each(data.coord.subElements.planets, function(key, datum) {
         var planet = new EntityPlanet(datum);
         if(planet != undefined && planet.pos != undefined) {
-          coord.planets[planet.pos] = planet;
-        }
+          myCoord.planets[planet.pos] = planet;        }
       });
     }    
+    console.log(myCoord.planets); // BUg pb synchros avec repaint
     if(typeof(parameters.callback) != 'undefined' && data.error != undefined) {
       parameters.callback();
     }
@@ -110,7 +110,6 @@ var MapAjaxProxy = function(servicesContext) {
    
     if(data != undefined && data.sector != undefined && data.sector.subElements != undefined && data.sector.subElements.systems != undefined) {
       $.each(data.sector.subElements.systems, function(key, datum) {
-        console.log(datum.pos);
         globalMap.refreshUniverse(datum.pos);        
       });
     } 
