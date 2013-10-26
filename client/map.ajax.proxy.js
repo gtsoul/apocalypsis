@@ -50,9 +50,9 @@ var MapAjaxProxy = function(servicesContext) {
 
     if(data.error != undefined) {
       console.warn(data.error);
-      // TODO : set class unknown on coord
+      myCoord.setKnown(false);
     }
-
+	
     if(data.coord != undefined && data.coord.subElements != undefined && data.coord.subElements.pc != undefined) {
       myCoord.pc = new EntityPc(data.coord.subElements.pc, myCoord);    
     }    
@@ -64,6 +64,7 @@ var MapAjaxProxy = function(servicesContext) {
         }        
       });
     }
+
     if(data.coord != undefined && data.coord.subElements != undefined && data.coord.subElements.planets != undefined) {
       $.each(data.coord.subElements.planets, function(key, datum) {
         var planet = new EntityPlanet(datum);
@@ -71,8 +72,8 @@ var MapAjaxProxy = function(servicesContext) {
           myCoord.planets[planet.pos] = planet;        }
       });
     }    
-    console.log(myCoord.planets); // BUg pb synchros avec repaint
-    if(typeof(parameters.callback) != 'undefined' && data.error != undefined) {
+
+    if(typeof(parameters.callback) != 'undefined' && typeof(data.error) == 'undefined') {
       parameters.callback();
     }
   };

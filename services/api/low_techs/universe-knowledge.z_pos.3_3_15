@@ -12,7 +12,7 @@
 				"capAbsoluteY": 320,
 				"absoluteWidth": 16,
 				"absoluteHeight": 16,
-				"known": true
+				"known": false
 			},
 			{
 				"pos": "3_3_15_2",
@@ -28,7 +28,7 @@
 				"capAbsoluteY": 336,
 				"absoluteWidth": 16,
 				"absoluteHeight": 16,
-				"known": true
+				"known": false
 			},
 			{
 				"pos": "3_3_15_4",
@@ -36,7 +36,7 @@
 				"capAbsoluteY": 336,
 				"absoluteWidth": 16,
 				"absoluteHeight": 16,
-				"known": true
+				"known": false
 			},
 			{
 				"pos": "3_3_15_5",
@@ -44,7 +44,7 @@
 				"capAbsoluteY": 304,
 				"absoluteWidth": 16,
 				"absoluteHeight": 16,
-				"known": true
+				"known": false
 			}],
 			"sun": {
 				"capAbsoluteX": 300,

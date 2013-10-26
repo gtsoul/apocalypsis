@@ -18,10 +18,10 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.__loadJson = function (json) {
     var system = this;
     this.pos = json.pos;
-    this.width = parseInt(json.absoluteWidth);
-    this.height = parseInt(json.absoluteHeight);
-    this.x = parseInt(json.capAbsoluteX);
-    this.y = parseInt(json.capAbsoluteY);
+    this.x = parseInt(json.capAbsoluteX) * EntitySystem.prototype.X_TO_PX;
+    this.y = parseInt(json.capAbsoluteY) * EntitySystem.prototype.Y_TO_PX;
+    this.width = parseInt(json.absoluteWidth) * EntitySystem.prototype.X_TO_PX;
+    this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX;    
     this.coords = new Array();
     this.sun = undefined;    
     if(json.subElements != undefined) {
@@ -69,6 +69,8 @@ var EntitySystem = function(json) {
   
   EntitySystem.prototype.WIDTH_PX = 110;
   EntitySystem.prototype.HEIGHT_PX = 130;
-
+  EntitySystem.prototype.X_TO_PX = 2;
+  EntitySystem.prototype.Y_TO_PX = 2;
+  
 	this.init();	
 };

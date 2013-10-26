@@ -27,7 +27,7 @@ var UiStar = function(x, y) {
 	}; 
   
   UiStar.prototype.draw = function () {
-    var r = Math.random()*3;
+    var r = Math.random()*2;
     var opacity = $(SVG('animate', {
           'attributeType': 'CSS',
           'attributeName': 'opacity',

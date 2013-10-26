@@ -20,7 +20,6 @@ var EntityPlanet = function(json, parent) {
 	this.init = function() {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     this.type = 'planet';
-    console.log(this);
 		this.init = function() {};
 	}; 
   
@@ -115,7 +114,12 @@ var EntityPc = function(json, parent) {
 var EntityCoords = function(json, parent) {
 
   EntityCoords.prototype.getHtml = function () {  
-    var $coords = $('<div class="coords unloaded" />');
+    var $coords;
+    if(this.known) {
+      $coords = $('<div class="coords unloaded" />');
+    } else {
+      $coords = $('<div class="coords unknown" />');
+    }
     $coords.attr('id', this.pos);    
     // coordPoint
     var $coordPointExt = this.pc.getHtmlExt();
@@ -140,8 +144,6 @@ var EntityCoords = function(json, parent) {
  
     // planets    
     var $planets = $('<div class="planets"/>');
-    console.log('=================================================');
-    console.log(this.planets);    
     if(this.planets != undefined) {
       for(var planetId in this.planets) {
         var planet = this.planets[planetId];
@@ -158,11 +160,13 @@ var EntityCoords = function(json, parent) {
   EntityCoords.prototype.__addEvents = function(htmlEl) {
     if(this.known == true) {
       htmlEl.mouseover(function() {
-        var coord = globalMap.getEntity($(this).attr('id'));
-        if(coord != undefined && coord.planets == undefined && coord.fleets == undefined && coord.known == true) {
-          coord.planets = new Array();
-          coord.fleets = new Array();
-          globalMap.refreshCoord(coord);      
+        if(!$(this).hasClass('unknown')) {
+          var coord = globalMap.getEntity($(this).attr('id'));
+          if(coord != undefined && coord.planets == undefined && coord.fleets == undefined && coord.known == true) {
+            coord.planets = new Array();
+            coord.fleets = new Array();
+            globalMap.refreshCoord(coord);      
+          }
         }
       });
     }
@@ -177,7 +181,18 @@ var EntityCoords = function(json, parent) {
       return this.planets[planetKey];
     } 
     return undefined;    
-  };    
+  };   
+
+  EntityCoords.prototype.setKnown = function(bool) {
+    this.known = bool;
+    var el = $('#'+this.pos);
+    if(bool == true) {
+      el.removeClass('unknown');
+    } else {
+      el.addClass('unknown');
+      el.removeClass('unloaded');
+    }
+  };  
 
   EntityCoords.prototype = new EntitySpaceElement(json, parent);
   this.planets = undefined;

@@ -9,7 +9,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.5, maxZoom : 40, zoomFactor : 0.3, moveSmooth : 0.8, zoomOnPlanet : 6, zoomOnCoords : 2};
+  this.zoomConfig = {minZoom : 0.5, maxZoom : 40, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 6, zoomOnCoords : 2};
 
 	this.init = function() {
     this.enableDrag();
@@ -46,18 +46,18 @@ var MapUi = function(mapContainer, viewport, tools) {
   MapUi.prototype.repaintSystem = function(system) {
     if(system != undefined) {
       var $oldSystem = $('#'+system.pos+'.system');
-      var left = system.x * EntitySystem.prototype.WIDTH_PX;
-      var top = system.y * EntitySystem.prototype.HEIGHT_PX;
+      var left = system.x;
+      var top = system.y;
       var $newSystem = system.getHtml();
-      var nbStars = system.widthPx * system.heightPx / 400;
-
+      var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO à diviser par le nb total de système avec un max
       for(var i=0; i<nbStars; i++) {
-        var star = new UiStar(Math.floor((Math.random()*(system.widthPx + EntitySystem.prototype.WIDTH_PX)) + left - EntitySystem.prototype.WIDTH_PX/2), 
-                              Math.floor((Math.random()*(system.heightPx + EntitySystem.prototype.HEIGHT_PX)) + top - EntitySystem.prototype.HEIGHT_PX/2));
+        var star = new UiStar(Math.floor((Math.random()*3*(system.width)) + left - 1*system.width), 
+                              Math.floor((Math.random()*3*(system.height)) + top - 1*system.height));                              
       }
       if($oldSystem.length > 0) {
         $oldSystem.remove();
       }      
+      // TODO : faire des lignes de debug
       this.mapRoot.append($newSystem);
     }  
   };
@@ -173,6 +173,8 @@ var MapUi = function(mapContainer, viewport, tools) {
   MapUi.prototype.onDragStop = function() {
   
   };
+  
+  MapUi.prototype.NB_MAX_STARS = 30;
   
 	this.init();	
 };
