@@ -23,8 +23,7 @@ var EntitySystem = function(json) {
     this.x = parseInt(json.capAbsoluteX) * EntitySystem.prototype.X_TO_PX;
     this.y = parseInt(json.capAbsoluteY) * EntitySystem.prototype.Y_TO_PX;
     this.width = parseInt(json.absoluteWidth) * EntitySystem.prototype.X_TO_PX;
-    this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX;    
-    this.coords = undefined;  
+    this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX; 
     this.sun = undefined;  
     if(typeof(json.known) == 'undefined' || json.known != false) {
       this.known = true;
@@ -35,9 +34,6 @@ var EntitySystem = function(json) {
       this.image = json.image.replace(/^\//, '');
     }
     if(json.subElements != undefined) {
-      if(json.subElements.coords != undefined) {
-        this.coords = new Array();
-      }
       $.each(json.subElements.coords, function(key, datum) {    
         var coord = new EntityCoords(datum, system);   
         if(coord != undefined && coord.pos != undefined) {
@@ -66,11 +62,9 @@ var EntitySystem = function(json) {
     if(this.sun != undefined) {
       $system.append(this.sun.getHtml());
     }
-    if(this.coords != undefined) {
-      for(var coordIt in this.coords) {
-        var coord = this.coords[coordIt];
-        $system.append(coord.getHtml());    
-      }
+    for(var coordIt in this.coords) {
+      var coord = this.coords[coordIt];
+      $system.append(coord.getHtml());    
     }
     this.__addLoadEvent($systemPoint);
     return $system;
@@ -92,8 +86,7 @@ var EntitySystem = function(json) {
       htmlEl.mouseover(function() { 
         if(!$(this).hasClass('unknown')) { 
           var system = globalMap.getEntity($(this).parent().attr('id'));    
-          if(system != undefined && system.known == true && system.loaded == false) {   
-            system.coords = new Array();
+          if(system != undefined && system.known == true && system.loaded == false) { 
             globalMap.refreshUniverse(system.pos);  
           }
         }

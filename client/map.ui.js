@@ -80,9 +80,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   };  
   
   MapUi.prototype.zoomTo = function(zoomValue) {
-    /*var zoomSlider = this.tools.find('.zoom');
-    zoomSlider.val(zoomValue);
-    zoomSlider.slidechange();*/
+    $('.zoom_hidden').val(zoomValue).change();
   };
   
 	MapUi.prototype.enableZoom = function(zoomSlider) {
@@ -129,6 +127,22 @@ var MapUi = function(mapContainer, viewport, tools) {
           zoom();           
         }      
     });
+    
+    $('.zoom_hidden').change(function() {
+        m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, $(this).val()));
+        var vOffset = m.viewport.offset();
+        var cOffset = m.mapRoot.offset();
+        var cOffset = m.mapRoot.offset();      
+        mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
+        mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / currentScale;                
+        var sliderVal = Math.log(m.zoom) * zoomFactorInvertLog;
+        if(slidInvert) sliderVal = slidMin + slidMax - sliderVal;
+        zoomMutex = true;
+        zoomSlider.slider('value', sliderVal);        
+        zoom();
+        zoomMutex = false;
+    });
+    
     function zoom() {
       var scale = m.zoom;
       if(scale != currentScale) {
