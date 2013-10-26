@@ -152,11 +152,11 @@ var EntityCoords = function(json, parent) {
       }
     }
     $coords.append($planets);
-    this.__addEvents($coords);
+    this.__addLoadEvent($coords);
     return $coords;
   };
   
-  EntityCoords.prototype.__addEvents = function(htmlEl) {
+  EntityCoords.prototype.__addLoadEvent = function(htmlEl) {
     if(this.known == true) {
       htmlEl.mouseover(function() {
         if(!$(this).hasClass('unknown')) {

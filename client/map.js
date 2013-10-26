@@ -52,6 +52,7 @@ var Map = function(mapUi, mapAjaxProxy) {
       var newSystem = map.proxy.getSystem(galaxy, sector, system);
       if(newSystem != undefined) {
         console.log('data updated, '+galaxy+', '+sector+', '+system);
+        newSystem.loaded = true;
         map.ui.repaintSystem(newSystem);
         console.log('repaint updated '+galaxy+', '+sector+', '+system);
         map.centerOnEntity(newSystem.pos, newSystem.type);

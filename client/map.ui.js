@@ -9,7 +9,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.5, maxZoom : 30, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 6, zoomOnCoords : 3.5};
+  this.zoomConfig = {minZoom : 0.5, maxZoom : 30, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 4, zoomOnCoords : 3.5};
 
 	this.init = function() {
     this.enableDrag();
@@ -58,7 +58,9 @@ var MapUi = function(mapContainer, viewport, tools) {
       if($oldSystem.length > 0) {
         $oldSystem.remove();
       }      
-      // TODO : faire des lignes de debug
+      if(system.loaded) {
+        $newSystem.removeClass('unloaded');
+      }
       this.mapRoot.append($newSystem);
     }  
   };

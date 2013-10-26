@@ -6,6 +6,7 @@ var EntitySystem = function(json) {
   this.x;
   this.y;
   this.known;
+  this.loaded = false;
   this.coords = new Array();
   this.sun;
   this.type = 'system';
@@ -23,7 +24,7 @@ var EntitySystem = function(json) {
     this.y = parseInt(json.capAbsoluteY) * EntitySystem.prototype.Y_TO_PX;
     this.width = parseInt(json.absoluteWidth) * EntitySystem.prototype.X_TO_PX;
     this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX;    
-    this.coords = new Array();
+    this.coords = undefined;  
     this.sun = undefined;  
     if(typeof(json.known) == 'undefined' || json.known != false) {
       this.known = true;
@@ -34,6 +35,9 @@ var EntitySystem = function(json) {
       this.image = json.image.replace(/^\//, '');
     }
     if(json.subElements != undefined) {
+      if(json.subElements.coords != undefined) {
+        this.coords = new Array();
+      }
       $.each(json.subElements.coords, function(key, datum) {    
         var coord = new EntityCoords(datum, system);   
         if(coord != undefined && coord.pos != undefined) {
@@ -51,7 +55,9 @@ var EntitySystem = function(json) {
     var $system = $('<div class="system"></div>');
     if(!this.known) {
       $system.addClass('unknown');
-    }
+    } else if(!this.loaded) {
+      $system.addClass('unloaded');
+    }    
     $system.attr('id', this.pos);
     $systemPoint.css('left', Math.round(this.x + this.width/2 - EntitySystem.prototype.WIDTH_PX/2)+'px');
     $systemPoint.css('top', Math.round(this.y + this.height/2 - EntitySystem.prototype.HEIGHT_PX/2)+'px');
@@ -60,10 +66,13 @@ var EntitySystem = function(json) {
     if(this.sun != undefined) {
       $system.append(this.sun.getHtml());
     }
-    for(var coordIt in this.coords) {
-      var coord = this.coords[coordIt];
-      $system.append(coord.getHtml());    
+    if(this.coords != undefined) {
+      for(var coordIt in this.coords) {
+        var coord = this.coords[coordIt];
+        $system.append(coord.getHtml());    
+      }
     }
+    this.__addLoadEvent($systemPoint);
     return $system;
   };
   
@@ -76,6 +85,20 @@ var EntitySystem = function(json) {
       return this.coords[coordKey];
     } 
     return undefined;    
+  };  
+  
+  EntitySystem.prototype.__addLoadEvent = function(htmlEl) {
+    if(this.known == true) {
+      htmlEl.mouseover(function() { 
+        if(!$(this).hasClass('unknown')) { 
+          var system = globalMap.getEntity($(this).parent().attr('id'));    
+          if(system != undefined && system.known == true && system.loaded == false) {   
+            system.coords = new Array();
+            globalMap.refreshUniverse(system.pos);  
+          }
+        }
+      });
+    }
   };  
   
   EntitySystem.prototype.WIDTH_PX = 110;

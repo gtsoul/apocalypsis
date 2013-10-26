@@ -75,7 +75,8 @@
   display: none;
 }
 
-#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint.extended, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
+#map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint.extended, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint,
+#map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint, #map  .mapRoot.zoomOnCoords .system.unloaded .systemPoint {
   display: block;
 }
 
@@ -135,6 +136,10 @@
 
 #map .coords.unknown .coordPoint, #map .system.unknown .systemPoint{
   box-shadow: 0px 0px 5px 2px red;
+}
+
+#map .coords.unloaded .coordPoint, #map .system.unloaded .systemPoint{
+  box-shadow: 0px 0px 5px 2px orange;
 }
 
 /*-------- Lines -------------*/
