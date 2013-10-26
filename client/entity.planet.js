@@ -51,8 +51,8 @@ var EntitySun = function(json, parent) {
 		this.init = function() {};
 	}; 
   
-  EntitySun.prototype.WIDTH_PX_DEFAULT = 80;
-  EntitySun.prototype.HEIGHT_PX_DEFAULT = 80;
+  EntitySun.prototype.WIDTH_PX_DEFAULT = 510;
+  EntitySun.prototype.HEIGHT_PX_DEFAULT = 510;
   
 	this.init();
 };
@@ -93,7 +93,6 @@ var EntityPc = function(json, parent) {
     }
     this.type = 'pc';
     this.image = EntityPc.prototype.IMAGE_DEFAULT;
-    console.log(json);
 		this.init = function() {};
 	};  
 
@@ -206,7 +205,6 @@ var EntityCoords = function(json, parent) {
     }  
     this.type = 'coords';
     this.image = 'images/apocalypsis/coords.png';
-    console.log(this);
 		this.init = function() {};    
 	};  
   

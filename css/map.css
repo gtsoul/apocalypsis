@@ -45,10 +45,11 @@
 }
 #crosshairs{
   position: absolute;
-  left: 260px;
-  top: 160px;
+  left: 362px;
+  top: 234px;
   z-index: 5000;
   pointer-events: none;
+  border: 1px solid red;
 }
 
 /*-------- Map elements -------------*/
@@ -70,13 +71,17 @@
   pointer-events: none;
 }
 
-#map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars {
+#map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars , #map  .mapRoot.zoomOnPlanet #stars{
   display: none;
 }
 
 #map  .mapRoot.zoomOnPlanet .coords.unloaded .coordPoint.extended, #map  .mapRoot.zoomOnPlanet .system.unloaded .systemPoint {
   display: block;
 }
+
+/*#map  .mapRoot.zoomOnCoords .system.unknown .systemPoint, #map  .mapRoot.zoomOnPlanet .system.unknown .systemPoint {
+  display: block;
+}*/
 
 #map  .mapRoot.zoomOnCoords .fleets, #map  .mapRoot.zoomOnCoords .coords .coordPoint.pc, #map  .mapRoot.zoomOnCoords .planets, #map  .mapRoot.zoomOnCoords .system .systemPoint, #map  .mapRoot.zoomOnCoords #svgRoot #lines {
   display: none;
@@ -126,6 +131,10 @@
 #map .planet:hover, #map .coordPoint:hover, #map .systemPoint:hover {
   border-radius: 30px;
   box-shadow: 0px 0px 5px 2px #ccc;
+}
+
+#map .coords.unknown .coordPoint, #map .system.unknown .systemPoint{
+  box-shadow: 0px 0px 5px 2px red;
 }
 
 /*-------- Lines -------------*/

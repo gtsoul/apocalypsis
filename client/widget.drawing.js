@@ -53,6 +53,7 @@ var UiStar = function(x, y) {
         .attr('stroke', 'grey')
         .attr('stroke-width', r/2)
         .attr('fill', 'white');
+    // TODO : test performances
     if(size > 2) {
       size.appendTo(star);
     }

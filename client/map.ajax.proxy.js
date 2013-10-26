@@ -111,7 +111,16 @@ var MapAjaxProxy = function(servicesContext) {
    
     if(data != undefined && data.sector != undefined && data.sector.subElements != undefined && data.sector.subElements.systems != undefined) {
       $.each(data.sector.subElements.systems, function(key, datum) {
-        globalMap.refreshUniverse(datum.pos);        
+        if(datum.pos != undefined && datum.known == true) {
+          globalMap.refreshUniverse(datum.pos);        
+        } else if(datum.pos != undefined) {
+          var systemBlank = new EntitySystem(datum);
+          if(systemBlank != undefined && systemBlank.pos != undefined) {
+            proxy.sSystems[systemBlank.pos] = systemBlank;
+            globalMap.ui.repaintSystem(systemBlank);
+          }
+        }
+
       });
     } 
 

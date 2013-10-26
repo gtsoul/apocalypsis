@@ -47,13 +47,14 @@ var Map = function(mapUi, mapAjaxProxy) {
         galaxy = pos[0];
       }
     }
+    
     this.proxy.getUniverseKnowledge(galaxy, sector, system, function () {
       var newSystem = map.proxy.getSystem(galaxy, sector, system);
       if(newSystem != undefined) {
         console.log('data updated, '+galaxy+', '+sector+', '+system);
         map.ui.repaintSystem(newSystem);
         console.log('repaint updated '+galaxy+', '+sector+', '+system);
-        map.centerOnEntity(newSystem);
+        map.centerOnEntity(newSystem.pos, newSystem.type);
       }
     });
   };
@@ -62,16 +63,15 @@ var Map = function(mapUi, mapAjaxProxy) {
     return this.proxy.getEntity(entityId);
   }; 
 
-  Map.prototype.centerOnEntity = function(entity) {
-    if(entity != undefined && entity.type != undefined) {
-      if(entity.type == 'system') {
-        this.ui.centerOnElement($('#'+entity.pos+'.system .systemPoint'));
-      } else if(entity.type == 'coords') {
-        // TODO
-        console.error('To be implemented');
-      } else if(entity.type == 'planet') {
-        // TODO
-        console.error('To be implemented');
+  Map.prototype.centerOnEntity = function(entityPos, entityType) {
+    // definir des zooms
+    if(entityType != undefined) {
+      if(entityType == 'system') {
+        this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), 1);
+      } else if(entityType == 'coords') {
+        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), 2);
+      } else if(entityType == 'planet') {
+        this.ui.centerOnElement($('#'+entityPos+'.planet'), 6);
       }
     }
   };  

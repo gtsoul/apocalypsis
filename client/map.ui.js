@@ -9,7 +9,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.5, maxZoom : 40, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 6, zoomOnCoords : 2};
+  this.zoomConfig = {minZoom : 0.5, maxZoom : 30, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 6, zoomOnCoords : 3.5};
 
 	this.init = function() {
     this.enableDrag();
@@ -35,11 +35,12 @@ var MapUi = function(mapContainer, viewport, tools) {
     console.log('done');
   };
   
-  MapUi.prototype.centerOnElement = function($element) {
+  MapUi.prototype.centerOnElement = function($element, zoom) {
     if($element.length > 0) {
       this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) + 'px');
       this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) + 'px');
       this.applyZoomOnMap();
+      this.zoomTo(10); // TODO : for test
     }
   };
   
@@ -76,10 +77,16 @@ var MapUi = function(mapContainer, viewport, tools) {
     }  
   };  
   
+  MapUi.prototype.zoomTo = function(zoomValue) {
+    /*var zoomSlider = this.tools.find('.zoom');
+    zoomSlider.val(zoomValue);
+    zoomSlider.slidechange();*/
+  };
+  
 	MapUi.prototype.enableZoom = function(zoomSlider) {
     var m = this;
-    var viewPortHeight = 600,
-        viewPortWidth = 800;
+    var viewPortHeight = 600; //window.innerHeight; //600,
+        viewPortWidth = 800; //window.innerWidth; //800;
     var ratio = 1;
     m.mapRoot.css({
         'height': viewPortHeight * ratio + 'px',
@@ -174,7 +181,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   };
   
-  MapUi.prototype.NB_MAX_STARS = 30;
+  MapUi.prototype.NB_MAX_STARS = 0;
   
 	this.init();	
 };
