@@ -1,0 +1,66 @@
+{
+	"system": {
+		"pos": "3_15_5",
+		"capAbsoluteX": 240,
+		"capAbsoluteY": 0,
+		"absoluteWidth": 64,
+		"absoluteHeight": 64,
+		"image": "\/images\/universe\/system_fg5.jpg",    
+		"subElements": {
+			"coords": [{
+				"pos": "3_15_5_1",
+				"capAbsoluteX": 244,
+				"capAbsoluteY": 28,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_15_5_2",
+				"capAbsoluteX": 284,
+				"capAbsoluteY": 16,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_15_5_3",
+				"capAbsoluteX": 260,
+				"capAbsoluteY": 0,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_15_5_4",
+				"capAbsoluteX": 244,
+				"capAbsoluteY": 48,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": true
+			},
+			{
+				"pos": "3_15_5_5",
+				"capAbsoluteX": 264,
+				"capAbsoluteY": 44,
+				"absoluteWidth": 16,
+				"absoluteHeight": 16,
+				"known": false
+			}],
+			"sun": {
+				"capAbsoluteX": 264,
+				"capAbsoluteY": 16,
+				"absoluteWidth": 8,
+				"absoluteHeight": 8,
+				"image": "\/images\/universe\/soleil5\.png"
+			}
+		}
+	},
+	"cap": {
+		"minVisiblePosLevel": 3,
+		"absoluteGrid": {
+			"width": 512,
+			"height": 512
+		}
+	}
+}

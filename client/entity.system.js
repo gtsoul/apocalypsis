@@ -5,6 +5,7 @@ var EntitySystem = function(json) {
   this.height;
   this.x;
   this.y;
+  this.known;
   this.coords = new Array();
   this.sun;
   this.type = 'system';
@@ -23,7 +24,15 @@ var EntitySystem = function(json) {
     this.width = parseInt(json.absoluteWidth) * EntitySystem.prototype.X_TO_PX;
     this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX;    
     this.coords = new Array();
-    this.sun = undefined;    
+    this.sun = undefined;  
+    if(typeof(json.known) == 'undefined' || json.known != false) {
+      this.known = true;
+    } else {
+      this.known = false;
+    }
+    if(typeof(json.image) != 'undefined') {
+      this.image = json.image.replace(/^\//, '');
+    }
     if(json.subElements != undefined) {
       $.each(json.subElements.coords, function(key, datum) {    
         var coord = new EntityCoords(datum, system);   
@@ -35,12 +44,14 @@ var EntitySystem = function(json) {
         this.sun = new EntitySun(json.subElements.sun, system);    
       }
     }
-    console.log(this);
   };
   
   EntitySystem.prototype.getHtml = function () {
     var $systemPoint = $('<img class="systemPoint nozoom" style="height:'+EntitySystem.prototype.WIDTH_PX+'px;width: '+EntitySystem.prototype.HEIGHT_PX+'px;"/>');
     var $system = $('<div class="system"></div>');
+    if(!this.known) {
+      $system.addClass('unknown');
+    }
     $system.attr('id', this.pos);
     $systemPoint.css('left', Math.round(this.x + this.width/2 - EntitySystem.prototype.WIDTH_PX/2)+'px');
     $systemPoint.css('top', Math.round(this.y + this.height/2 - EntitySystem.prototype.HEIGHT_PX/2)+'px');
