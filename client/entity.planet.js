@@ -6,11 +6,14 @@
 var EntityPlanet = function(json, parent) {
   
   EntityPlanet.prototype.getHtml = function () {
-    var $planet = $('<img class="planet nozoom" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
+    var $planet = $('<div class="planet nozoom" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
+    var $planetImg = $('<img class="planetImg" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
+    
     $planet.attr('id', this.pos);
-    $planet.attr('src', this.image);
+    $planetImg.attr('src', this.image);
     $planet.css('left', Math.round(this.x + this.width/2 - 25)+'px');
     $planet.css('top', Math.round(this.y + this.height/2 - 25)+'px');
+    $planet.append($planetImg);
     var $name = $('<div class="name nozoom">'+this.name+'</div>');
     return $planet;
   };    
@@ -69,18 +72,22 @@ var EntitySun = function(json, parent) {
 var EntityPc = function(json, parent) {
 
   EntityPc.prototype.getHtmlPc = function () {
-    var $pc = $('<img class="coordPoint pc nozoom" style="width:'+EntityPc.prototype.WIDTH_PX+'px;height:'+EntityPc.prototype.HEIGHT_PX+'px;"/>');
-    $pc.attr('src', this.image);
+    var $pc = $('<div class="coordPoint pc nozoom" style="width:'+EntityPc.prototype.WIDTH_PX+'px;height:'+EntityPc.prototype.HEIGHT_PX+'px;"/>');
+    var $pcImg = $('<img class="coordPointImg" style="width:'+EntityPc.prototype.WIDTH_PX+'px;height:'+EntityPc.prototype.HEIGHT_PX+'px;"/>');
+    $pcImg.attr('src', this.image);
     $pc.css('left', Math.round(this.x + this.width/2 - EntityPc.prototype.WIDTH_PX/2)+'px');
     $pc.css('top', Math.round(this.y + this.height/2 - EntityPc.prototype.HEIGHT_PX/2)+'px');
+    $pc.append($pcImg);
     return $pc;
   };
 
   EntityPc.prototype.getHtmlExt = function () {
-    var $pc = $('<img class="coordPoint extended nozoom" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
-    $pc.attr('src', this.image);
+    var $pc = $('<div class="coordPoint extended nozoom" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
+    var $pcImg = $('<img class="coordPointImg" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
+    $pcImg.attr('src', this.image);
     $pc.css('left', Math.round(this.x + this.width/2 - EntityCoords.prototype.WIDTH_PX_DEFAULT/2)+'px');
     $pc.css('top', Math.round(this.y + this.height/2 - EntityCoords.prototype.HEIGHT_PX_DEFAULT/2)+'px');
+    $pc.append($pcImg);    
     return $pc;
   };    
   
@@ -128,7 +135,7 @@ var EntityCoords = function(json, parent) {
     var $coordPointExt = this.pc.getHtmlExt();
     var $coordPointPc = this.pc.getHtmlPc();
     
-    $coordPointExt.attr('src', this.image);  
+    $coordPointExt.find('.coordPointImg').attr('src', this.image);  
     $coords.append($coordPointExt);
     $coords.append($coordPointPc);   
       

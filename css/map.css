@@ -56,8 +56,6 @@
 
 #map .planets .planet, #map  .coords .coordPoint, #map  .sector .sectorPoint, #map  .system .systemPoint   {
   position: absolute;
-  /*width: 50px;
-  height: 50px;*/
   cursor: pointer;
 }
 
@@ -125,20 +123,19 @@
   height: 110px;
 }
 
-#map .planet, #map .coordPoint, #map .systemPoint {
+#map .planet .planetImg, #map .coordPoint .coordPointImg, #map .systemPoint .systemPointImg  {
   border-radius: 30px;
 }
 
-#map .planet:hover, #map .coordPoint:hover, #map .systemPoint:hover {
-  border-radius: 30px;
+#map .planet:hover .planetImg, #map .coordPoint:hover .coordPointImg, #map .systemPoint:hover .systemPointImg {
   box-shadow: 0px 0px 5px 2px #ccc;
 }
 
-#map .coords.unknown .coordPoint, #map .system.unknown .systemPoint{
+#map .coords.unknown .coordPoint .coordPointImg, #map .system.unknown .systemPoint .systemPointImg {
   box-shadow: 0px 0px 5px 2px red;
 }
 
-#map .coords.unloaded .coordPoint, #map .system.unloaded .systemPoint{
+#map .coords.unloaded .coordPoint .coordPointImg, #map .system.unloaded .systemPoint .systemPointImg {
   box-shadow: 0px 0px 5px 2px orange;
 }
 
