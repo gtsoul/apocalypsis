@@ -47,8 +47,9 @@ var EntitySystem = function(json) {
   };
   
   EntitySystem.prototype.getHtml = function () {
-    var $systemPoint = $('<div class="systemPoint"/>');
-    var $systemPointImg = $('<img class="nozoom systemPointImg" style="height:'+EntitySystem.prototype.WIDTH_PX+'px;width: '+EntitySystem.prototype.HEIGHT_PX+'px;"/>');
+    var $systemPoint = $('<div class="systemPoint nozoom"  style="height:'+EntitySystem.prototype.WIDTH_PX+'px;width: '+EntitySystem.prototype.HEIGHT_PX+'px;"/>');
+    var $systemPointImg = $('<img class="systemPointImg" style="height:'+EntitySystem.prototype.WIDTH_PX+'px;width: '+EntitySystem.prototype.HEIGHT_PX+'px;"/>');
+    var $systemPointOverlay = $('<div class="overlay"/>');
     var $system = $('<div class="system"></div>');
     if(!this.known) {
       $system.addClass('unknown');
@@ -60,6 +61,7 @@ var EntitySystem = function(json) {
     $systemPoint.css('top', Math.round(this.y + this.height/2 - EntitySystem.prototype.HEIGHT_PX/2)+'px');
     $systemPointImg.attr('src', this.image);
     $systemPoint.append($systemPointImg);
+    $systemPoint.append($systemPointOverlay);        
     $system.append($systemPoint);
     if(this.sun != undefined) {
       $system.append(this.sun.getHtml());
@@ -99,7 +101,7 @@ var EntitySystem = function(json) {
 
   EntitySystem.prototype.__addClickEvent = function(htmlEl) {
     htmlEl.click(function() { 
-      globalMap.centerOnEntity($(this).parent().attr('id'), EntitySystem.prototype.TYPE);
+      globalMap.centerOnEntity($(this).parent().attr('id'), EntitySystem.prototype.TYPE, !$(this).parent().hasClass('unknown'));
       //$('#popininfo').colorbox();
       $.colorbox({html:'Welcome', title:'Titre', className:'popininfo', width:'40%', height:'90%', fixed:true, right:'5%'});
       $('.popininfo').addClass('loading');
@@ -117,6 +119,8 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.X_TO_PX = 2;
   EntitySystem.prototype.Y_TO_PX = 2;
   EntitySystem.prototype.TYPE = 'system';
+  EntitySystem.prototype.ZOOM_IN = 5;
+  EntitySystem.prototype.ZOOM_OUT = 2;
   
 	this.init();	
 };

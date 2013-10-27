@@ -8,13 +8,18 @@ var EntityPlanet = function(json, parent) {
   EntityPlanet.prototype.getHtml = function () {
     var $planet = $('<div class="planet nozoom" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     var $planetImg = $('<img class="planetImg" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
-    
+    var $planetName = $('<div class="name">'+this.name+'</div>');
+    var $planetOverlay = $('<div class="overlay"/>');
     $planet.attr('id', this.pos);
     $planetImg.attr('src', this.image);
     $planet.css('left', Math.round(this.x + this.width/2 - 25)+'px');
     $planet.css('top', Math.round(this.y + this.height/2 - 25)+'px');
     $planet.append($planetImg);
-    var $name = $('<div class="name nozoom">'+this.name+'</div>');
+    $planet.append($planetOverlay);
+    $planet.append($planetName);
+
+    
+
     return $planet;
   };    
   
@@ -27,6 +32,7 @@ var EntityPlanet = function(json, parent) {
 	this.init = function() {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     this.type = EntityPlanet.prototype.TYPE;
+    this.name = json.name;
 		this.init = function() {};
 	}; 
   

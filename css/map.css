@@ -15,6 +15,15 @@
   background: black;
 }
 
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('ethnocentric.ttf') format('truetype');
+}
+
+html, body {
+  font-family: Ethnocentric, sans-serif;
+}
+
 .mapRoot {
   display: block;
   clear: both;
@@ -127,13 +136,61 @@
   border-radius: 30px;
 }
 
-#map .planet:hover .planetImg, #map .coordPoint:hover .coordPointImg, #map .systemPoint:hover .systemPointImg {
-  box-shadow: 0px 0px 5px 2px #ccc;
+#map .planet:hover .overlay, #map .planet.active .overlay {
+  background: url('../images/apocalypsis/planet_selected.gif') no-repeat 0 0 transparent;
+  height: 80px;
+  left: -15px;
+  position: relative;
+  top: -68px;
+  margin-bottom: -80px;
+  width: 80px;
 }
 
-#map .coords.unknown .coordPoint .coordPointImg, #map .system.unknown .systemPoint .systemPointImg {
-  box-shadow: 0px 0px 5px 2px red;
+#map  .system .systemPoint:hover .overlay, #map  .system.active .systemPoint .overlay,
+#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {
+  background: url('../images/apocalypsis/system_selected.gif') no-repeat 0 0 transparent;
+  height: 130px;
+  left: 0px;
+  position: relative;
+  top: -122px;
+  margin-bottom: -130px;
+  width: 130px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  filter: none;
 }
+
+#map  .system.unknown .systemPoint .overlay {
+  border-radius: 20px 20px 20px 20px;
+  height: 110px;
+  margin-bottom: -80px;
+  position: relative;
+  top: -115px;
+  width: 130px;
+  -moz-box-shadow: inset 0px 0px 120px 20px #000000;
+  -webkit-box-shadow: inset 0px 0px 120px 20px #000000;
+  -o-box-shadow: inset 0px 0px 120px 20px #000000;
+  box-shadow: inset 0px 0px 120px 20px #000000;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=NaN, Strength=120);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+
+#map .planet:hover .planetImg, #map .coordPoint:hover .coordPointImg, #map .systemPoint:hover .systemPointImg {
+  /*box-shadow: 0px 0px 5px 2px #ccc;*/
+}
+
+#map .planet .name {
+  /*padding-top: 10px;*/
+  font-size: 9px;
+}
+
+/*#map .coords.unknown .coordPoint .coordPointImg, #map .system.unknown .systemPoint .systemPointImg {
+  box-shadow: 0px 0px 5px 2px red;
+}*/
 
 #map .coords.unloaded .coordPoint .coordPointImg, #map .system.unloaded .systemPoint .systemPointImg {
   box-shadow: 0px 0px 5px 2px orange;
@@ -167,20 +224,24 @@
   display: none !important;
 }
 
+#cboxWrapper {
+  -moz-box-shadow: inset 0px 0px 30px 15px #cfcfcf;
+  -webkit-box-shadow: inset 0px 0px 30px 15px #cfcfcf;
+  -o-box-shadow: inset 0px 0px 30px 15px #cfcfcf;
+  box-shadow: inset 0px 0px 30px 15px #cfcfcf;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=NaN, Strength=30);
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
 
 #colorbox.popininfo #cboxContent { 
-
-
   border-width: 3px solid grey; 
   -moz-box-shadow: inset 0px 0px 100px 2px #96b5f9;
   -webkit-box-shadow: inset 0px 0px 100px 2px #96b5f9;
   -o-box-shadow: inset 0px 0px 100px 2px #96b5f9;
   box-shadow: inset 0px 0px 100px 2px #96b5f9;
   filter:progid:DXImageTransform.Microsoft.Shadow(color=#96b5f9, Direction=NaN, Strength=50);
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-
   background: none repeat scroll 0 0 rgba(18, 51, 128, 0.7) !important;
 }
 
@@ -190,6 +251,18 @@
 
 #colorbox.popininfo #cboxContent #cboxLoadedContent {
   padding: 20px;
+  padding-top: 70px;
+}
+
+#colorbox.popininfo #cboxContent #cboxTitle {
+  float: none;
+  font-size: 24px;
+  position: absolute;
+  top: 30px;
+  border-bottom: 1px solid #555555;
+  display: block;
+  height: 30px;  
+  color: #FFA500;
 }
 
 #cboxLoadingOverlay{ 

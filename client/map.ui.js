@@ -39,6 +39,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     if($element.length > 0) {
       this.applyZoomOnMap();
       this.zoomTo(zoom);    
+      // TODO : corriger le centrage en cas de zoom > 1
       this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) - parseFloat($element.css('width'))/2 + 'px');
       this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) - parseFloat($element.css('height'))/2 + 'px');
 
@@ -52,6 +53,9 @@ var MapUi = function(mapContainer, viewport, tools) {
       var top = system.y;
       var $newSystem = system.getHtml();
       var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO à diviser par le nb total de système avec un max
+      if(!system.known)  {
+        nbStars = 0;
+      }
       for(var i=0; i<nbStars; i++) {
         var star = new UiStar(Math.floor((Math.random()*3*(system.width)) + left - 1*system.width), 
                               Math.floor((Math.random()*3*(system.height)) + top - 1*system.height));                              
@@ -199,7 +203,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   };
   
-  MapUi.prototype.NB_MAX_STARS = 5; // TODO partager les étoiles
+  MapUi.prototype.NB_MAX_STARS = 20; // TODO partager les étoiles
   
 	this.init();	
 };
