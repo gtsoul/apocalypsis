@@ -98,6 +98,12 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.__addClickEvent = function(htmlEl) {
     htmlEl.click(function() { 
       globalMap.centerOnEntity($(this).parent().attr('id'), EntitySystem.prototype.TYPE);
+      //$('#popininfo').colorbox();
+      $.colorbox({html:'Welcome', title:'Titre', className:'popininfo', width:'40%', height:'90%', fixed:true, right:'5%'});
+      $('.popininfo').addClass('loading');
+      setTimeout(function() {
+        $('.popininfo').removeClass('loading');
+      }, 500);
     }); 
     if(this.known == true) {
 
