@@ -100,14 +100,11 @@ var EntitySystem = function(json) {
   };
 
   EntitySystem.prototype.__addClickEvent = function(htmlEl) {
+    var me = this;
     htmlEl.click(function() { 
-      globalMap.centerOnEntity($(this).parent().attr('id'), EntitySystem.prototype.TYPE, !$(this).parent().hasClass('unknown'));
-      //$('#popininfo').colorbox();
-      $.colorbox({html:'Welcome', title:'Titre', className:'popininfo', width:'40%', height:'90%', fixed:true, right:'5%'});
-      $('.popininfo').addClass('loading');
-      setTimeout(function() {
-        $('.popininfo').removeClass('loading');
-      }, 500);
+      var infoBox = new InfoBoxUI(me);
+      infoBox.display();
+      globalMap.centerOnEntity(me.pos, EntitySystem.prototype.TYPE, me.known);
     }); 
     if(this.known == true) {
 

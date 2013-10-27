@@ -24,7 +24,9 @@ var EntityPlanet = function(json, parent) {
   };    
   
   EntityPlanet.prototype.__clickHandler = function(htmlEl) {
-    console.warn('EntityPlanet.__clickHandler');
+    var infoBox = new InfoBoxUI(this);
+    infoBox.display();
+    globalMap.centerOnEntity(this.pos, EntityPlanet.prototype.TYPE, true);
   };  
  
   EntityPlanet.prototype = new EntitySpaceElement(json, parent); 
@@ -204,7 +206,9 @@ var EntityCoords = function(json, parent) {
   };    
   
   EntityCoords.prototype.__clickHandler = function(htmlEl) {
-    console.warn('EntityCoords.__clickHandler');
+    var infoBox = new InfoBoxUI(this);
+    infoBox.display();
+    globalMap.centerOnEntity(this.pos, EntityCoords.prototype.TYPE, this.known);
   };    
   
   EntityCoords.prototype.getPlanet = function(planetId) {

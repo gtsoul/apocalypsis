@@ -72,7 +72,7 @@ var Map = function(mapUi, mapAjaxProxy) {
         this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), (zoomIn ? EntitySystem.prototype.ZOOM_IN : EntitySystem.prototype.ZOOM_OUT));
         $('#'+entityPos+'.system').addClass('active');        
       } else if(entityType == EntityCoords.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), 2);
+        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), 5);
         $('#'+entityPos+'.coords').addClass('active');        
       } else if(entityType == EntityPlanet.prototype.TYPE) {
         this.ui.centerOnElement($('#'+entityPos+'.planet'), 6);
