@@ -55,7 +55,7 @@ var Map = function(mapUi, mapAjaxProxy) {
         newSystem.loaded = true;
         map.ui.repaintSystem(newSystem);
         console.log('repaint updated '+galaxy+', '+sector+', '+system);
-        map.centerOnEntity(newSystem.pos, newSystem.type);
+        map.ui.applyZoomOnMap();
       }
     });
   };
@@ -67,11 +67,11 @@ var Map = function(mapUi, mapAjaxProxy) {
   Map.prototype.centerOnEntity = function(entityPos, entityType) {
     // definir des zooms
     if(entityType != undefined) {
-      if(entityType == 'system') {
+      if(entityType == EntitySystem.prototype.TYPE) {
         this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), 1);
-      } else if(entityType == 'coords') {
+      } else if(entityType == EntityCoords.prototype.TYPE) {
         this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), 2);
-      } else if(entityType == 'planet') {
+      } else if(entityType == EntityPlanet.prototype.TYPE) {
         this.ui.centerOnElement($('#'+entityPos+'.planet'), 6);
       }
     }

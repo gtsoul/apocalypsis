@@ -9,7 +9,7 @@ var EntitySystem = function(json) {
   this.loaded = false;
   this.coords = new Array();
   this.sun;
-  this.type = 'system';
+  this.type = EntitySystem.prototype.TYPE;
   this.image = 'images/universe/system_fg'+(Math.round(Math.random()*3))+'.jpg';
   
 	this.init = function() { 
@@ -64,9 +64,10 @@ var EntitySystem = function(json) {
     }
     for(var coordIt in this.coords) {
       var coord = this.coords[coordIt];
-      $system.append(coord.getHtml());    
+      $system.append(coord.getHtml());
     }
     this.__addLoadEvent($systemPoint);
+    this.__addClickEvent($systemPoint);
     return $system;
   };
   
@@ -79,7 +80,7 @@ var EntitySystem = function(json) {
       return this.coords[coordKey];
     } 
     return undefined;    
-  };  
+  }; 
   
   EntitySystem.prototype.__addLoadEvent = function(htmlEl) {
     if(this.known == true) {
@@ -92,12 +93,22 @@ var EntitySystem = function(json) {
         }
       });
     }
+  };
+
+  EntitySystem.prototype.__addClickEvent = function(htmlEl) {
+    htmlEl.click(function() { 
+      globalMap.centerOnEntity($(this).parent().attr('id'), EntitySystem.prototype.TYPE);
+    }); 
+    if(this.known == true) {
+
+    }
   };  
   
   EntitySystem.prototype.WIDTH_PX = 110;
   EntitySystem.prototype.HEIGHT_PX = 130;
   EntitySystem.prototype.X_TO_PX = 2;
   EntitySystem.prototype.Y_TO_PX = 2;
+  EntitySystem.prototype.TYPE = 'system';
   
 	this.init();	
 };

@@ -37,10 +37,11 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   MapUi.prototype.centerOnElement = function($element, zoom) {
     if($element.length > 0) {
-      this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) + 'px');
-      this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) + 'px');
       this.applyZoomOnMap();
-      this.zoomTo(10); // TODO : for test
+      this.zoomTo(zoom);    
+      this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) - parseFloat($element.css('width'))/2 + 'px');
+      this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) - parseFloat($element.css('height'))/2 + 'px');
+
     }
   };
   
@@ -74,8 +75,9 @@ var MapUi = function(mapContainer, viewport, tools) {
         var $newCoord = coord.getHtml();      
         $oldCoord.html($newCoord.html());
         $oldCoord.removeClass('unloaded');
-      }
+      }   
       this.applyZoomOnMap();
+      coord.__addClickEvent($oldCoord);
     }  
   };  
   
@@ -197,7 +199,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   };
   
-  MapUi.prototype.NB_MAX_STARS = 0;
+  MapUi.prototype.NB_MAX_STARS = 5; // TODO partager les étoiles
   
 	this.init();	
 };

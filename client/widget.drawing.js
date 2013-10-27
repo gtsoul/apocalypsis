@@ -28,7 +28,7 @@ var UiStar = function(x, y) {
   
   UiStar.prototype.draw = function () {
     var r = Math.random()*2;
-    var opacity = $(SVG('animate', {
+    /*var opacity = $(SVG('animate', {
           'attributeType': 'CSS',
           'attributeName': 'opacity',
           'repeatCount': 'indefinite',
@@ -45,7 +45,7 @@ var UiStar = function(x, y) {
         .attr('from', r)
         .attr('to', 0)
         .attr('dur', Math.floor(Math.random()*20+10)+'s')
-        .attr('begin', Math.floor(Math.random()*5)+'s');        
+        .attr('begin', Math.floor(Math.random()*5)+'s');  */      
     var star = $(SVG('circle'))
         .attr('cx', this.x)
         .attr('cy', this.y)
@@ -54,10 +54,10 @@ var UiStar = function(x, y) {
         .attr('stroke-width', r/2)
         .attr('fill', 'white');
     // TODO : test performances
-    if(size > 2) {
+    /*if(size > 2) {
       size.appendTo(star);
     }
-    opacity.appendTo(star);
+    opacity.appendTo(star);*/
     star.appendTo($('#svgRoot #stars'));       
   };
 

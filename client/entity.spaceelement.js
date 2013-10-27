@@ -35,8 +35,12 @@ var EntitySpaceElement = function(json, parent) {
   };
   
   EntitySpaceElement.prototype.getHtml = function (left, top) { 
-    console.warn('undefined function');
-  }
+    console.warn('undefined function getHtml');
+  };
+  
+  EntitySpaceElement.prototype.__clickHandler = function(htmlEl) {
+    console.warn('undefined function __clickHandler');
+  };    
 
 	this.init();	
 };

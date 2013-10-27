@@ -24,7 +24,7 @@ var MapAjaxProxy = function(servicesContext) {
             if(entityIds.length == 4) {
               return coord;
             } else {
-              var planet = system.getPlanet(entityIds[4]);
+              var planet = coord.getPlanet(entityIds[4]);
               if(planet != undefined) {
                 return planet;
               }
@@ -135,7 +135,7 @@ var MapAjaxProxy = function(servicesContext) {
   MapAjaxProxy.prototype.__getSystemKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
     $.each(data, function(key, datum) {
-      if(key == 'system') {
+      if(key == EntitySystem.prototype.TYPE) {
         var system = new EntitySystem(datum);
         if(system != undefined && system.pos != undefined) {
           proxy.sSystems[system.pos] = system;

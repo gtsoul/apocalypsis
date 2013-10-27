@@ -11,20 +11,25 @@ var EntityPlanet = function(json, parent) {
     $planet.attr('src', this.image);
     $planet.css('left', Math.round(this.x + this.width/2 - 25)+'px');
     $planet.css('top', Math.round(this.y + this.height/2 - 25)+'px');
-    var $name = $('<div class="name nozoom">'+this.name+'</div>')
+    var $name = $('<div class="name nozoom">'+this.name+'</div>');
     return $planet;
   };    
+  
+  EntityPlanet.prototype.__clickHandler = function(htmlEl) {
+    console.warn('EntityPlanet.__clickHandler');
+  };  
  
   EntityPlanet.prototype = new EntitySpaceElement(json, parent); 
  
 	this.init = function() {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
-    this.type = 'planet';
+    this.type = EntityPlanet.prototype.TYPE;
 		this.init = function() {};
 	}; 
   
   EntityPlanet.prototype.WIDTH_PX_DEFAULT = 50;
   EntityPlanet.prototype.HEIGHT_PX_DEFAULT = 50;  
+  EntityPlanet.prototype.TYPE = 'planet';
   
 	this.init();	
 };
@@ -76,7 +81,6 @@ var EntityPc = function(json, parent) {
     $pc.attr('src', this.image);
     $pc.css('left', Math.round(this.x + this.width/2 - EntityCoords.prototype.WIDTH_PX_DEFAULT/2)+'px');
     $pc.css('top', Math.round(this.y + this.height/2 - EntityCoords.prototype.HEIGHT_PX_DEFAULT/2)+'px');
-
     return $pc;
   };    
   
@@ -169,7 +173,26 @@ var EntityCoords = function(json, parent) {
         }
       });
     }
-  };
+  };  
+
+  EntityCoords.prototype.__addClickEvent = function(htmlEl) {
+    htmlEl.find('.coordPoint.pc').click(function() {
+      var pc = globalMap.getEntity($(this).parent().attr('id'));
+      if(pc != undefined) {
+        pc.__clickHandler();
+      }
+    }); 
+    htmlEl.find('.planets .planet').click(function() {
+      var planet = globalMap.getEntity($(this).attr('id'));
+      if(planet != undefined) {
+        planet.__clickHandler();
+      }
+    });
+  };    
+  
+  EntityCoords.prototype.__clickHandler = function(htmlEl) {
+    console.warn('EntityCoords.__clickHandler');
+  };    
   
   EntityCoords.prototype.getPlanet = function(planetId) {
     var planetKey = planetId;
@@ -191,7 +214,7 @@ var EntityCoords = function(json, parent) {
       el.addClass('unknown');
       el.removeClass('unloaded');
     }
-  };  
+  }; 
 
   EntityCoords.prototype = new EntitySpaceElement(json, parent);
   this.planets = undefined;
@@ -203,13 +226,14 @@ var EntityCoords = function(json, parent) {
       EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]); 
       this.pc = new EntityPc(this, [undefined, parent]);
     }  
-    this.type = 'coords';
+    this.type = EntityCoords.prototype.TYPE;
     this.image = 'images/apocalypsis/coords.png';
 		this.init = function() {};    
 	};  
   
   EntityCoords.prototype.WIDTH_PX_DEFAULT = 150;
   EntityCoords.prototype.HEIGHT_PX_DEFAULT = 110;     
+  EntityCoords.prototype.TYPE = 'coords';
   
 	this.init();	
 };
