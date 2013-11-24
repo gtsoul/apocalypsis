@@ -35,7 +35,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     // TODO : center on center map
     
     // TODO : only for tests
-    //this.centerOnElement($("#3_15_6 .systemPoint"), 4);
+    //this.centerOnElement($("#3_15_6 .systemPoint"), 2);
 
     console.log('done');
   };
@@ -60,12 +60,22 @@ var MapUi = function(mapContainer, viewport, tools) {
       // TODO : corriger le centrage, prendre en compte le nozzom pour la width
       //var left = parseFloat($element.css('left')) + (this.viewport.width()/2 - parseFloat($element.css('width'))/2)/zoom;
       //var top = parseFloat($element.css('top')) + this.viewport.height()/2 - parseFloat($element.css('height'))/2;
-      var left = parseFloat($element.css('left') + (this.viewport.width()/(2)));
-      var top = parseFloat($element.css('top'));      
-      console.log(parseFloat($element.css('left'))+"  + "+(this.viewport.width()/(2*zoom))+" - "+parseFloat($element.css('width'))/2);
+      var left = parseFloat($element.css('left'));
+      var top = parseFloat($element.css('top'));   
       
-      console.log(left+", "+top+", "+zoom);
-      this.__scrollTo(left, top);
+      // TODO : ne pas utiliser scrollTO
+      /*this.__scrollTo(left, top);
+      
+      this.__scrollTo(250, 50);
+      
+      var dleft = ((this.viewport.width()/(2*zoom)) + parseFloat($element.css('width')));
+      var dtop = ((this.viewport.height()/(2*zoom)) - parseFloat($element.css('height'))/(zoom));  
+      console.log("left : "+parseFloat($element.css('left'))+"  + "+(this.viewport.width()/(2*zoom))+" - "+parseFloat($element.css('width'))/(zoom)+" = "+(parseFloat($element.css('left'))  + (this.viewport.width()/(2*zoom)) - parseFloat($element.css('width'))/(zoom)));
+      console.log("top : "+parseFloat($element.css('top'))+"  + "+(this.viewport.height()/(2*zoom))+" - "+parseFloat($element.css('height'))/(zoom)+" = "+(parseFloat($element.css('top'))  + (this.viewport.height()/(2*zoom)) - parseFloat($element.css('height'))/(zoom)));      
+      
+      console.log(dleft+", "+dtop+", "+zoom);    
+      this.__scrollTo(-dleft, dtop);*/
+      
       //this.__scrollTo(2505, 895, 4);
     }
   };
