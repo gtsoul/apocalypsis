@@ -9,19 +9,6 @@ this.scroller = new Scroller(render, {
 	zooming: true
 });
 
-
-/*var scrollLeftField = document.getElementById("scrollLeft");
-var scrollTopField = document.getElementById("scrollTop");
-var zoomLevelField = document.getElementById("zoomLevel");
-
-setInterval(function() {
-	var values = scroller.getValues();
-	scrollLeftField.value = values.left.toFixed(2);
-	scrollTopField.value = values.top.toFixed(2);
-	zoomLevelField.value = values.zoom.toFixed(2);
-}, 500);*/
-
-
 var rect = container.getBoundingClientRect();
 scroller.setPosition(rect.left + container.clientLeft, rect.top + container.clientTop);
 
@@ -35,46 +22,6 @@ var reflow = function() {
 
 window.addEventListener("resize", reflow, false);
 reflow();
-
-/*var checkboxes = document.querySelectorAll("#settings input[type=checkbox]");
-for (var i=0, l=checkboxes.length; i<l; i++) {
-	checkboxes[i].addEventListener("change", function() {
-		scroller.options[this.id] = this.checked;
-	}, false);
-}
-
-document.querySelector("#settings #zoom").addEventListener("click", function() {
-	scroller.zoomTo(parseFloat(document.getElementById("zoomLevel").value));
-}, false);
-
-document.querySelector("#settings #zoomIn").addEventListener("click", function() {
-	scroller.zoomBy(1.2, true);
-}, false);
-
-document.querySelector("#settings #zoomOut").addEventListener("click", function() {
-	scroller.zoomBy(0.8, true);
-}, false);
-
-document.querySelector("#settings #scrollTo").addEventListener("click", function() {
-	scroller.scrollTo(parseFloat(document.getElementById("scrollLeft").value), parseFloat(document.getElementById("scrollTop").value), true);
-}, false);
-
-document.querySelector("#settings #scrollByUp").addEventListener("click", function() {
-	scroller.scrollBy(0, -150, true);
-}, false);
-
-document.querySelector("#settings #scrollByRight").addEventListener("click", function() {
-	scroller.scrollBy(150, 0, true);
-}, false);
-
-document.querySelector("#settings #scrollByDown").addEventListener("click", function() {
-	scroller.scrollBy(0, 150, true);
-}, false);
-
-document.querySelector("#settings #scrollByLeft").addEventListener("click", function() {
-	scroller.scrollBy(-150, 0, true);
-}, false);*/
-
 
 if ('ontouchstart' in window) {
 
@@ -145,13 +92,3 @@ if ('ontouchstart' in window) {
 	}, false);
 
 }
-
-/*
-// Test for background activity (slow down scrolling)
-setInterval(function() {
-	var arr = [];
-	for (var i=0, l=Math.random()*600; i<l; i++) {
-		arr.push.call(arr, document.querySelectorAll(".abc" + i));
-	}
-}, 50);
-*/
