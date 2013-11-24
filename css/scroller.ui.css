@@ -14,7 +14,7 @@ body{
 	line-height: 1.8;
 }
 
-#container, #viewport{
+#container, #viewport, #viewport2{
 	position: absolute;
 	left: 20px;
 	top: 20px;
@@ -31,7 +31,7 @@ body{
 	user-select: none;
 }
 
-#content, #map{
+#content, #map, #map2{
 	background: white;
 	
 	-webkit-transform-origin: left top;

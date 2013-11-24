@@ -28,14 +28,14 @@
   </head>
   <body>    
   
-    <div id="container" >
+    <div id="container"  style="display:none;">
       <div id="content"></div>
     </div>  
   
-    <div id="viewport" style="display:none;">
-      <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt=""/>
+    <div id="viewport">
+      <!--img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt=""/-->
       <div id="map">     
-        <div class="mapRoot" style="width:1200px;height:700px;">      
+        <!--div class="mapRoot" style="width:1200px;height:700px;">      
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;" width="2400" height="1400" id="svgRoot">
             <defs>
               <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" >
@@ -51,7 +51,7 @@
           </svg>   
           
           <img id="target" class="nozoom" src="images/apocalypsis/target.png" alt="" />
-        </div>
+        </div-->
       </div>
       <div id="tools_wrapper">
           <div class="zoom"></div>
@@ -90,8 +90,8 @@
 		var cellHeight = 100;
 
 		// Initialize layout
-		var container = document.getElementById("container");
-		var content = document.getElementById("content");
+		var container = document.getElementById("viewport");
+		var content = document.getElementById("map");
 	
 		content.style.width = contentWidth + "px";
 		content.style.height = contentHeight + "px";
