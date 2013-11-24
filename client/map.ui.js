@@ -35,7 +35,8 @@ var MapUi = function(mapContainer, viewport, tools) {
     // TODO : center on center map
     
     // TODO : only for tests
-    //this.centerOnElement($("#3_15_6 .systemPoint"), 2);
+    this.centerOnElement($("#3_15_5 .systemPoint"), 3);
+    //console.log(getScroller().setPosition());
 
     console.log('done');
   };
@@ -64,9 +65,10 @@ var MapUi = function(mapContainer, viewport, tools) {
       var top = parseFloat($element.css('top'));   
       
       // TODO : ne pas utiliser scrollTO
-      /*this.__scrollTo(left, top);
+      this.__scrollTo(left, top);
+      console.log(left+", "+top);
       
-      this.__scrollTo(250, 50);
+      /*this.__scrollTo(250, 50);
       
       var dleft = ((this.viewport.width()/(2*zoom)) + parseFloat($element.css('width')));
       var dtop = ((this.viewport.height()/(2*zoom)) - parseFloat($element.css('height'))/(zoom));  
