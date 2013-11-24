@@ -113,8 +113,8 @@ var EntitySystem = function(json) {
   
   EntitySystem.prototype.WIDTH_PX = 110;
   EntitySystem.prototype.HEIGHT_PX = 130;
-  EntitySystem.prototype.X_TO_PX = 2;
-  EntitySystem.prototype.Y_TO_PX = 2;
+  EntitySystem.prototype.X_TO_PX = 5;
+  EntitySystem.prototype.Y_TO_PX = 5;
   EntitySystem.prototype.TYPE = 'system';
   EntitySystem.prototype.ZOOM_IN = 5;
   EntitySystem.prototype.ZOOM_OUT = 2;

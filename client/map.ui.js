@@ -18,7 +18,14 @@ var MapUi = function(mapContainer, viewport, tools) {
 	}; 	
   
 	MapUi.prototype.enableDrag = function() {  
-    
+		var contentWidth = 2000;
+		var contentHeight = 2000;
+		var cellWidth = 100;
+		var cellHeight = 100;
+
+		// Initialize layout
+		var container = document.getElementById("viewport");
+		var content = document.getElementById("map");
     console.log('done');
   };
   
@@ -190,7 +197,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   };
   
-  MapUi.prototype.NB_MAX_STARS = 20; // TODO partager les étoiles
+  MapUi.prototype.NB_MAX_STARS = 0; // TODO partager les étoiles
   
 	this.init();	
 };
