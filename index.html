@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link href="css/dot-luv/jquery-ui-1.9.2.custom.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/scroller.ui.css" />
     <link rel="stylesheet" href="js/colorbox/colorbox.css" />    
     <link href="http://www.apocalypsis.org/definitive.css?v=6" rel="stylesheet"/>
     <link href="css/map.css" rel="stylesheet"/>
@@ -10,7 +11,10 @@
     <script src="js/jquery-1.8.3.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.js"></script>
     <script src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/colorbox/jquery.colorbox-min.js"></script>     
+    <script src="js/colorbox/jquery.colorbox-min.js"></script>  
+    <script src="js/scroller/animate.js"></script> 	
+    <script src="js/scroller/scroller.js"></script> 	
+    <script src="js/scroller/render.js"></script> 
     <script src="client/widget.drawing.js"></script>
     <script src="client/entity.spaceelement.js"></script>
     <script src="client/entity.planet.js"></script>
@@ -19,12 +23,17 @@
     <script src="client/map.ajax.proxy.js"></script>
     <script src="client/map.ui.js"></script>
     <script src="client/infobox.ui.js"></script>
-    <script src="client/map.js"></script>
+    <script src="client/map.js"></script>    
     <script src="client/init.js"></script>
   </head>
-  <body>
-    <div id="viewport">
-      <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt="" />
+  <body>    
+  
+    <div id="container" >
+      <div id="content"></div>
+    </div>  
+  
+    <div id="viewport" style="display:none;">
+      <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt=""/>
       <div id="map">     
         <div class="mapRoot" style="width:1200px;height:700px;">      
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;" width="2400" height="1400" id="svgRoot">
@@ -49,5 +58,65 @@
           <input class="zoom_hidden" name="zoom_hidden" value="1" type="hidden"/>
       </div> 
     </div>
+    
+    
+    <!--div id="settings">
+      <div><label for="scrollingX">ScrollingX: </label><input type="checkbox" id="scrollingX" checked/></div>
+      <div><label for="scrollingY">ScrollingY: </label><input type="checkbox" id="scrollingY" checked/></div>
+      <div><label for="animating">Animating: </label><input type="checkbox" id="animating" checked/></div>
+      <div><label for="bouncing">Bouncing: </label><input type="checkbox" id="bouncing" checked/></div>
+      <div><label for="locking">Locking: </label><input type="checkbox" id="locking" checked/></div>
+
+      <div><label for="zooming">Zooming: </label><input type="checkbox" id="zooming" checked/></div>
+      <div><label for="minZoom">Min Zoom: </label><input type="text" id="minZoom" size="5" value="0.5"/></div>
+      <div><label for="maxZoom">Max Zoom: </label><input type="text" id="maxZoom" size="5" value="3"/></div>
+      <div><label for="zoomLevel">Zoom Level: </label><input type="text" id="zoomLevel" size="5"/></div>
+      <div><button id="zoom">Zoom to Level</button><button id="zoomIn">+</button><button id="zoomOut">-</button></div>
+      
+      <div><label for="scrollLeft">Scroll Left: </label><input type="text" id="scrollLeft" size="9"/></div>
+      <div><label for="scrollTop">Scroll Top: </label><input type="text" id="scrollTop" size="9"/></div>
+      <div><button id="scrollTo">Scroll to Coords</button></div>
+
+      <div><button id="scrollByUp">&uarr;</button><button id="scrollByDown">&darr;</button><button id="scrollByLeft">&larr;</button><button id="scrollByRight">&rarr;</button></div>
+    </div-->	
+    
+	<!-- Custom rendering code -->
+	<script type="text/javascript">
+
+		// Settings
+		var contentWidth = 2000;
+		var contentHeight = 2000;
+		var cellWidth = 100;
+		var cellHeight = 100;
+
+		// Initialize layout
+		var container = document.getElementById("container");
+		var content = document.getElementById("content");
+	
+		content.style.width = contentWidth + "px";
+		content.style.height = contentHeight + "px";
+
+
+		// Generate content
+		var frag = document.createDocumentFragment();
+		for (var row=0, rl=contentHeight/cellHeight; row<rl; row++) {
+			for (var col=0, cl=contentWidth/cellWidth; col<cl; col++) {
+				elem = document.createElement("div");
+				elem.style.backgroundColor = row%2 + col%2 > 0 ? "#ddd" : "";
+				elem.style.width = cellWidth + "px";
+				elem.style.height = cellHeight + "px";
+				elem.style.display = "inline-block";
+				elem.style.textIndent = "6px";
+				elem.innerHTML = row + "," + col;
+				frag.appendChild(elem);
+			}
+		}
+		content.appendChild(frag);
+	</script>
+	
+	<!-- Create Scroller, bind UI layer and mouse/touch events -->
+	<script src="js/scroller/ui.js"></script>
+	    
+    
   </body>
 </html>

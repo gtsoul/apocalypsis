@@ -17,21 +17,8 @@ var MapUi = function(mapContainer, viewport, tools) {
 		this.init = function() {};
 	}; 	
   
-	MapUi.prototype.enableDrag = function() {
-    this.mapContainer.draggable({
-      cursor: "move", 
-      distance: 5,
-      scroll: true
-      /*distance: 50,
-      start: function() {
-
-      },
-      drag: function() {
-
-      },
-      stop: function(event) {
-      }*/
-    });
+	MapUi.prototype.enableDrag = function() {  
+    
     console.log('done');
   };
   
@@ -86,7 +73,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   };  
   
   MapUi.prototype.zoomTo = function(zoomValue) {
-    $('.zoom_hidden').val(zoomValue).change();
+    /*$('.zoom_hidden').val(zoomValue).change();*/
   };
   
 	MapUi.prototype.enableZoom = function(zoomSlider) {
@@ -104,7 +91,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     m.viewport.on('mousewheel', function(e, delta) {
         m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, currentScale * (1 + delta * m.zoomConfig.zoomFactor)));
-        var vOffset = m.viewport.offset();
+        /*var vOffset = m.viewport.offset();
         var cOffset = m.mapRoot.offset();
         mouseLocation.x = (e.pageX - (vOffset.left + cOffset.left)) / currentScale;
         mouseLocation.y = (e.pageY - (vOffset.top + cOffset.top)) / currentScale;        
@@ -113,7 +100,7 @@ var MapUi = function(mapContainer, viewport, tools) {
         zoomMutex = true;
         zoomSlider.slider('value', sliderVal);        
         zoom();
-        zoomMutex = false;
+        zoomMutex = false;*/
     });
     var slidMin = Math.log(m.zoomConfig.minZoom) * zoomFactorInvertLog, slidMax = Math.log(m.zoomConfig.maxZoom) * zoomFactorInvertLog;
     var slidInvert = (slidMin > slidMax);
@@ -126,17 +113,17 @@ var MapUi = function(mapContainer, viewport, tools) {
     }).on('slide slidechange', function (event, ui) {
         var v = slidInvert ? slidMin + slidMax - ui.value : ui.value;
         m.zoom = Math.pow(m.zoomConfig.zoomFactor, v);       
-        if(!zoomMutex) {
+        /*if(!zoomMutex) {
           var cOffset = m.mapRoot.offset();      
           mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
           mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / currentScale;        
           zoom();           
-        }      
+        }*/      
     });
     
     $('.zoom_hidden').change(function() {
         m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, $(this).val()));
-        var vOffset = m.viewport.offset();
+        /*var vOffset = m.viewport.offset();
         var cOffset = m.mapRoot.offset();
         var cOffset = m.mapRoot.offset();      
         mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
@@ -146,10 +133,10 @@ var MapUi = function(mapContainer, viewport, tools) {
         zoomMutex = true;
         zoomSlider.slider('value', sliderVal);        
         zoom();
-        zoomMutex = false;
+        zoomMutex = false;*/
     });
     
-    function zoom() {
+    /*function zoom() {
       var scale = m.zoom;
       if(scale != currentScale) {
         var imgScale = 1/m.zoom;
@@ -174,7 +161,7 @@ var MapUi = function(mapContainer, viewport, tools) {
         currentScale = m.zoom;
         m.applyZoomOnMap();
       }
-    }
+    }*/
   };
 
   MapUi.prototype.applyZoomOnMap = function() {
