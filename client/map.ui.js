@@ -12,20 +12,20 @@ var MapUi = function(mapContainer, viewport, tools) {
   this.zoomConfig = {minZoom : 0.5, maxZoom : 30, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 4, zoomOnCoords : 3.5};
 
 	this.init = function() {
-    this.enableDrag();
     this.enableZoom(this.tools.find('.zoom'));
 		this.init = function() {};
 	}; 	
   
-	MapUi.prototype.enableDrag = function() {  
-		var contentWidth = 2000;
-		var contentHeight = 2000;
-		var cellWidth = 100;
-		var cellHeight = 100;
-
+	MapUi.prototype.enableScroller = function(sectorWidth, sectorHeight) {  
+    // TODO : passer les variables/fonctions en global
+		contentWidth = sectorWidth;
+		contentHeight = sectorHeight;
+    
 		// Initialize layout
 		var container = document.getElementById("viewport");
 		var content = document.getElementById("map");
+
+    reflow();
     console.log('done');
   };
   

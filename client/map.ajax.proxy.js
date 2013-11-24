@@ -108,6 +108,9 @@ var MapAjaxProxy = function(servicesContext) {
   
   MapAjaxProxy.prototype.__getSectorKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
+    
+    var sectorWidth = 2000;
+    var sectorHeight = 2000;
    
     if(data != undefined && data.sector != undefined && data.sector.subElements != undefined && data.sector.subElements.systems != undefined) {
       $.each(data.sector.subElements.systems, function(key, datum) {
@@ -121,14 +124,16 @@ var MapAjaxProxy = function(servicesContext) {
         }
 
       });
+      
+      if(data.cap != undefined && data.cap.absoluteGrid != undefined && data.cap.absoluteGrid.width != undefined && data.cap.absoluteGrid.height != undefined) {
+        sectorWidth = (data.cap.absoluteGrid.width*EntitySystem.prototype.X_TO_PX);
+        sectorHeight = (data.cap.absoluteGrid.height*EntitySystem.prototype.Y_TO_PX);
+        console.log("map  size :"+sectorWidth+" / "+sectorHeight);
+      }
     } 
-
-    if(data != undefined && data.cap != undefined) {
-      // TODO 
-    }    
    
     if(typeof(parameters.callback) != 'undefined') {
-      parameters.callback();
+      parameters.callback(sectorWidth, sectorHeight);
     }
   };  
  
