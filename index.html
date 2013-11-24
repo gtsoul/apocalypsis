@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link href="css/dot-luv/jquery-ui-1.9.2.custom.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/scroller.ui.css" />
+    <!--link rel="stylesheet" href="css/scroller.ui.css" /-->
     <link rel="stylesheet" href="js/colorbox/colorbox.css" />    
     <link href="http://www.apocalypsis.org/definitive.css?v=6" rel="stylesheet"/>
     <link href="css/map.css" rel="stylesheet"/>
@@ -33,9 +33,9 @@
     </div>  
   
     <div id="viewport">
-      <!--img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt=""/-->
+      <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt=""/>
       <div id="map">     
-        <!--div class="mapRoot" style="width:1200px;height:700px;">      
+        <div class="mapRoot" style="width:1200px;height:700px;">      
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute;" width="2400" height="1400" id="svgRoot">
             <defs>
               <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" >
@@ -51,7 +51,7 @@
           </svg>   
           
           <img id="target" class="nozoom" src="images/apocalypsis/target.png" alt="" />
-        </div-->
+        </div>
       </div>
       <div id="tools_wrapper">
           <div class="zoom"></div>
@@ -98,7 +98,7 @@
 
 
 		// Generate content
-		var frag = document.createDocumentFragment();
+		/*var frag = document.createDocumentFragment();
 		for (var row=0, rl=contentHeight/cellHeight; row<rl; row++) {
 			for (var col=0, cl=contentWidth/cellWidth; col<cl; col++) {
 				elem = document.createElement("div");
@@ -111,7 +111,7 @@
 				frag.appendChild(elem);
 			}
 		}
-		content.appendChild(frag);
+		content.appendChild(frag);*/
 	</script>
 	
 	<!-- Create Scroller, bind UI layer and mouse/touch events -->
