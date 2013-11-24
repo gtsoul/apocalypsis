@@ -20,6 +20,10 @@ var reflow = function() {
 	scroller.setDimensions(clientWidth, clientHeight, contentWidth, contentHeight);
 };
 
+var getScroller = function() {
+  return this.scroller;
+};
+
 window.addEventListener("resize", reflow, false);
 reflow();
 

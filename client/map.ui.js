@@ -26,17 +26,47 @@ var MapUi = function(mapContainer, viewport, tools) {
 		var content = document.getElementById("map");
 
     reflow();
+    
+    var ratioX = this.viewport.width()/sectorWidth;
+    var ratioY = this.viewport.height()/sectorHeight;
+    var zoomInit = Math.min(ratioX, ratioY);
+    this.__zoomTo(zoomInit);
+    
+    // TODO : center on center map
+    
+    // TODO : only for tests
+    //this.centerOnElement($("#3_15_6 .systemPoint"), 4);
+
     console.log('done');
   };
+  
+  MapUi.prototype.__scrollTo = function(left, top) {
+    zoom = getScroller().getValues().zoom;
+    if(left != undefined && top != undefined) {
+      getScroller().scrollTo(zoom*left, zoom*top);
+    }
+  };
+  
+  MapUi.prototype.__zoomTo = function(zoom) {
+    if(zoom != undefined) {
+      getScroller().zoomTo(zoom);
+    }
+  };  
   
   MapUi.prototype.centerOnElement = function($element, zoom) {
     if($element.length > 0) {
       this.applyZoomOnMap();
-      this.zoomTo(zoom);    
-      // TODO : corriger le centrage en cas de zoom > 1
-      this.mapContainer.css('left', this.viewport.width()/2 - parseFloat($element.css('left')) - parseFloat($element.css('width'))/2 + 'px');
-      this.mapContainer.css('top', this.viewport.height()/2 - parseFloat($element.css('top')) - parseFloat($element.css('height'))/2 + 'px');
-
+      this.__zoomTo(zoom);    
+      // TODO : corriger le centrage, prendre en compte le nozzom pour la width
+      //var left = parseFloat($element.css('left')) + (this.viewport.width()/2 - parseFloat($element.css('width'))/2)/zoom;
+      //var top = parseFloat($element.css('top')) + this.viewport.height()/2 - parseFloat($element.css('height'))/2;
+      var left = parseFloat($element.css('left') + (this.viewport.width()/(2)));
+      var top = parseFloat($element.css('top'));      
+      console.log(parseFloat($element.css('left'))+"  + "+(this.viewport.width()/(2*zoom))+" - "+parseFloat($element.css('width'))/2);
+      
+      console.log(left+", "+top+", "+zoom);
+      this.__scrollTo(left, top);
+      //this.__scrollTo(2505, 895, 4);
     }
   };
   
@@ -78,10 +108,6 @@ var MapUi = function(mapContainer, viewport, tools) {
       coord.__addClickEvent($oldCoord);
     }  
   };  
-  
-  MapUi.prototype.zoomTo = function(zoomValue) {
-    /*$('.zoom_hidden').val(zoomValue).change();*/
-  };
   
 	MapUi.prototype.enableZoom = function(zoomSlider) {
     var m = this;
