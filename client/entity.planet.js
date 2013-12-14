@@ -40,6 +40,7 @@ var EntityPlanet = function(json, parent) {
   
   EntityPlanet.prototype.WIDTH_PX_DEFAULT = 50;
   EntityPlanet.prototype.HEIGHT_PX_DEFAULT = 50;  
+  EntityPlanet.prototype.ZOOM_OUT = 4;  
   EntityPlanet.prototype.TYPE = 'planet';
   
 	this.init();	
@@ -249,7 +250,8 @@ var EntityCoords = function(json, parent) {
 	};  
   
   EntityCoords.prototype.WIDTH_PX_DEFAULT = 150;
-  EntityCoords.prototype.HEIGHT_PX_DEFAULT = 110;     
+  EntityCoords.prototype.HEIGHT_PX_DEFAULT = 110;  
+  EntityCoords.prototype.ZOOM_IN = 1.7;  
   EntityCoords.prototype.TYPE = 'coords';
   
 	this.init();	

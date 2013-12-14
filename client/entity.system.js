@@ -116,8 +116,8 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.X_TO_PX = 10;
   EntitySystem.prototype.Y_TO_PX = 10;
   EntitySystem.prototype.TYPE = 'system';
-  EntitySystem.prototype.ZOOM_IN = 5;
-  EntitySystem.prototype.ZOOM_OUT = 2;
+  EntitySystem.prototype.ZOOM_IN = 1.14;
+  EntitySystem.prototype.ZOOM_OUT = 0.44;
   
 	this.init();	
 };

@@ -54,7 +54,7 @@ var Scroller;
 			zooming: false,
 
 			/** Minimum zoom level */
-			minZoom: 0.5,
+			minZoom: 1,
 
 			/** Maximum zoom level */
 			maxZoom: 3,
@@ -441,6 +441,8 @@ var Scroller;
 		 */
 		zoomTo: function(level, animate, originLeft, originTop) {
 
+      console.log("zoomTo : "+level);
+    
 			var self = this;
 
 			if (!self.options.zooming) {

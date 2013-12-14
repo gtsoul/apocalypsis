@@ -1,6 +1,10 @@
 
 console.log('Loading map ui classes');
 
+var lastUpdateReperesTime = 0;
+var lastUpdateReperesTimeout;
+var lastUpdateReperesDelay = 300;
+
 var MapUi = function(mapContainer, viewport, tools) {
   this.zoom = 1;
   this.newCss = {};
@@ -9,10 +13,10 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.5, maxZoom : 30, zoomFactor : 0.15, moveSmooth : 1, zoomOnPlanet : 4, zoomOnCoords : 3.5};
+  this.zoomConfig = {minZoom : 0.5, maxZoom : 5, zoomFactor : 0.15, zoomOnCoords : 0.5, zoomOnPlanet : 1.1};
 
 	this.init = function() {
-    this.enableZoom(this.tools.find('.zoom'));
+    this.enableSlider(this.tools.find('.zoom'));
 		this.init = function() {};
 	}; 	
   
@@ -20,22 +24,40 @@ var MapUi = function(mapContainer, viewport, tools) {
     // TODO : passer les variables/fonctions en global
 		contentWidth = sectorWidth;
 		contentHeight = sectorHeight;
+    $('#svgRoot').attr({width:sectorWidth, height:sectorHeight});
     
 		// Initialize layout
-		var container = document.getElementById("viewport");
-		var content = document.getElementById("map");
-
+		var container = viewport[0];
+		var content = mapContainer[0];
+    var ui = this;
+    
+    this.mapContainer.bind('zooming', function(event) {
+      if(typeof(event.detail) == 'undefined') {
+        event = event.originalEvent;
+      }
+      ui.__afterZoom(event.detail.zoom);
+      ui.__updateReperes();
+    });
+    this.mapContainer.bind('scrolling', function(event) {
+      ui.__updateReperes();
+    });    
+    
     reflow();
     
     var ratioX = this.viewport.width()/sectorWidth;
     var ratioY = this.viewport.height()/sectorHeight;
-    var zoomInit = Math.min(ratioX, ratioY);
-    this.__zoomTo(zoomInit);
+    var zoomInit = Math.min(ratioX, ratioY);    
+    getScroller().options.minZoom = Math.min(this.zoomConfig.maxZoom, zoomInit);
+    getScroller().options.maxZoom = this.zoomConfig.maxZoom;
+    // TODO : for test only
+    //this.__zoomTo(zoomInit);  
+    this.__zoomTo(1);    
+    
     
     // TODO : center on center map
     
     // TODO : only for tests
-    this.centerOnElement($("#3_15_5 .systemPoint"), 3);
+    //this.centerOnElement($("#3_15_5 .systemPoint"), 3);
     //console.log(getScroller().setPosition());
 
     console.log('done');
@@ -54,9 +76,77 @@ var MapUi = function(mapContainer, viewport, tools) {
     }
   };  
   
+  MapUi.prototype.__afterZoom = function(zoom) {
+    this.zoom = zoom;
+    var compat = ['-moz-', '-webkit-', '-o-', ''];
+    this.newCssNozoom = {};
+    for(var i = compat.length - 1; i; i--) {
+      this.newCssNozoom[compat[i]+'transform'] = 'scale('+(1/zoom)+')';
+    }  
+    this.applyZoomOnMap();
+  }; 
+
+  MapUi.prototype.__updateReperes = function() {
+    var now = (new Date().getTime()); 
+    if(now - lastUpdateReperesTime >= lastUpdateReperesDelay) {
+      lastUpdateReperesTime = now;
+      clearTimeout(lastUpdateReperesTimeout);
+      // TODO : mettre les repères Hors carte
+      var vwidth = this.viewport.width();
+      var vheight = this.viewport.height();
+      var xmin = getScroller().getValues().left / this.zoom;
+      var ymin = getScroller().getValues().top / this.zoom;
+      var xmax = xmin + (vwidth / this.zoom);
+      var ymax = ymin + (vheight / this.zoom);
+      var dx = (EntitySystem.prototype.WIDTH_PX/2);// * this.zoom;
+      var dy = (EntitySystem.prototype.HEIGHT_PX/2);// * this.zoom;  
+      var vox = this.viewport.offset().left;
+      var voy = this.viewport.offset().top;
+      $('.reperes').remove();
+      var $systems = this.mapContainer.find('.system:not(.unknown) .systemPoint').each(function(it) {
+        var x = parseFloat($(this).css('left')) + dx;
+        var y = parseFloat($(this).css('top')) + dy;
+        var spos = $(this).parent().attr('id');
+        console.log(spos+' = '+x+' : '+y);
+        if(xmin <= x && x <= xmax && ymin <= y && y <= ymax) {
+          console.log(spos+' est visible');// TODO : rectifier les formules
+        } else {
+          if(xmin > x) {
+            x = 0;
+          } else if(x > xmax) {
+            x = vwidth;
+          } else {
+            x = (x - xmin) / (xmax - xmin) * vwidth;
+          }
+          if(ymin > y) {
+            y = 0;
+          } else if(y > ymax) {
+            y = vheight;
+          } else {
+            y = (y - ymin) / (ymax - ymin) * vheight;
+          }        
+          x += vox;
+          y += voy;
+          x = Math.min(x, vwidth-10);
+          y = Math.min(y, vheight-10);
+          var $div = $('<div class="reperes" style="color:red;font-size=35px;position:absolute;cursor:pointer;"><img src="'+$(this).find('.systemPointImg').attr('src')+'" style="width:30px;height:30px;"/></div>');
+          $div.css({'left':x+'px', 'top': y+'px'});
+          $div.click(function() {
+            globalMap.ui.centerOnElement($("#"+spos+" .systemPoint"));
+          });
+          $('body').append($div);
+        }
+      });
+    } else {
+      lastUpdateReperesTimeout = setTimeout(function() {
+        globalMap.ui.__updateReperes();
+      }, lastUpdateReperesDelay);
+    }
+  };  
+  
   MapUi.prototype.centerOnElement = function($element, zoom) {
     if($element.length > 0) {
-      this.applyZoomOnMap();
+      //this.applyZoomOnMap();
       this.__zoomTo(zoom);    
       // TODO : corriger le centrage, prendre en compte le nozzom pour la width
       //var left = parseFloat($element.css('left')) + (this.viewport.width()/2 - parseFloat($element.css('width'))/2)/zoom;
@@ -121,8 +211,8 @@ var MapUi = function(mapContainer, viewport, tools) {
     }  
   };  
   
-	MapUi.prototype.enableZoom = function(zoomSlider) {
-    var m = this;
+	MapUi.prototype.enableSlider = function(zoomSlider) {
+    /*var m = this;
     var viewPortHeight = 600; //window.innerHeight; //600,
         viewPortWidth = 800; //window.innerWidth; //800;
     var ratio = 1;
@@ -133,20 +223,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     var currentScale = 1, currentLocation = {x: viewPortWidth/2, y: viewPortHeight/2}, mouseLocation = {x: viewPortWidth/2, y: viewPortHeight/2};
     var zoomFactorInvertLog = 1 / Math.log(m.zoomConfig.zoomFactor);  
     var zoomMutex = false;
-    
-    m.viewport.on('mousewheel', function(e, delta) {
-        m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, currentScale * (1 + delta * m.zoomConfig.zoomFactor)));
-        /*var vOffset = m.viewport.offset();
-        var cOffset = m.mapRoot.offset();
-        mouseLocation.x = (e.pageX - (vOffset.left + cOffset.left)) / currentScale;
-        mouseLocation.y = (e.pageY - (vOffset.top + cOffset.top)) / currentScale;        
-        var sliderVal = Math.log(m.zoom) * zoomFactorInvertLog;
-        if(slidInvert) sliderVal = slidMin + slidMax - sliderVal;
-        zoomMutex = true;
-        zoomSlider.slider('value', sliderVal);        
-        zoom();
-        zoomMutex = false;*/
-    });
+
     var slidMin = Math.log(m.zoomConfig.minZoom) * zoomFactorInvertLog, slidMax = Math.log(m.zoomConfig.maxZoom) * zoomFactorInvertLog;
     var slidInvert = (slidMin > slidMax);
     zoomSlider.slider({
@@ -158,69 +235,21 @@ var MapUi = function(mapContainer, viewport, tools) {
     }).on('slide slidechange', function (event, ui) {
         var v = slidInvert ? slidMin + slidMax - ui.value : ui.value;
         m.zoom = Math.pow(m.zoomConfig.zoomFactor, v);       
-        /*if(!zoomMutex) {
-          var cOffset = m.mapRoot.offset();      
-          mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
-          mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / currentScale;        
-          zoom();           
-        }*/      
-    });
+        // TODO action de zoom
+    });*/
     
-    $('.zoom_hidden').change(function() {
-        m.zoom = Math.max(m.zoomConfig.minZoom, Math.min(m.zoomConfig.maxZoom, $(this).val()));
-        /*var vOffset = m.viewport.offset();
-        var cOffset = m.mapRoot.offset();
-        var cOffset = m.mapRoot.offset();      
-        mouseLocation.x = (viewPortWidth / 2 - cOffset.left) / currentScale;          
-        mouseLocation.y = (viewPortHeight / 2 - cOffset.top) / currentScale;                
-        var sliderVal = Math.log(m.zoom) * zoomFactorInvertLog;
-        if(slidInvert) sliderVal = slidMin + slidMax - sliderVal;
-        zoomMutex = true;
-        zoomSlider.slider('value', sliderVal);        
-        zoom();
-        zoomMutex = false;*/
-    });
-    
-    /*function zoom() {
-      var scale = m.zoom;
-      if(scale != currentScale) {
-        var imgScale = 1/m.zoom;
-        if(m.zoom <= m.zoomConfig.zoomOnCoords) {
-          var cOffset = m.mapRoot.offset();       
-          currentLocation.x = (m.mapRoot.width() / 2 - cOffset.left) / currentScale;
-          currentLocation.y = (m.mapRoot.height() / 2 - cOffset.top) / currentScale;
-        } else {
-          currentLocation.x = (m.zoomConfig.moveSmooth * (mouseLocation.x) + (1 - m.zoomConfig.moveSmooth) * currentLocation.x);
-          currentLocation.y = (m.zoomConfig.moveSmooth * (mouseLocation.y) + (1 - m.zoomConfig.moveSmooth) * currentLocation.y);
-        }
-        $('#target').css('left', (currentLocation.x-24)+'px');
-        $('#target').css('top', (currentLocation.y-24)+'px');          
-        var compat = ['-moz-', '-webkit-', '-o-', ''];
-        m.newCss = {};
-        m.newCssNozoom = {};
-        for(var i = compat.length - 1; i; i--) {
-            m.newCss[compat[i]+'transform'] = 'scale('+m.zoom+')';
-            m.newCssNozoom[compat[i]+'transform'] = 'scale('+imgScale+')';
-            m.newCss[compat[i]+'transform-origin'] = currentLocation.x + 'px ' + currentLocation.y + 'px'; // TODO
-        }
-        currentScale = m.zoom;
-        m.applyZoomOnMap();
-      }
-    }*/
   };
 
   MapUi.prototype.applyZoomOnMap = function() {
-    this.mapRoot.css(this.newCss);
+    // TODO : apply this ? this.mapRoot.css(this.newCss);
     this.mapRoot.find('.nozoom').css(this.newCssNozoom);
 
-    
-    // TODO : adjust these zoom values
     this.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
     if(this.zoom >= this.zoomConfig.zoomOnPlanet) {
       this.mapRoot.addClass('zoomOnPlanet');
     } else if(this.zoom >= this.zoomConfig.zoomOnCoords) {
       this.mapRoot.addClass('zoomOnCoords');
-    } else /*if(this.zoom >= 0.08)*/ {
+    } else {
       this.mapRoot.addClass('zoomOnSystem');
     } 
   };

@@ -20,6 +20,14 @@ var render = (function(global) {
 		webkit: 'Webkit',
 		presto: 'O'
 	}[engine];
+  
+
+  
+  var fireZoomingEvent = function(element, data) {
+    var event;
+    event = new CustomEvent('zooming', { bubbles : true, cancelable : true, detail : data});
+    element.dispatchEvent(event);
+  };
 	
 	var helperElem = document.createElement("div");
 	var undef;
@@ -30,7 +38,8 @@ var render = (function(global) {
 	if (helperElem.style[perspectiveProperty] !== undef) {
 		
 		return function(left, top, zoom) {
-			content.style[transformProperty] = 'translate3d(' + (-left) + 'px,' + (-top) + 'px,0) scale(' + zoom + ')';
+			content.style[transformProperty] = 'translate3d(' + (-left) + 'px,' + (-top) + 'px,0) scale(' + zoom + ')';    
+      fireZoomingEvent(content, {'zoom':zoom});
 		};	
 		
 	} else if (helperElem.style[transformProperty] !== undef) {

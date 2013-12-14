@@ -76,10 +76,10 @@ var Map = function(mapUi, mapAjaxProxy) {
         this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), (zoomIn ? EntitySystem.prototype.ZOOM_IN : EntitySystem.prototype.ZOOM_OUT));
         $('#'+entityPos+'.system').addClass('active');        
       } else if(entityType == EntityCoords.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), 5);
+        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), EntityCoords.prototype.ZOOM_IN);
         $('#'+entityPos+'.coords').addClass('active');        
       } else if(entityType == EntityPlanet.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.planet'), 6);
+        this.ui.centerOnElement($('#'+entityPos+'.planet'), EntityPlanet.prototype.ZOOM_OUT);
         $('#'+entityPos+'.planet').addClass('active');    
       }
     }
