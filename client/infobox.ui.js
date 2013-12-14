@@ -8,12 +8,18 @@ var InfoBoxUI = function(entity) {
 
   InfoBoxUI.prototype.display = function() {
     var boxClass = InfoBoxUI.prototype.BOX_CLASS;
-    $.colorbox({html:this.__getHtmlForEntity(this.entity), title:this.title, className:boxClass, width:'40%', height:'90%', fixed:true, right:'5%'});
+    $.colorbox({html:this.__getHtmlForEntity(), title:this.__getTitleBoxForEntity(), className:boxClass, width:'40%', height:'90%', fixed:true, right:'5%'});
     $('.'+boxClass).addClass('loading');
     setTimeout(function() {
       $('.'+boxClass).removeClass('loading');
     }, 500);
   };  
+  
+  InfoBoxUI.prototype.__getTitleBoxForEntity = function() {
+    var titleHtml = this.title;
+    titleHtml = '<img src="images/apocalypsis/left.png" style=""/>'+titleHtml+'<img src="images/apocalypsis/right.png" style=""/>';
+    return titleHtml;
+  };    
   
   InfoBoxUI.prototype.__getHtmlForEntity = function() {
     // TODO : faire un switch sur le type de l'entity

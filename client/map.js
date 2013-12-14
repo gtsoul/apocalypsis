@@ -60,6 +60,7 @@ var Map = function(mapUi, mapAjaxProxy) {
         }
       } else if(sectorWidth != undefined && sectorHeight != undefined) {
         map.ui.enableScroller(sectorWidth, sectorHeight);
+        map.ui.addParallax();
       }
     });
   };

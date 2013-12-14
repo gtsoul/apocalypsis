@@ -5,6 +5,36 @@
   pointer-events: none;
 }
 
+#backgroundWrap {
+  background: transparent;
+  position: absolute;
+  pointer-events: none; 
+  overflow: hidden;
+  background: black;
+}
+
+#backgroundImage {
+  background: url('../images/apocalypsis/background2.jpg') repeat 0 0 black;
+  position: relative;
+  pointer-events: none; 
+  left: -300px;
+  top: -300px;
+  opacity:0.4;
+  filter:alpha(opacity=40);
+}
+
+#backgroundOpacity {
+  width: 100%;
+  height: 100%;
+  /*background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 18%, rgba(0,0,0,0.8) 47%, rgba(0,0,0,1) 72%, rgba(0,0,0,1) 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.3)), color-stop(18%,rgba(0,0,0,0.5)), color-stop(47%,rgba(0,0,0,0.8)), color-stop(72%,rgba(0,0,0,1)), color-stop(100%,rgba(0,0,0,1)));
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 18%,rgba(0,0,0,0.8) 47%,rgba(0,0,0,1) 72%,rgba(0,0,0,1) 100%); 
+  background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 18%,rgba(0,0,0,0.8) 47%,rgba(0,0,0,1) 72%,rgba(0,0,0,1) 100%);
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 18%,rgba(0,0,0,0.8) 47%,rgba(0,0,0,1) 72%,rgba(0,0,0,1) 100%); 
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 18%,rgba(0,0,0,0.8) 47%,rgba(0,0,0,1) 72%,rgba(0,0,0,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', endColorstr='#000000',GradientType=1 ); */
+}
+
 #viewport, #viewport2 {
 /*margin: 300px;*/
   /*width:1024px;
@@ -12,7 +42,8 @@
   overflow:hidden;
   border: 3px solid #555;
   border:1px solid black;
-  background: black;
+  /*background: url('../images/apocalypsis/background.jpg') repeat 0 0 transparent;*/
+  background: transparent;
   
 	position: absolute;
 	left: 20px;
@@ -83,6 +114,21 @@ html, body {
   z-index: 5000;
   pointer-events: none;
   border: 1px solid red;
+}
+
+.reperes {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  z-index: 1000;
+}
+
+.reperes:hover {
+  -webkit-animation: blip-function 0.5s linear infinite; 
+     -moz-animation: blip-function 0.5s linear infinite; 
+      -ms-animation: blip-function 0.5s linear infinite; 
+       -o-animation: blip-function 0.5s linear infinite; 
+          animation: blip-function 0.5s linear infinite; 
 }
 
 /*-------- Map elements -------------*/

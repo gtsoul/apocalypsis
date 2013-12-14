@@ -27,6 +27,12 @@
   </head>
   <body>    
 
+  
+    <div id="backgroundWrap">
+      <div id="backgroundImage" class="background">
+        <div id="backgroundOpacity" class="background">&nbsp;</div>
+      </div>
+    </div>
     <div id="viewport">
       <img id="crosshairs" src="images/apocalypsis/crosshairs.png" alt=""/>
       <div id="map">     
@@ -53,7 +59,7 @@
           <input class="zoom_hidden" name="zoom_hidden" value="1" type="hidden"/>
       </div> 
     </div>
-
+    
 	<!-- Custom rendering code -->
 	<script type="text/javascript">
 
@@ -67,6 +73,8 @@
 		var container = document.getElementById("viewport");
 		var content = document.getElementById("map");
 
+
+    
 	</script>
 	
 	<!-- Create Scroller, bind UI layer and mouse/touch events -->

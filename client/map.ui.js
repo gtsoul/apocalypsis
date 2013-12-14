@@ -3,7 +3,7 @@ console.log('Loading map ui classes');
 
 var lastUpdateReperesTime = 0;
 var lastUpdateReperesTimeout;
-var lastUpdateReperesDelay = 300;
+var lastUpdateReperesDelay = 500;
 
 var MapUi = function(mapContainer, viewport, tools) {
   this.zoom = 1;
@@ -16,7 +16,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   this.zoomConfig = {minZoom : 0.5, maxZoom : 5, zoomFactor : 0.15, zoomOnCoords : 0.5, zoomOnPlanet : 1.1};
 
 	this.init = function() {
-    this.enableSlider(this.tools.find('.zoom'));
+    //this.enableSlider(this.tools.find('.zoom'));
 		this.init = function() {};
 	}; 	
   
@@ -39,6 +39,9 @@ var MapUi = function(mapContainer, viewport, tools) {
       ui.__updateReperes();
     });
     this.mapContainer.bind('scrolling', function(event) {
+      /*if(typeof(event.detail) == 'undefined') {
+        event = event.originalEvent;
+      }*/
       ui.__updateReperes();
     });    
     
@@ -107,7 +110,6 @@ var MapUi = function(mapContainer, viewport, tools) {
         var x = parseFloat($(this).css('left')) + dx;
         var y = parseFloat($(this).css('top')) + dy;
         var spos = $(this).parent().attr('id');
-        console.log(spos+' = '+x+' : '+y);
         if(xmin <= x && x <= xmax && ymin <= y && y <= ymax) {
           console.log(spos+' est visible'); // TODO : rectifier les formules
         } else {
@@ -127,23 +129,50 @@ var MapUi = function(mapContainer, viewport, tools) {
           }        
           x += vox;
           y += voy;
-          x = Math.min(x, vwidth-10);
-          y = Math.min(y, vheight-10);
-          var $div = $('<div class="reperes" style="color:red;font-size=35px;position:absolute;cursor:pointer;"><img src="'+$(this).find('.systemPointImg').attr('src')+'" style="width:30px;height:30px;"/></div>');
-          $div.css({'left':x+'px', 'top': y+'px'});
-          $div.click(function() {
-            globalMap.centerOnEntity(spos, EntitySystem.prototype.TYPE, false, false);
-            //globalMap.ui.centerOnElement($("#"+spos+" .systemPoint"), false, true);
-          });
+          x = Math.min(x, vwidth-5);
+          y = Math.min(y, vheight-5);
+          var $div = $('<div class="reperes" spos="'+spos+'" style="color:red;font-size=35px;position:absolute;cursor:pointer;"><img src="'+$(this).find('.systemPointImg').attr('src')+'" style="width:30px;height:30px;"/></div>');
+          $div.css({'left':x+'px', 'top': y+'px'});   
           $('body').append($div);
         }
       });
+      $('.reperes').click(function() {
+        globalMap.centerOnEntity($(this).attr('spos'), EntitySystem.prototype.TYPE, false, false);
+      });
     } else {
+      clearTimeout(lastUpdateReperesTimeout);
       lastUpdateReperesTimeout = setTimeout(function() {
         globalMap.ui.__updateReperes();
       }, lastUpdateReperesDelay);
     }
+    this.__updateParallax();
   };  
+  
+   
+  
+  MapUi.prototype.addParallax = function() {
+    var dx = 600;
+    var dy = 600;
+    var $bgWrap = $('#backgroundWrap');
+    var $bg = $('#backgroundImage');
+    var $viewport = $('#viewport');
+    $bgWrap.css({'width': $viewport.outerWidth()+'px', 'height': $viewport.outerHeight()+'px', 'left': $viewport.css('left'), 'top': $viewport.css('top')});
+    $bg.css({'width': $viewport.outerWidth()+dx+'px', 'height': $viewport.outerHeight()+dy+'px'});
+    MapUi.prototype.__updateParallax = function() {
+      var vwidth = this.viewport.width();
+      var vheight = this.viewport.height();
+      var xmin = getScroller().getValues().left / this.zoom;
+      var ymin = getScroller().getValues().top / this.zoom;
+      var px = xmin / contentWidth;
+      var py = ymin / contentHeight;
+      //px = 1-px;
+      //py = 1-py;
+      var bgleft = dx*px - dx;
+      var bgtop = dy*py - dy;
+      $bg.css({'left': bgleft+'px', 'top': bgtop+'px'});
+    }; 
+  };
+
   
   MapUi.prototype.centerOnElement = function($element, zoom, infobox) {
     if($element.length > 0) {
