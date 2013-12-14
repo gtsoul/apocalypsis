@@ -49,21 +49,13 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     var ratioX = this.viewport.width()/sectorWidth;
     var ratioY = this.viewport.height()/sectorHeight;
-    var zoomInit = Math.min(ratioX, ratioY);    
+    var zoomInit = Math.min(ratioX, ratioY)*1.5;    
     getScroller().options.minZoom = Math.min(this.zoomConfig.maxZoom, zoomInit);
     getScroller().options.maxZoom = this.zoomConfig.maxZoom;
-    // TODO : for test only
-    //this.__zoomTo(zoomInit);  
-    this.__zoomTo(1);    
-    
-    
-    // TODO : center on center map
-    
-    // TODO : only for tests
-    //this.centerOnElement($("#3_15_5 .systemPoint"), 3);
-    //console.log(getScroller().setPosition());
-
-    console.log('done');
+    this.__zoomTo(zoomInit);  
+    // TODO : for test only    
+    //this.__zoomTo(1);    
+    console.log('map ui initialized');
   };
   
   MapUi.prototype.__scrollTo = function(left, top) {

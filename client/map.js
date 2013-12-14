@@ -69,18 +69,19 @@ var Map = function(mapUi, mapAjaxProxy) {
     return this.proxy.getEntity(entityId);
   }; 
 
-  Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infobox) { // if zoomIn is false => zoomOut
+  Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => décaler sur la gauche
+    // TODO : check if element is loaded and load it then
     // definir des zooms
     if(entityType != undefined) {
       $('#map .planet.active, #map .coords.active, #map .system.active').removeClass('active');
       if(entityType == EntitySystem.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), (zoomIn ? EntitySystem.prototype.ZOOM_IN : EntitySystem.prototype.ZOOM_OUT), infobox);
+        this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), (zoomIn ? EntitySystem.prototype.ZOOM_IN : EntitySystem.prototype.ZOOM_OUT), infoBox);
         $('#'+entityPos+'.system').addClass('active');        
       } else if(entityType == EntityCoords.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), EntityCoords.prototype.ZOOM_IN, infobox);
+        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), EntityCoords.prototype.ZOOM_IN, infoBox);
         $('#'+entityPos+'.coords').addClass('active');        
       } else if(entityType == EntityPlanet.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.planet'), EntityPlanet.prototype.ZOOM_OUT, infobox);
+        this.ui.centerOnElement($('#'+entityPos+'.planet'), EntityPlanet.prototype.ZOOM_OUT, infoBox);
         $('#'+entityPos+'.planet').addClass('active');    
       }
     }

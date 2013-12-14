@@ -17,8 +17,8 @@
   background: url('../images/apocalypsis/background2.jpg') repeat 0 0 black;
   position: relative;
   pointer-events: none; 
-  left: -300px;
-  top: -300px;
+  /*left: -300px;
+  top: -300px;*/
   opacity:0.4;
   filter:alpha(opacity=40);
 }
