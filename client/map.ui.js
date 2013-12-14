@@ -157,7 +157,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     var $bg = $('#backgroundImage');
     var $viewport = $('#viewport');
     $bgWrap.css({'width': $viewport.outerWidth()+'px', 'height': $viewport.outerHeight()+'px', 'left': $viewport.css('left'), 'top': $viewport.css('top')});
-    $bg.css({'width': $viewport.outerWidth()+dx+'px', 'height': $viewport.outerHeight()+dy+'px'});
+    $bg.css({'width': $viewport.outerWidth()+dx*1.1+'px', 'height': $viewport.outerHeight()+dy*1.1+'px'});
     MapUi.prototype.__updateParallax = function() {
       var vwidth = this.viewport.width();
       var vheight = this.viewport.height();
@@ -165,10 +165,10 @@ var MapUi = function(mapContainer, viewport, tools) {
       var ymin = getScroller().getValues().top / this.zoom;
       var px = xmin / contentWidth;
       var py = ymin / contentHeight;
-      //px = 1-px;
-      //py = 1-py;
-      var bgleft = dx*px - dx;
-      var bgtop = dy*py - dy;
+      px = 1-px;
+      py = 1-py;
+      var bgleft = dx*px - 1.1*dx;
+      var bgtop = dy*py - 1.1*dy;
       $bg.css({'left': bgleft+'px', 'top': bgtop+'px'});
     }; 
   };
