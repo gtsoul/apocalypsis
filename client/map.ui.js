@@ -109,7 +109,7 @@ var MapUi = function(mapContainer, viewport, tools) {
         var spos = $(this).parent().attr('id');
         console.log(spos+' = '+x+' : '+y);
         if(xmin <= x && x <= xmax && ymin <= y && y <= ymax) {
-          console.log(spos+' est visible');// TODO : rectifier les formules
+          console.log(spos+' est visible'); // TODO : rectifier les formules
         } else {
           if(xmin > x) {
             x = 0;
@@ -148,27 +148,16 @@ var MapUi = function(mapContainer, viewport, tools) {
     if($element.length > 0) {
       //this.applyZoomOnMap();
       this.__zoomTo(zoom);    
-      // TODO : corriger le centrage, prendre en compte le nozzom pour la width
-      //var left = parseFloat($element.css('left')) + (this.viewport.width()/2 - parseFloat($element.css('width'))/2)/zoom;
-      //var top = parseFloat($element.css('top')) + this.viewport.height()/2 - parseFloat($element.css('height'))/2;
+      // TODO : corriger en cas d'affichage de la popin
       var left = parseFloat($element.css('left'));
-      var top = parseFloat($element.css('top'));   
+      var top = parseFloat($element.css('top'));      
+      var vleft = (this.viewport.width()/2)/zoom;
+      var vtop = (this.viewport.height()/2)/zoom;
+      var wleft = (parseFloat($element.css('width'))/2);
+      var htop = (parseFloat($element.css('height'))/2);
       
       // TODO : ne pas utiliser scrollTO
-      this.__scrollTo(left, top);
-      console.log(left+", "+top);
-      
-      /*this.__scrollTo(250, 50);
-      
-      var dleft = ((this.viewport.width()/(2*zoom)) + parseFloat($element.css('width')));
-      var dtop = ((this.viewport.height()/(2*zoom)) - parseFloat($element.css('height'))/(zoom));  
-      console.log("left : "+parseFloat($element.css('left'))+"  + "+(this.viewport.width()/(2*zoom))+" - "+parseFloat($element.css('width'))/(zoom)+" = "+(parseFloat($element.css('left'))  + (this.viewport.width()/(2*zoom)) - parseFloat($element.css('width'))/(zoom)));
-      console.log("top : "+parseFloat($element.css('top'))+"  + "+(this.viewport.height()/(2*zoom))+" - "+parseFloat($element.css('height'))/(zoom)+" = "+(parseFloat($element.css('top'))  + (this.viewport.height()/(2*zoom)) - parseFloat($element.css('height'))/(zoom)));      
-      
-      console.log(dleft+", "+dtop+", "+zoom);    
-      this.__scrollTo(-dleft, dtop);*/
-      
-      //this.__scrollTo(2505, 895, 4);
+      this.__scrollTo(left-vleft+wleft, top-vtop+htop);
     }
   };
   
