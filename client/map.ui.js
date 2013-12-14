@@ -132,7 +132,8 @@ var MapUi = function(mapContainer, viewport, tools) {
           var $div = $('<div class="reperes" style="color:red;font-size=35px;position:absolute;cursor:pointer;"><img src="'+$(this).find('.systemPointImg').attr('src')+'" style="width:30px;height:30px;"/></div>');
           $div.css({'left':x+'px', 'top': y+'px'});
           $div.click(function() {
-            globalMap.ui.centerOnElement($("#"+spos+" .systemPoint"));
+            globalMap.centerOnEntity(spos, EntitySystem.prototype.TYPE, false, false);
+            //globalMap.ui.centerOnElement($("#"+spos+" .systemPoint"), false, true);
           });
           $('body').append($div);
         }
@@ -144,17 +145,20 @@ var MapUi = function(mapContainer, viewport, tools) {
     }
   };  
   
-  MapUi.prototype.centerOnElement = function($element, zoom) {
+  MapUi.prototype.centerOnElement = function($element, zoom, infobox) {
     if($element.length > 0) {
       //this.applyZoomOnMap();
       this.__zoomTo(zoom);    
-      // TODO : corriger en cas d'affichage de la popin
       var left = parseFloat($element.css('left'));
       var top = parseFloat($element.css('top'));      
       var vleft = (this.viewport.width()/2)/zoom;
       var vtop = (this.viewport.height()/2)/zoom;
       var wleft = (parseFloat($element.css('width'))/2);
       var htop = (parseFloat($element.css('height'))/2);
+      
+      if(infobox) {
+        vleft *= 0.7; // TODO : ne pas utiliser de valeurs fixes
+      }
       
       // TODO : ne pas utiliser scrollTO
       this.__scrollTo(left-vleft+wleft, top-vtop+htop);
@@ -242,6 +246,10 @@ var MapUi = function(mapContainer, viewport, tools) {
       this.mapRoot.addClass('zoomOnSystem');
     } 
   };
+  
+	MapUi.prototype.getInfoBox = function() {
+    return $("."+InfoBoxUI.prototype.BOX_CLASS+":first");  
+  };   
   
   // Events
  

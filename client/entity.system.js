@@ -104,7 +104,7 @@ var EntitySystem = function(json) {
     htmlEl.click(function() { 
       var infoBox = new InfoBoxUI(me);
       infoBox.display();
-      globalMap.centerOnEntity(me.pos, EntitySystem.prototype.TYPE, me.known);
+      globalMap.centerOnEntity(me.pos, EntitySystem.prototype.TYPE, false, true);
     }); 
     if(this.known == true) {
 
@@ -117,7 +117,7 @@ var EntitySystem = function(json) {
   EntitySystem.prototype.Y_TO_PX = 10;
   EntitySystem.prototype.TYPE = 'system';
   EntitySystem.prototype.ZOOM_IN = 1.14;
-  EntitySystem.prototype.ZOOM_OUT = 0.44;
+  EntitySystem.prototype.ZOOM_OUT = 0.49;
   
 	this.init();	
 };

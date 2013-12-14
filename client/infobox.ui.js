@@ -5,9 +5,9 @@ var InfoBoxUI = function(entity) {
 
   var title;
   var entity;
-  var boxClass = 'popininfo';
 
   InfoBoxUI.prototype.display = function() {
+    var boxClass = InfoBoxUI.prototype.BOX_CLASS;
     $.colorbox({html:this.__getHtmlForEntity(this.entity), title:this.title, className:boxClass, width:'40%', height:'90%', fixed:true, right:'5%'});
     $('.'+boxClass).addClass('loading');
     setTimeout(function() {
@@ -35,8 +35,9 @@ var InfoBoxUI = function(entity) {
     this.entity = entity;
     this.title = this.__getTitleForEntity();
 		this.init = function() {};
-	}; 	
+	}; 	  
   
+  InfoBoxUI.prototype.BOX_CLASS = 'popininfo';
   
 	this.init();	
 };
