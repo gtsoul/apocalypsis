@@ -53,7 +53,15 @@ var MapAjaxProxy = function(servicesContext) {
     var entityList = [];
     if(entityIds.length > 3) {
       var parentEntity = this.getParentEntity(curEntityId);
-      console.log(parentEntity);
+      if (parentEntity == undefined) {
+        console.error('Parent is undefined');
+      } else if(parentEntity.type == EntitySystem.prototype.TYPE) {
+        entityList = parentEntity.coords;
+      } else if(parentEntity.type == EntityCoords.prototype.TYPE) {
+        entityList = parentEntity.planets;
+      } else {
+        console.error('Unknown parent type '+parentEntity.type);
+      }
     } else {
       entityList = this.sSystems;
     }

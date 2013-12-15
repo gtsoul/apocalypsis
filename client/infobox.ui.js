@@ -35,7 +35,7 @@ var InfoBoxUI = function(entity) {
     if(this.entity.type == EntitySystem.prototype.TYPE) {
       return "Système "+this.entity.pos;
     } else if(this.entity.type == EntityCoords.prototype.TYPE) {
-      return "Coordonnées "+this.entity.pos;       
+      return "Coords "+this.entity.pos;       
     } else if(this.entity.type == EntityPlanet.prototype.TYPE) {
       return this.entity.name;  
     }   
@@ -46,7 +46,7 @@ var InfoBoxUI = function(entity) {
     htmlEl.find('#cboxTitle .prevEntity').click(function() { 
       var prevEntity = globalMap.getPrevEntity($(this).attr('curPos'));
       var type = $(this).attr('type');
-      if(prevEntity != undefined && type != undefined) {
+      if(prevEntity != undefined) {
         var infoBox = new InfoBoxUI(prevEntity);
         infoBox.display();
         globalMap.centerOnEntity(prevEntity.pos, type, false, true);
@@ -55,7 +55,7 @@ var InfoBoxUI = function(entity) {
     htmlEl.find('#cboxTitle .nextEntity').click(function() { 
       var nextEntity = globalMap.getNextEntity($(this).attr('curPos'));
       var type = $(this).attr('type');
-      if(nextEntity != undefined && type != undefined) {
+      if(nextEntity != undefined) {
         var infoBox = new InfoBoxUI(nextEntity);
         infoBox.display();
         globalMap.centerOnEntity(nextEntity.pos, type, false, true);
