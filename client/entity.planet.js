@@ -27,7 +27,7 @@ var EntityPlanet = function(json, parent) {
     return $planet;
   };    
   
-  EntityPlanet.prototype.__clickHandler = function(htmlEl) {
+  EntityPlanet.prototype.__clickHandler = function() {
     var infoBox = new InfoBoxUI(this);
     infoBox.display();
     globalMap.centerOnEntity(this.pos, EntityPlanet.prototype.TYPE, true, true);
@@ -91,20 +91,24 @@ var EntityPc = function(json, parent) {
   EntityPc.prototype.getHtmlPc = function () {
     var $pc = $('<div class="coordPoint pc nozoom" style="width:'+EntityPc.prototype.WIDTH_PX+'px;height:'+EntityPc.prototype.HEIGHT_PX+'px;"/>');
     var $pcImg = $('<img class="coordPointImg" style="width:'+EntityPc.prototype.WIDTH_PX+'px;height:'+EntityPc.prototype.HEIGHT_PX+'px;"/>');
+    var $pcOverlay = $('<div class="overlay"/>');
     $pcImg.attr('src', this.image);
     $pc.css('left', Math.round(this.x + this.width/2 - EntityPc.prototype.WIDTH_PX/2)+'px');
     $pc.css('top', Math.round(this.y + this.height/2 - EntityPc.prototype.HEIGHT_PX/2)+'px');
     $pc.append($pcImg);
+    $pc.append($pcOverlay);
     return $pc;
   };
 
   EntityPc.prototype.getHtmlExt = function () {
     var $pc = $('<div class="coordPoint extended nozoom" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     var $pcImg = $('<img class="coordPointImg" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
+    var $pcOverlay = $('<div class="overlay"/>');
     $pcImg.attr('src', this.image);
     $pc.css('left', Math.round(this.x + this.width/2 - EntityCoords.prototype.WIDTH_PX_DEFAULT/2)+'px');
     $pc.css('top', Math.round(this.y + this.height/2 - EntityCoords.prototype.HEIGHT_PX_DEFAULT/2)+'px');
     $pc.append($pcImg);    
+    $pc.append($pcOverlay);    
     return $pc;
   };    
   
@@ -208,9 +212,15 @@ var EntityCoords = function(json, parent) {
     htmlEl.find('.coordPoint.pc').click(function() {
       var pc = globalMap.getEntity($(this).parent().attr('id'));
       if(pc != undefined) {
-        pc.__clickHandler();
+        pc.__clickHandler(true);
       }
     }); 
+    htmlEl.find('.coordPoint.extended').click(function() {
+      var pc = globalMap.getEntity($(this).parent().attr('id'));
+      if(pc != undefined) {
+        pc.__clickHandler(false);
+      }
+    });     
     htmlEl.find('.planets .planet').click(function() {
       var planet = globalMap.getEntity($(this).attr('id'));
       if(planet != undefined) {
@@ -219,10 +229,10 @@ var EntityCoords = function(json, parent) {
     });
   };    
   
-  EntityCoords.prototype.__clickHandler = function(htmlEl) {
+  EntityCoords.prototype.__clickHandler = function(zoomIn) {
     var infoBox = new InfoBoxUI(this);
     infoBox.display();
-    globalMap.centerOnEntity(this.pos, EntityCoords.prototype.TYPE, this.known, true);
+    globalMap.centerOnEntity(this.pos, EntityCoords.prototype.TYPE, (this.known && zoomIn), true);
   };    
   
   EntityCoords.prototype.getPlanet = function(planetId) {
@@ -265,6 +275,7 @@ var EntityCoords = function(json, parent) {
   EntityCoords.prototype.WIDTH_PX_DEFAULT = 150;
   EntityCoords.prototype.HEIGHT_PX_DEFAULT = 110;  
   EntityCoords.prototype.ZOOM_IN = 1.7;  
+  EntityCoords.prototype.ZOOM_OUT = 0.88;  
   EntityCoords.prototype.TYPE = 'coords';
   
 	this.init();	

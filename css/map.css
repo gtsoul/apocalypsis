@@ -113,7 +113,7 @@ html, body {
   top: 234px;
   z-index: 5000;
   pointer-events: none;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 .reperes {
@@ -235,9 +235,29 @@ span.ennemy, div.ennemy {
   width: 80px;
 }
 
+#map  .coords .coordPoint:hover .overlay, #map  .coords.active .coordPoint .overlay {  
+  background: url('../images/apocalypsis/planet_radar.png') no-repeat 0 0 transparent;  
+  opacity: 0.7;
+  -webkit-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
+     -moz-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
+      -ms-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
+       -o-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
+          animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
+  height: 80px;
+  left: -15px;
+  position: relative;
+  top: -68px;
+  margin-bottom: -80px;
+  width: 80px;          
+}
+
+#map  .coords .coordPoint.extended:hover .overlay, #map  .coords.active .coordPoint.extended .overlay {  
+  left: 35px;
+  top: -97px;
+}
+
 #map  .system .systemPoint:hover .overlay, #map  .system.active .systemPoint .overlay,
-#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {
-  
+#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {  
   background: url('../images/apocalypsis/system_radar.png') no-repeat 0 0 transparent;  
   opacity: 0.7;
   -webkit-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
