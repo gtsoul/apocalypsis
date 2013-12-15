@@ -103,7 +103,7 @@ var MapUi = function(mapContainer, viewport, tools) {
         var y = parseFloat($(this).css('top')) + dy;
         var spos = $(this).parent().attr('id');
         if(xmin <= x && x <= xmax && ymin <= y && y <= ymax) {
-          console.log(spos+' est visible'); // TODO : rectifier les formules
+          //console.log(spos+' est visible'); // TODO : rectifier les formules
         } else {
           if(xmin > x) {
             x = 0;

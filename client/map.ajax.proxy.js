@@ -15,11 +15,13 @@ var MapAjaxProxy = function(servicesContext) {
     var entityIds = entityId.split('_');
     if(entityIds.length >= 3) {
       var system = this.getSystem(entityIds[0], entityIds[1], entityIds[2]);
+      // TODO : ajax load if unloaded
       if(system != undefined) {
         if(entityIds.length == 3) {
           return system;
         } else {
           var coord = system.getCoord(entityIds[3]);
+          // TODO : ajax load if unloaded
           if(coord != undefined) {
             if(entityIds.length == 4) {
               return coord;
@@ -35,6 +37,56 @@ var MapAjaxProxy = function(servicesContext) {
     }
     return undefined;
   };  
+  
+  MapAjaxProxy.prototype.getParentEntity = function (entityId) {
+    var entityIds = entityId.split('_');
+    if(entityIds.length > 3) {
+      entityIds.pop();
+      var parentEntityId = entityIds.join('_');
+      return this.getEntity(parentEntityId);
+    }
+    return undefined;
+  };
+  
+  MapAjaxProxy.prototype.getPrevNextEntityId = function (curEntityId, prevOrNext) {
+    var entityIds = curEntityId.split('_');
+    var entityList = [];
+    if(entityIds.length > 3) {
+      var parentEntity = this.getParentEntity(curEntityId);
+      console.log(parentEntity);
+    } else {
+      entityList = this.sSystems;
+    }
+    var tmpEntity;
+    for(var entityId in entityList) {
+      if(prevOrNext == 'prev') {
+        if(entityId == curEntityId) {
+          if(tmpEntity == undefined) {
+            // get the last one
+            for(var entityId in entityList) {
+              tmpEntity = entityId;
+            }
+          }
+          return tmpEntity;           
+        } else {
+          tmpEntity = entityId;
+        }
+      } else if(prevOrNext == 'next') {
+        if(tmpEntity != undefined) {
+          return entityId;
+        } else if(entityId == curEntityId) {
+          tmpEntity = entityId;
+        }
+      }
+    }
+    if(prevOrNext == 'next') {
+      // get the first one
+      for(var entityId in entityList) {
+        return entityId;
+      }      
+    }
+    return undefined;
+  }; 
   
   MapAjaxProxy.prototype.getCoordKnowledge = function (coordIt, callback) {
     var json = this.__ajaxGet('universe-knowledge', 
