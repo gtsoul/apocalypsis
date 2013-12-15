@@ -14,13 +14,13 @@
 }
 
 #backgroundImage {
-  background: url('../images/apocalypsis/background2.jpg') repeat 0 0 black;
+  background: url('../images/apocalypsis/background7.jpg') repeat 0 0 black;
   position: relative;
   pointer-events: none; 
   /*left: -300px;
   top: -300px;*/
-  opacity:0.4;
-  filter:alpha(opacity=40);
+  opacity:0.2;
+  filter:alpha(opacity=20);
 }
 
 #backgroundOpacity {
@@ -131,6 +131,16 @@ html, body {
           animation: blip-function 0.5s linear infinite; 
 }
 
+span.friend, div.friend {
+  color: #5593BD;
+}
+span.neutral, div.neutral {
+  color: #FFA500;
+}
+span.ennemy, div.ennemy {
+  color: #FF3838;
+}
+
 /*-------- Map elements -------------*/
 
 #map .planets .planet, #map  .coords .coordPoint, #map  .sector .sectorPoint, #map  .system .systemPoint   {
@@ -146,8 +156,8 @@ html, body {
 
 #map  .system .sun {
   pointer-events: none;
-  opacity:0.7;
-  filter:alpha(opacity=70);
+  opacity:0.8;
+  filter:alpha(opacity=80);
 }
 
 #map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars , #map  .mapRoot.zoomOnPlanet #stars{
@@ -273,7 +283,7 @@ html, body {
 #map .planet .name {
   /*padding-top: 10px;*/
   font-size: 9px;
-  color: #ccc;
+  /*color: #ccc;*/
 }
 
 #map .planet:hover .name, #map .planet.active .name  {
@@ -322,6 +332,13 @@ html, body {
         -ms-animation: travel-function 5s linear infinite; 
          -o-animation: travel-function 5s linear infinite; 
             animation: travel-function 5s linear infinite; */
+}
+
+.coords .coordPoint.extended .fleetsNb {
+  position:relative;
+  top:-63px;
+  text-align:center;
+  font-size: 14px;
 }
 
 /*-------- Colorbox ------------*/

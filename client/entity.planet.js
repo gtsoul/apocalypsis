@@ -8,7 +8,13 @@ var EntityPlanet = function(json, parent) {
   EntityPlanet.prototype.getHtml = function () {
     var $planet = $('<div class="planet nozoom" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     var $planetImg = $('<img class="planetImg" style="width:'+EntityPlanet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityPlanet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
-    var $planetName = $('<div class="name">'+this.name+'</div>');
+    var friendlyClass = 'neutral';
+    if(this.capId == globalCaptainId) {
+      friendlyClass = 'friend';
+    } else if(this.capId != undefined) {
+      friendlyClass = 'ennemy';
+    }
+    var $planetName = $('<div class="name '+friendlyClass+'">'+this.name+'</div>');
     var $planetOverlay = $('<div class="overlay"/>');
     $planet.attr('id', this.pos);
     $planetImg.attr('src', this.image);
@@ -16,9 +22,7 @@ var EntityPlanet = function(json, parent) {
     $planet.css('top', Math.round(this.y + this.height/2 - 25)+'px');
     $planet.append($planetImg);
     $planet.append($planetOverlay);
-    $planet.append($planetName);
-
-    
+    $planet.append($planetName);   
 
     return $planet;
   };    
@@ -35,6 +39,10 @@ var EntityPlanet = function(json, parent) {
     EntitySpaceElement.prototype.__loadJson.apply(this, [json, parent]);
     this.type = EntityPlanet.prototype.TYPE;
     this.name = json.name;
+    if(json.owner != undefined && json.owner.cap_id != undefined) {
+      this.capId = json.owner.cap_id;
+      this.capName = json.owner.cap_name;
+    }
 		this.init = function() {};
 	}; 
   
@@ -162,7 +170,7 @@ var EntityCoords = function(json, parent) {
       }
       if((nbEnnemyFleets+nbFriendFleets) > 0) {
         $coords.append($fleet.getHtmlIdle(nbEnnemyFleets, nbFriendFleets));
-        //$coordPointExt.append($fleet.getHtmlExt(nbEnnemyFleets, nbFriendFleets));
+        $coordPointExt.append($fleet.getHtmlPcExt(nbEnnemyFleets, nbFriendFleets));
       }  
     }
  

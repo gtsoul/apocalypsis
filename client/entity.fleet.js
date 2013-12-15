@@ -62,6 +62,18 @@ var EntityFleet = function(json, parent) {
     return $fleets;
   }
   
+  EntityFleet.prototype.getHtmlPcExt = function (nbEnnemyFleets, nbFriendFleets) { 
+    var $fleets = $('<div class="fleetsNb"/>'); 
+    var $friend = $('<span class="friend"/>');
+    $friend.html(nbFriendFleets);    
+    var $ennemy = $('<span class="ennemy"/>');
+    $ennemy.html(nbEnnemyFleets);    
+    $fleets.append($friend);
+    $fleets.append(" / ");
+    $fleets.append($ennemy);    
+    return $fleets;
+  };
+  
   EntityFleet.prototype.WIDTH_PX_DEFAULT = 10;
   EntityFleet.prototype.HEIGHT_PX_DEFAULT = 10;  
   EntityFleet.prototype.INTERVAL_PX = 8;
