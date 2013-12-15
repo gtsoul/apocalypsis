@@ -218,7 +218,8 @@ span.ennemy, div.ennemy {
   border-radius: 30px;
 }
 
-#map .planet:hover .overlay, #map .planet.active .overlay {
+#map .planet:hover .overlay, #map .planet.active .overlay, 
+  #map  .coords .coordPoint:hover .overlay, #map  .coords.active .coordPoint .overlay {
   background: url('../images/apocalypsis/planet_radar.png') no-repeat 0 0 transparent;  
   opacity:0.7;
   filter:alpha(opacity=70);
@@ -235,20 +236,14 @@ span.ennemy, div.ennemy {
   width: 80px;
 }
 
-#map  .coords .coordPoint:hover .overlay, #map  .coords.active .coordPoint .overlay {  
-  background: url('../images/apocalypsis/planet_radar.png') no-repeat 0 0 transparent;  
-  opacity: 0.7;
-  -webkit-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
-     -moz-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
-      -ms-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
-       -o-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
-          animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
-  height: 80px;
-  left: -15px;
-  position: relative;
-  top: -68px;
-  margin-bottom: -80px;
-  width: 80px;          
+#map .planet.unknown:hover .overlay, #map .planet.unknown.active .overlay, 
+  #map  .coords.unknown .coordPoint:hover .overlay, #map  .coords.unknown.active .coordPoint .overlay {
+  background-image: url('../images/apocalypsis/planet_radar_unknown.png');  
+}
+
+#map .planet.unloaded:hover .overlay, #map .planet.unloaded.active .overlay, 
+  #map  .coords.unloaded .coordPoint:hover .overlay, #map  .coords.unloaded.active .coordPoint .overlay {
+  background-image: url('../images/apocalypsis/planet_radar_unloaded.png');  
 }
 
 #map  .coords .coordPoint.extended:hover .overlay, #map  .coords.active .coordPoint.extended .overlay {  
@@ -296,6 +291,14 @@ span.ennemy, div.ennemy {
   border-radius: 20px;
 }
 
+#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {
+  background-image: url('../images/apocalypsis/system_radar_unknown.png');  
+}
+
+#map  .system.unloaded .systemPoint:hover .overlay, #map  .system.unloaded.active .systemPoint .overlay {
+  background-image: url('../images/apocalypsis/system_radar_unloaded.png');  
+}
+
 #map .planet:hover .planetImg, #map .coordPoint:hover .coordPointImg, #map .systemPoint:hover .systemPointImg {
   /*box-shadow: 0px 0px 5px 2px #ccc;*/
 }
@@ -314,9 +317,9 @@ span.ennemy, div.ennemy {
   box-shadow: 0px 0px 5px 2px red;
 }*/
 
-#map .coords.unloaded .coordPoint .coordPointImg, #map .system.unloaded .systemPoint .systemPointImg {
+/*#map .coords.unloaded .coordPoint .coordPointImg, #map .system.unloaded .systemPoint .systemPointImg {
   box-shadow: 0px 0px 5px 2px orange;
-}
+}*/
 
 /*-------- Lines -------------*/
 

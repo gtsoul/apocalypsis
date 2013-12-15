@@ -61,7 +61,8 @@ var MapUi = function(mapContainer, viewport, tools) {
   MapUi.prototype.__scrollTo = function(left, top) {
     zoom = getScroller().getValues().zoom;
     if(left != undefined && top != undefined) {
-      getScroller().scrollTo(zoom*left, zoom*top);
+      getScroller().scrollTo(zoom*left, zoom*top, true);
+      // PERFORMANCE : set animate to false
     }
   };
   
