@@ -195,16 +195,18 @@ var EntityCoords = function(json, parent) {
   
   EntityCoords.prototype.__addLoadEvent = function(htmlEl) {
     if(this.known == true) {
-      htmlEl.mouseover(function() {
+      // PERFORMANCE : put this on htmlEl.mouseover(function() {
+      //htmlEl.mouseover(function() {
         if(!$(this).hasClass('unknown')) {
-          var coord = globalMap.getEntity($(this).attr('id'));
+          //var coord = globalMap.getEntity($(this).attr('id'));
+          var coord = globalMap.getEntity(this.pos);
           if(coord != undefined && coord.planets == undefined && coord.fleets == undefined && coord.known == true) {
             coord.planets = new Array();
             coord.fleets = new Array();
             globalMap.refreshCoord(coord);      
           }
         }
-      });
+      //});
     }
   };  
 
