@@ -14,13 +14,13 @@
 }
 
 #backgroundImage {
-  background: url('../images/apocalypsis/background2.jpg') repeat 0 0 black;
+  background: url('../images/apocalypsis/background7.jpg') repeat 0 0 black;
   position: relative;
   pointer-events: none; 
   /*left: -300px;
   top: -300px;*/
-  opacity:0.4;
-  filter:alpha(opacity=40);
+  opacity:0.2;
+  filter:alpha(opacity=20);
 }
 
 #backgroundOpacity {
@@ -113,7 +113,7 @@ html, body {
   top: 234px;
   z-index: 5000;
   pointer-events: none;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 .reperes {
@@ -131,6 +131,16 @@ html, body {
           animation: blip-function 0.5s linear infinite; 
 }
 
+span.friend, div.friend {
+  color: #5593BD;
+}
+span.neutral, div.neutral {
+  color: #FFA500;
+}
+span.ennemy, div.ennemy {
+  color: #FF3838;
+}
+
 /*-------- Map elements -------------*/
 
 #map .planets .planet, #map  .coords .coordPoint, #map  .sector .sectorPoint, #map  .system .systemPoint   {
@@ -146,6 +156,8 @@ html, body {
 
 #map  .system .sun {
   pointer-events: none;
+  opacity:0.8;
+  filter:alpha(opacity=80);
 }
 
 #map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars , #map  .mapRoot.zoomOnPlanet #stars{
@@ -206,9 +218,11 @@ html, body {
   border-radius: 30px;
 }
 
-#map .planet:hover .overlay, #map .planet.active .overlay {
+#map .planet:hover .overlay, #map .planet.active .overlay, 
+  #map  .coords .coordPoint:hover .overlay, #map  .coords.active .coordPoint .overlay {
   background: url('../images/apocalypsis/planet_radar.png') no-repeat 0 0 transparent;  
-  opacity: 0.7;
+  opacity:0.7;
+  filter:alpha(opacity=70);
   -webkit-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
      -moz-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
       -ms-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
@@ -222,9 +236,23 @@ html, body {
   width: 80px;
 }
 
+#map .planet.unknown:hover .overlay, #map .planet.unknown.active .overlay, 
+  #map  .coords.unknown .coordPoint:hover .overlay, #map  .coords.unknown.active .coordPoint .overlay {
+  background-image: url('../images/apocalypsis/planet_radar_unknown.png');  
+}
+
+#map .planet.unloaded:hover .overlay, #map .planet.unloaded.active .overlay, 
+  #map  .coords.unloaded .coordPoint:hover .overlay, #map  .coords.unloaded.active .coordPoint .overlay {
+  background-image: url('../images/apocalypsis/planet_radar_unloaded.png');  
+}
+
+#map  .coords .coordPoint.extended:hover .overlay, #map  .coords.active .coordPoint.extended .overlay {  
+  left: 35px;
+  top: -97px;
+}
+
 #map  .system .systemPoint:hover .overlay, #map  .system.active .systemPoint .overlay,
-#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {
-  
+#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {  
   background: url('../images/apocalypsis/system_radar.png') no-repeat 0 0 transparent;  
   opacity: 0.7;
   -webkit-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
@@ -263,6 +291,14 @@ html, body {
   border-radius: 20px;
 }
 
+#map  .system.unknown .systemPoint:hover .overlay, #map  .system.unknown.active .systemPoint .overlay {
+  background-image: url('../images/apocalypsis/system_radar_unknown.png');  
+}
+
+#map  .system.unloaded .systemPoint:hover .overlay, #map  .system.unloaded.active .systemPoint .overlay {
+  background-image: url('../images/apocalypsis/system_radar_unloaded.png');  
+}
+
 #map .planet:hover .planetImg, #map .coordPoint:hover .coordPointImg, #map .systemPoint:hover .systemPointImg {
   /*box-shadow: 0px 0px 5px 2px #ccc;*/
 }
@@ -270,7 +306,7 @@ html, body {
 #map .planet .name {
   /*padding-top: 10px;*/
   font-size: 9px;
-  color: #ccc;
+  /*color: #ccc;*/
 }
 
 #map .planet:hover .name, #map .planet.active .name  {
@@ -281,9 +317,9 @@ html, body {
   box-shadow: 0px 0px 5px 2px red;
 }*/
 
-#map .coords.unloaded .coordPoint .coordPointImg, #map .system.unloaded .systemPoint .systemPointImg {
+/*#map .coords.unloaded .coordPoint .coordPointImg, #map .system.unloaded .systemPoint .systemPointImg {
   box-shadow: 0px 0px 5px 2px orange;
-}
+}*/
 
 /*-------- Lines -------------*/
 
@@ -300,12 +336,32 @@ html, body {
 }
 
 /*-------- Fleets -------------*/
+.fleets {
+  /*-webkit-animation: rotating-function 5s linear infinite; 
+       -moz-animation: rotating-function 5s linear infinite; 
+        -ms-animation: rotating-function 5s linear infinite; 
+         -o-animation: rotating-function 5s linear infinite; 
+            animation: rotating-function 5s linear infinite; */ 
+}
 .fleets .fleet {
+  width: 10px;
+  height: 10px;
   position: absolute;
-  /*rotation-point:50% 50%;*/
 }
 .fleetStatic {
   pointer-events: none;
+  /*-webkit-animation: travel-function 5s linear infinite; 
+       -moz-animation: travel-function 5s linear infinite; 
+        -ms-animation: travel-function 5s linear infinite; 
+         -o-animation: travel-function 5s linear infinite; 
+            animation: travel-function 5s linear infinite; */
+}
+
+.coords .coordPoint.extended .fleetsNb {
+  position:relative;
+  top:-63px;
+  text-align:center;
+  font-size: 14px;
 }
 
 /*-------- Colorbox ------------*/
@@ -357,8 +413,31 @@ html, body {
 #cboxLoadingOverlay{ 
   display:none;
 }
+
 #cboxLoadingGraphic{ 
   display:none;
+}
+
+#colorbox.popininfo .prevEntity, #colorbox.popininfo .nextEntity {
+  cursor: pointer;
+  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+}
+
+#colorbox.popininfo .prevEntity:hover, #colorbox.popininfo .nextEntity:hover {
+  -moz-box-shadow: inset 0px 0px 10px 2px #FFA500;
+  -webkit-box-shadow: inset 0px 0px 10px 2px #FFA500;
+  -o-box-shadow: inset 0px 0px 10px 2px #FFA500;
+  box-shadow: inset 0px 0px 10px 2px #FFA500;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#FFA500, Direction=NaN, Strength=10);
+}
+
+#colorbox.popininfo #cboxTitle .title {
+  position: relative;
+  top: -8px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 /*-------- Animations ------------*/
@@ -473,3 +552,121 @@ html, body {
     opacity: 0.7;
   }
 }
+
+@-webkit-keyframes travel-function {
+  0% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }
+  10% {
+    margin-left: -30px;
+    margin-top: 15px;
+  }  
+  25% {
+    margin-left: 0px;
+    margin-top: 25px;
+  }  
+  40% {
+    margin-left: 30px;
+    margin-top: 15px;
+  }  
+  50% {
+    margin-left: 40px;
+    margin-top: 0px;
+  }
+  60% {
+    margin-left: 30px;
+    margin-top: -15px;
+  }   
+  75% {
+    margin-left: 0px;
+    margin-top: -25px;
+  }  
+  90% {
+    margin-left: -30px;
+    margin-top: -15px;
+  }   
+  100% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }  
+}
+
+@-moz-keyframes travel-function {
+  0% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }
+  10% {
+    margin-left: -30px;
+    margin-top: 15px;
+  }  
+  25% {
+    margin-left: 0px;
+    margin-top: 25px;
+  }  
+  40% {
+    margin-left: 30px;
+    margin-top: 15px;
+  }  
+  50% {
+    margin-left: 40px;
+    margin-top: 0px;
+  }
+  60% {
+    margin-left: 30px;
+    margin-top: -15px;
+  }   
+  75% {
+    margin-left: 0px;
+    margin-top: -25px;
+  }  
+  90% {
+    margin-left: -30px;
+    margin-top: -15px;
+  }   
+  100% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }  
+}
+
+@-ms-keyframes travel-function {
+  0% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }
+  10% {
+    margin-left: -30px;
+    margin-top: 15px;
+  }  
+  25% {
+    margin-left: 0px;
+    margin-top: 25px;
+  }  
+  40% {
+    margin-left: 30px;
+    margin-top: 15px;
+  }  
+  50% {
+    margin-left: 40px;
+    margin-top: 0px;
+  }
+  60% {
+    margin-left: 30px;
+    margin-top: -15px;
+  }   
+  75% {
+    margin-left: 0px;
+    margin-top: -25px;
+  }  
+  90% {
+    margin-left: -30px;
+    margin-top: -15px;
+  }   
+  100% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }  
+}
+

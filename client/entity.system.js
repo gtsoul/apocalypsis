@@ -14,6 +14,7 @@ var EntitySystem = function(json) {
   
 	this.init = function() { 
     this.__loadJson(json);
+    this.type = EntitySystem.prototype.TYPE;
 		this.init = function() {};
 	}; 
   
@@ -106,9 +107,6 @@ var EntitySystem = function(json) {
       infoBox.display();
       globalMap.centerOnEntity(me.pos, EntitySystem.prototype.TYPE, false, true);
     }); 
-    if(this.known == true) {
-
-    }
   };  
   
   EntitySystem.prototype.WIDTH_PX = 110;

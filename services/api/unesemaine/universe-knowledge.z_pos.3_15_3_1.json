@@ -1,1 +1,93 @@
-{"coord":{"pos":"3_15_3_1","capAbsoluteX":16,"capAbsoluteY":40,"absoluteWidth":16,"absoluteHeight":16,"subElements":{"planets":[{"pos":"3_15_3_1_1","capAbsoluteX":25,"capAbsoluteY":48,"absoluteWidth":4,"absoluteHeight":4,"owner":{"cap_id":"2","cap_name":"brigands"},"name":"margoliasm","image":"\/images\/universe\/temperee_fg1.jpg"},{"pos":"3_15_3_1_2","capAbsoluteX":18,"capAbsoluteY":40,"absoluteWidth":4,"absoluteHeight":4,"owner":{"cap_id":"3279","cap_name":"cdt. Yashory"},"name":"Sareos","image":"\/images\/universe\/luxuriante_fg1.jpg"},{"pos":"3_15_3_1_3","capAbsoluteX":25,"capAbsoluteY":40,"absoluteWidth":4,"absoluteHeight":4,"owner":{"cap_id":"3279","cap_name":"cdt. Yashory"},"name":"Noreos","image":"\/images\/universe\/luxuriante_fg1.jpg"},{"pos":"3_15_3_1_4","capAbsoluteX":16,"capAbsoluteY":47,"absoluteWidth":4,"absoluteHeight":4,"owner":{"cap_id":"3279","cap_name":"cdt. Yashory"},"name":"ttuemanee","image":"\/images\/universe\/luxuriante_fg1.jpg"}],"pc":{"capAbsoluteX":22,"capAbsoluteY":44,"absoluteWidth":4,"absoluteHeight":4,"image":"\/images\/universe\/coordonnee.jpg"}},"fleets":[{"cap_id":2,"cap_name":"brigands"},{"cap_id":3256,"cap_name":"cdt. Hrothgar"},{"cap_id":3279,"cap_name":"cdt. Yashory"},{"cap_id":3291,"cap_name":"cdt. Femtos"}]},"cap":{"minVisiblePosLevel":3,"absoluteGrid":{"width":512,"height":512}}}
+{
+	"coord": {
+		"pos": "3_15_3_1",
+		"capAbsoluteX": 16,
+		"capAbsoluteY": 40,
+		"absoluteWidth": 16,
+		"absoluteHeight": 16,
+		"subElements": {
+			"planets": [{
+				"pos": "3_15_3_1_1",
+				"capAbsoluteX": 25,
+				"capAbsoluteY": 48,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "2",
+					"cap_name": "brigands"
+				},
+				"name": "margoliasm",
+				"image": "\/images\/universe\/temperee_fg1.jpg"
+			},
+			{
+				"pos": "3_15_3_1_2",
+				"capAbsoluteX": 18,
+				"capAbsoluteY": 40,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "3279",
+					"cap_name": "cdt. Yashory"
+				},
+				"name": "Sareos",
+				"image": "\/images\/universe\/luxuriante_fg1.jpg"
+			},
+			{
+				"pos": "3_15_3_1_3",
+				"capAbsoluteX": 25,
+				"capAbsoluteY": 40,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "3279",
+					"cap_name": "cdt. Yashory"
+				},
+				"name": "Noreos",
+				"image": "\/images\/universe\/luxuriante_fg1.jpg"
+			},
+			{
+				"pos": "3_15_3_1_4",
+				"capAbsoluteX": 16,
+				"capAbsoluteY": 47,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"owner": {
+					"cap_id": "3279",
+					"cap_name": "cdt. Yashory"
+				},
+				"name": "ttuemanee",
+				"image": "\/images\/universe\/luxuriante_fg1.jpg"
+			}],
+			"pc": {
+				"capAbsoluteX": 22,
+				"capAbsoluteY": 44,
+				"absoluteWidth": 4,
+				"absoluteHeight": 4,
+				"image": "\/images\/universe\/coordonnee.jpg"
+			}
+		},
+		"fleets": [{
+			"cap_id": 2,
+			"cap_name": "brigands"
+		},
+		{
+			"cap_id": 3256,
+			"cap_name": "cdt. Hrothgar"
+		},
+		{
+			"cap_id": 3279,
+			"cap_name": "cdt. Yashory"
+		},
+		{
+			"cap_id": 3291,
+			"cap_name": "cdt. Femtos"
+		}]
+	},
+	"cap": {
+		"minVisiblePosLevel": 3,
+		"absoluteGrid": {
+			"width": 512,
+			"height": 512
+		}
+	}
+}

@@ -68,6 +68,18 @@ var Map = function(mapUi, mapAjaxProxy) {
   Map.prototype.getEntity = function (entityId) {
     return this.proxy.getEntity(entityId);
   }; 
+  
+  Map.prototype.getNextEntity = function (entityId) {
+    var nextEntityId = this.proxy.getPrevNextEntityId(entityId, 'next');
+    //console.log(entityId+' => '+nextEntityId);
+    return this.getEntity(nextEntityId);
+  };
+  
+  Map.prototype.getPrevEntity = function (entityId) {
+    var prevEntityId = this.proxy.getPrevNextEntityId(entityId, 'prev');
+    //console.log(entityId+' <= '+prevEntityId);
+    return this.getEntity(prevEntityId);
+  };  
 
   Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => décaler sur la gauche
     // TODO : check if element is loaded and load it then
@@ -78,7 +90,7 @@ var Map = function(mapUi, mapAjaxProxy) {
         this.ui.centerOnElement($('#'+entityPos+'.system .systemPoint'), (zoomIn ? EntitySystem.prototype.ZOOM_IN : EntitySystem.prototype.ZOOM_OUT), infoBox);
         $('#'+entityPos+'.system').addClass('active');        
       } else if(entityType == EntityCoords.prototype.TYPE) {
-        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), EntityCoords.prototype.ZOOM_IN, infoBox);
+        this.ui.centerOnElement($('#'+entityPos+'.coords .coordPoint'), (zoomIn ? EntityCoords.prototype.ZOOM_IN : EntityCoords.prototype.ZOOM_OUT), infoBox);
         $('#'+entityPos+'.coords').addClass('active');        
       } else if(entityType == EntityPlanet.prototype.TYPE) {
         this.ui.centerOnElement($('#'+entityPos+'.planet'), EntityPlanet.prototype.ZOOM_OUT, infoBox);
