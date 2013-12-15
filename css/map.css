@@ -146,6 +146,8 @@ html, body {
 
 #map  .system .sun {
   pointer-events: none;
+  opacity:0.7;
+  filter:alpha(opacity=70);
 }
 
 #map  .mapRoot.zoomOnPlanet .coords .coordPoint.extended, #map .mapRoot .coords.unloaded .coordPoint.pc, #map  .mapRoot.zoomOnPlanet .system .systemPoint, #map  .mapRoot.zoomOnPlanet #svgRoot #stars , #map  .mapRoot.zoomOnPlanet #stars{
@@ -208,7 +210,8 @@ html, body {
 
 #map .planet:hover .overlay, #map .planet.active .overlay {
   background: url('../images/apocalypsis/planet_radar.png') no-repeat 0 0 transparent;  
-  opacity: 0.7;
+  opacity:0.7;
+  filter:alpha(opacity=70);
   -webkit-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
      -moz-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
       -ms-animation: pulsie-function 5s linear infinite, rotating-function 30s linear infinite; 
@@ -300,12 +303,25 @@ html, body {
 }
 
 /*-------- Fleets -------------*/
+.fleets {
+  /*-webkit-animation: rotating-function 5s linear infinite; 
+       -moz-animation: rotating-function 5s linear infinite; 
+        -ms-animation: rotating-function 5s linear infinite; 
+         -o-animation: rotating-function 5s linear infinite; 
+            animation: rotating-function 5s linear infinite; */ 
+}
 .fleets .fleet {
+  width: 10px;
+  height: 10px;
   position: absolute;
-  /*rotation-point:50% 50%;*/
 }
 .fleetStatic {
   pointer-events: none;
+  /*-webkit-animation: travel-function 5s linear infinite; 
+       -moz-animation: travel-function 5s linear infinite; 
+        -ms-animation: travel-function 5s linear infinite; 
+         -o-animation: travel-function 5s linear infinite; 
+            animation: travel-function 5s linear infinite; */
 }
 
 /*-------- Colorbox ------------*/
@@ -473,3 +489,121 @@ html, body {
     opacity: 0.7;
   }
 }
+
+@-webkit-keyframes travel-function {
+  0% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }
+  10% {
+    margin-left: -30px;
+    margin-top: 15px;
+  }  
+  25% {
+    margin-left: 0px;
+    margin-top: 25px;
+  }  
+  40% {
+    margin-left: 30px;
+    margin-top: 15px;
+  }  
+  50% {
+    margin-left: 40px;
+    margin-top: 0px;
+  }
+  60% {
+    margin-left: 30px;
+    margin-top: -15px;
+  }   
+  75% {
+    margin-left: 0px;
+    margin-top: -25px;
+  }  
+  90% {
+    margin-left: -30px;
+    margin-top: -15px;
+  }   
+  100% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }  
+}
+
+@-moz-keyframes travel-function {
+  0% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }
+  10% {
+    margin-left: -30px;
+    margin-top: 15px;
+  }  
+  25% {
+    margin-left: 0px;
+    margin-top: 25px;
+  }  
+  40% {
+    margin-left: 30px;
+    margin-top: 15px;
+  }  
+  50% {
+    margin-left: 40px;
+    margin-top: 0px;
+  }
+  60% {
+    margin-left: 30px;
+    margin-top: -15px;
+  }   
+  75% {
+    margin-left: 0px;
+    margin-top: -25px;
+  }  
+  90% {
+    margin-left: -30px;
+    margin-top: -15px;
+  }   
+  100% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }  
+}
+
+@-ms-keyframes travel-function {
+  0% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }
+  10% {
+    margin-left: -30px;
+    margin-top: 15px;
+  }  
+  25% {
+    margin-left: 0px;
+    margin-top: 25px;
+  }  
+  40% {
+    margin-left: 30px;
+    margin-top: 15px;
+  }  
+  50% {
+    margin-left: 40px;
+    margin-top: 0px;
+  }
+  60% {
+    margin-left: 30px;
+    margin-top: -15px;
+  }   
+  75% {
+    margin-left: 0px;
+    margin-top: -25px;
+  }  
+  90% {
+    margin-left: -30px;
+    margin-top: -15px;
+  }   
+  100% {
+    margin-left: -40px;
+    margin-top: 0px;
+  }  
+}
+

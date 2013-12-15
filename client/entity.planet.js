@@ -149,16 +149,21 @@ var EntityCoords = function(json, parent) {
     $coords.append($coordPointPc);   
       
     if(this.fleets != undefined) {
-      var nbFleets = 0;
+      var nbEnnemyFleets = 0;
+      var nbFriendFleets = 0;
       var $fleet;
       for(var fleetId in this.fleets) {
-        nbFleets++;
+        if(this.fleets[fleetId].captainId == globalCaptainId) {
+          nbFriendFleets++;
+        } else {
+          nbEnnemyFleets++;
+        }
         $fleet = this.fleets[fleetId];
       }
-      if(nbFleets > 0) {
-        $coords.append($fleet.getHtmlIdle(nbFleets));
-      }
-      $coordPointPc.attr('fleets', nbFleets); // TODO : remove      
+      if((nbEnnemyFleets+nbFriendFleets) > 0) {
+        $coords.append($fleet.getHtmlIdle(nbEnnemyFleets, nbFriendFleets));
+        //$coordPointExt.append($fleet.getHtmlExt(nbEnnemyFleets, nbFriendFleets));
+      }  
     }
  
     // planets    

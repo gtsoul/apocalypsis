@@ -21,51 +21,55 @@ var EntityFleet = function(json, parent) {
     this.spaceElement = parent;
     this.pos = this.spaceElement.pos+'_'+this.captainId;    
     this.strength = 100; // TODO : measure fleet strength
-    //this.image = 'images/fleet/fleet'+(Math.ceil(Math.random()*9))+'.png';
-    this.image = 'images/ship/ship_picto.png';
     this.state = EntityFleet.prototype.STATE_FLY;
   };
   
-  EntityFleet.prototype.getHtmlIdle = function (nbFleets) { 
-    nbFleetsLn = Math.min(16, Math.pow(nbFleets, 1/3));
+  EntityFleet.prototype.getHtmlIdle = function (nbEnnemyFleets, nbFriendFleets) { 
+    if(nbEnnemyFleets <= 3) {
+      nbFleetsLn = nbEnnemyFleets;
+    } else if(nbEnnemyFleets <= 50) {
+      nbFleetsLn = Math.max(3, Math.pow(nbEnnemyFleets, 1/2));
+    } else {
+      nbFleetsLn = Math.max(7, Math.pow(nbEnnemyFleets, 1/3));
+    }
+    nbFleetsLn = Math.min(20, nbFleetsLn);
+    nbFleetsLn += nbFriendFleets;
     var $fleets = $('<div class="fleets"/>'); 
     var $fleet = $('<img class="fleet nozoom fleetStatic" style="width:'+EntityFleet.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityFleet.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
-    $fleet.attr('src', this.image);
-    //var left = Math.round(this.spaceElement.x + this.spaceElement.width/2 - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
-    //var top = Math.round(this.spaceElement.y + this.spaceElement.height/2 - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);    
-    //var left = Math.round(this.spaceElement.x + this.spaceElement.width/2);// - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
-    //var top = Math.round(this.spaceElement.y + this.spaceElement.height/2);// - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);
+    $fleet.attr('src', EntityFleet.prototype.IMAGE_ENNEMY);
     var left = Math.round(this.spaceElement.x + this.spaceElement.width/2 - EntityFleet.prototype.WIDTH_PX_DEFAULT/2);
     var top = Math.round(this.spaceElement.y + this.spaceElement.height/2 - EntityFleet.prototype.HEIGHT_PX_DEFAULT/2);    
-    var side = Math.ceil(Math.sqrt(nbFleetsLn));
-    console.log(left+' / '+top+' / '+side);
+    $fleet.css({'left': left+'px', 'top': top+'px'});
 
-    
-    left -= (EntityFleet.prototype.INTERVAL_PX/2 * side);
-    top -= (EntityFleet.prototype.INTERVAL_PX/2 * side);
-    
-    for(var ity=0; ity<side; ity++) {
-      var itx = 0;
-      while(itx<side) {
-        var it = ity*side+itx;      
-        if(it<nbFleetsLn) {
-          var $fleetTmp = $fleet.clone();
-          $fleetTmp.css('left', Math.round(left + EntityFleet.prototype.INTERVAL_PX*itx)+'px');
-          $fleetTmp.css('top', Math.round(top + EntityFleet.prototype.INTERVAL_PX*ity)+'px'); 
-          $fleets.append($fleetTmp);
-        }
-        itx++;
+    for(var it=0; it<nbFleetsLn; it++) {
+      var $fleetTmp = $fleet.clone();
+      var animSpeed = 2;
+      if(it >= nbFleetsLn-nbFriendFleets) {
+        $fleetTmp.attr('src', EntityFleet.prototype.IMAGE_FRIEND);
+      } else {
+        animSpeed = (Math.random()*5+2);
       }
+      var compat = ['-moz-', '-webkit-', '-o-', ''];
+      var timing = ['linear', 'ease', 'ease-in', 'ease-out'];
+      var cssAnim = {};
+      var anim = 'travel-function '+animSpeed+'s linear infinite';
+      for(var i = compat.length - 1; i; i--) {
+        cssAnim[compat[i]+'animation'] = anim;
+      }    
+      $fleetTmp.css(cssAnim);
+      $fleets.append($fleetTmp);
     }
     return $fleets;
   }
   
   EntityFleet.prototype.WIDTH_PX_DEFAULT = 10;
   EntityFleet.prototype.HEIGHT_PX_DEFAULT = 10;  
-  EntityFleet.prototype.INTERVAL_PX = 1;
+  EntityFleet.prototype.INTERVAL_PX = 8;
   EntityFleet.prototype.STATE_IDLE = 'idle';
   EntityFleet.prototype.STATE_FLY = 'fly';
   EntityFleet.prototype.STATE_FIGHT = 'fight';
+  EntityFleet.prototype.IMAGE_ENNEMY = 'images/ship/ship_ennemy_picto.png';  
+  EntityFleet.prototype.IMAGE_FRIEND = 'images/ship/ship_friend_picto.png';  
 
 	this.init();	
 };
