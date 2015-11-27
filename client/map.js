@@ -71,15 +71,18 @@ var Map = function(mapUi, mapAjaxProxy) {
   
   Map.prototype.getNextEntity = function (entityId) {
     var nextEntityId = this.proxy.getPrevNextEntityId(entityId, 'next');
-    //console.log(entityId+' => '+nextEntityId);
     return this.getEntity(nextEntityId);
   };
   
   Map.prototype.getPrevEntity = function (entityId) {
     var prevEntityId = this.proxy.getPrevNextEntityId(entityId, 'prev');
-    //console.log(entityId+' <= '+prevEntityId);
     return this.getEntity(prevEntityId);
-  };  
+  }; 
+
+  Map.prototype.getParentEntity = function (entityId) {
+    var parentEntity = this.proxy.getParentEntity(entityId);
+    return parentEntity;
+  };   
 
   Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => décaler sur la gauche
     // TODO : check if element is loaded and load it then

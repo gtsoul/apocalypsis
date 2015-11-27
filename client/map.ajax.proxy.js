@@ -168,10 +168,7 @@ var MapAjaxProxy = function(servicesContext) {
   
   MapAjaxProxy.prototype.__getSectorKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
-    
-    var sectorWidth = 2000;
-    var sectorHeight = 2000;
-   
+
     if(data != undefined && data.sector != undefined && data.sector.subElements != undefined && data.sector.subElements.systems != undefined) {
       $.each(data.sector.subElements.systems, function(key, datum) {
         if(datum.pos != undefined) {

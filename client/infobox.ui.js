@@ -20,14 +20,44 @@ var InfoBoxUI = function(entity) {
   };  
   
   InfoBoxUI.prototype.__getTitleBoxForEntity = function() {
-    var $box = $('<div/>');     
-    $box.html('<img src="images/apocalypsis/left.png" class="prevEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/><span class="title">'+this.title+'</span><img src="images/apocalypsis/right.png" class="nextEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');
+    var $box = $('<div/>');    
+    var $left = $('<img src="images/apocalypsis/left.png" class="prevEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');
+    $box.append($left);
+    var $title = $('<span class="title">'+this.title+'</span>');    
+    $box.append($title);
+    var $right = $('<img src="images/apocalypsis/right.png" class="nextEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');    
+    $box.append($right);
+    if(this.entity.type != EntitySystem.prototype.TYPE) {
+      var parentType;
+      if(this.entity.type == EntityCoords.prototype.TYPE) {
+        parentType = EntitySystem.prototype.TYPE;
+      } else {
+        parentType = EntityCoords.prototype.TYPE;
+      }
+      var $up = $('<img src="images/apocalypsis/up.png" class="parentEntity" curPos="'+this.entity.pos+'" type="'+parentType+'"/>');    
+      $box.append($up);
+    }
     return $box.html();   
   };    
   
   InfoBoxUI.prototype.__getHtmlForEntity = function() {
     var $box = $('<div/>');
-    $box.html('Welcome');
+    if(typeof(this.entity.known) != 'undefined' && this.entity.known == false) {
+      $box.append('<div class="alert">Vous n\'avez pas encore exploré cet endroit.</div>');
+    }
+    var $entityImageWrapper = $('<div class="entityImageWrapper"/>')
+    var $entityImage = $('<img class="entityImage" width="50%"/>');
+    $entityImage.attr({'width': '50%', 'height': '50%'});
+    $entityImageWrapper.append($entityImage);
+    $box.append($entityImageWrapper); 
+    
+    if(this.entity.type == EntitySystem.prototype.TYPE) {
+      $entityImage.attr('src', this.entity.image);
+    } else if(this.entity.type == EntityCoords.prototype.TYPE) {
+       $entityImage.attr('src', this.entity.getFullsizeImage());
+    } else if(this.entity.type == EntityPlanet.prototype.TYPE) {
+      $entityImage.attr('src', this.entity.getFullsizeImage());
+    }      
     return $box.html();
   };  
   
@@ -60,7 +90,16 @@ var InfoBoxUI = function(entity) {
         infoBox.display();
         globalMap.centerOnEntity(nextEntity.pos, type, false, true);
       }
-    });     
+    }); 
+    htmlEl.find('#cboxTitle .parentEntity').click(function() { 
+      var parentEntity = globalMap.getParentEntity($(this).attr('curPos'));
+      var type = $(this).attr('type');
+      if(parentEntity != undefined) {
+        var infoBox = new InfoBoxUI(parentEntity);
+        infoBox.display();
+        globalMap.centerOnEntity(parentEntity.pos, type, false, true);
+      }
+    });
   };  
   
 	this.init = function() {

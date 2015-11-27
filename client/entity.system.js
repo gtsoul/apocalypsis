@@ -10,7 +10,7 @@ var EntitySystem = function(json) {
   this.coords = new Array();
   this.sun;
   this.type = EntitySystem.prototype.TYPE;
-  this.image = 'images/universe/system_fg'+(Math.round(Math.random()*3))+'.jpg';
+  this.image = EntitySystem.prototype.FOLDER_IMG+'/system_fg'+(Math.round(Math.random()*3))+'.jpg';
   
 	this.init = function() { 
     this.__loadJson(json);
@@ -31,8 +31,9 @@ var EntitySystem = function(json) {
     } else {
       this.known = false;
     }
-    if(typeof(json.image) != 'undefined') {
-      this.image = json.image.replace(/^\//, '');
+    if(typeof(json.image) != 'undefined') {    
+      this.image = this.image.replace(new RegExp("^.*/([^/]+)\.(?:jpg|png)$"), EntitySystem.prototype.FOLDER_IMG+"\/$1.jpg");
+      //this.image = json.image.replace(/^\//, '');
     }
     if(json.subElements != undefined) {
       $.each(json.subElements.coords, function(key, datum) {    
@@ -109,6 +110,7 @@ var EntitySystem = function(json) {
     }); 
   };  
   
+  EntitySystem.prototype.FOLDER_IMG = 'images\/universe\/systems';
   EntitySystem.prototype.WIDTH_PX = 110;
   EntitySystem.prototype.HEIGHT_PX = 130;
   EntitySystem.prototype.X_TO_PX = 10;

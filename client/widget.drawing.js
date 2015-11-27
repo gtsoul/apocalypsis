@@ -109,7 +109,7 @@ var UiLink = function($origin, $end, type) {
       
       $(SVG('path'))
           .attr('d', 'M '+originX+' '+originY+' q '+qX+' '+qY+' '+dX+' '+dY)
-          .attr('stroke', '#b5f0ff')
+          .attr('stroke', '#FFFFCC')
           .attr('stroke-width', 0.5)
           .attr('fill', 'none')
           .attr('stroke-dasharray', '0.5,1')

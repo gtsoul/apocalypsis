@@ -49,13 +49,16 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     var ratioX = this.viewport.width()/sectorWidth;
     var ratioY = this.viewport.height()/sectorHeight;
-    var zoomInit = Math.min(ratioX, ratioY)*1.5;    
+    var zoomInit = Math.max(0.1, Math.min(ratioX, ratioY)*1.5);    
     getScroller().options.minZoom = Math.min(this.zoomConfig.maxZoom, zoomInit);
-    getScroller().options.maxZoom = this.zoomConfig.maxZoom;
+    getScroller().options.maxZoom = this.zoomConfig.maxZoom;    
     this.__zoomTo(zoomInit);  
-    // TODO : for test only    
-    //this.__zoomTo(1);    
+    if(zoomInit < EntitySystem.prototype.ZOOM_OUT*0.5) {
+      $('.reperes:first').click();
+      getScroller().zoomBy(zoomInit, true, sectorWidth/2, sectorHeight/2);
+    }
     console.log('map ui initialized');
+    return zoomInit;
   };
   
   MapUi.prototype.__scrollTo = function(left, top) {
@@ -219,6 +222,9 @@ var MapUi = function(mapContainer, viewport, tools) {
       if($oldCoord.length > 0) {
         var $newCoord = coord.getHtml();      
         $oldCoord.html($newCoord.html());
+        if(coord.fleets != undefined && coord.fleets.length > 0) {
+          coord.drawCanvas();
+        }
         $oldCoord.removeClass('unloaded');
       }   
       this.applyZoomOnMap();
