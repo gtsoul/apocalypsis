@@ -78,12 +78,13 @@ var UiLink = function($origin, $end, type) {
     this.end = $end;
     this.type = type; // line, path ellipse
     if(this.origin != undefined && this.end != undefined) {
-      this.draw();
+      //this.draw();
     }
 		this.init = function() {};
 	}; 
   
-  UiLink.prototype.draw = function () {
+  // TODO : traduire en webgl
+  /*UiLink.prototype.draw = function () {
     var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
     var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
     var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
@@ -116,7 +117,7 @@ var UiLink = function($origin, $end, type) {
           .attr('stroke-linecap', 'round')
           .appendTo($('#svgRoot #lines'));  
     }      
-  };
+  };*/
 
 	this.init();	
 };
@@ -126,7 +127,7 @@ var UiLink = function($origin, $end, type) {
 /* -------------------------- UiFleet --------------------------------- */
 /* ------------------------------------------------------------------- */
 
-/*var UiFleet = function($origin, $end, nb, state) {
+var UiFleet = function($origin, $end, nb, state) {
   this.origin;
   this.end;
   this.state;
@@ -137,12 +138,13 @@ var UiLink = function($origin, $end, type) {
     this.nb = nb;
     this.state = state; // idle, fly, fight
     if(this.origin != undefined && this.state != undefined) {
-      this.draw();
+      //this.draw();
     }
 		this.init = function() {};
 	}; 
   
-  UiFleet.prototype.draw = function () {
+  // TODO : traduire en webgl
+  /*UiFleet.prototype.draw = function () {
     var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
     var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
 
@@ -157,7 +159,7 @@ var UiLink = function($origin, $end, type) {
         //.attr('class', 'nozoom')
         .appendTo($('#svgRoot #fleets'));  
     }
-  };
+  };*/
 
 	this.init();	
-};*/
+};

@@ -90,7 +90,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     if(now - lastUpdateReperesTime >= lastUpdateReperesDelay) {
       lastUpdateReperesTime = now;
       clearTimeout(lastUpdateReperesTimeout);
-      // TODO : mettre les repères Hors carte
+      // TODO : mettre les repï¿½res Hors carte
       var vwidth = this.viewport.width();
       var vheight = this.viewport.height();
       var xmin = getScroller().getValues().left / this.zoom;
@@ -141,7 +141,7 @@ var MapUi = function(mapContainer, viewport, tools) {
         globalMap.ui.__updateReperes();
       }, lastUpdateReperesDelay);
     }
-    this.__updateParallax();
+    //this.__updateParallax();
   };  
   
    
@@ -196,7 +196,7 @@ var MapUi = function(mapContainer, viewport, tools) {
       var left = system.x;
       var top = system.y;
       var $newSystem = system.getHtml();
-      var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO à diviser par le nb total de système avec un max
+      var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO ï¿½ diviser par le nb total de systï¿½me avec un max
       if(!system.known)  {
         nbStars = 0;
       }
@@ -289,7 +289,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   };
   
-  MapUi.prototype.NB_MAX_STARS = 0; // TODO partager les étoiles
+  MapUi.prototype.NB_MAX_STARS = 0; // TODO partager les ï¿½toiles
   
 	this.init();	
 };
