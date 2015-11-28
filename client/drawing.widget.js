@@ -15,7 +15,7 @@ function SVG(tag, attrs) {
 /* -------------------------- UiStar --------------------------------- */
 /* ------------------------------------------------------------------- */
 
-var UiStar = function(x, y) {
+/*var UiStar = function(x, y) {
   this.x;
   this.y;
   
@@ -27,25 +27,7 @@ var UiStar = function(x, y) {
 	}; 
   
   UiStar.prototype.draw = function () {
-    var r = Math.random()*2;
-    /*var opacity = $(SVG('animate', {
-          'attributeType': 'CSS',
-          'attributeName': 'opacity',
-          'repeatCount': 'indefinite',
-        }))
-        .attr('from', 1)
-        .attr('to', 0)
-        .attr('dur', Math.floor(Math.random()*20+10)+'s')
-        .attr('begin', Math.floor(Math.random()*5)+'s');
-    var size = $(SVG('animate', {
-          'attributeType': 'XML',
-          'attributeName': 'r',
-          'repeatCount': 'indefinite',
-        }))
-        .attr('from', r)
-        .attr('to', 0)
-        .attr('dur', Math.floor(Math.random()*20+10)+'s')
-        .attr('begin', Math.floor(Math.random()*5)+'s');  */      
+    var r = Math.random()*2; 
     var star = $(SVG('circle'))
         .attr('cx', this.x)
         .attr('cy', this.y)
@@ -53,16 +35,11 @@ var UiStar = function(x, y) {
         .attr('stroke', 'grey')
         .attr('stroke-width', r/2)
         .attr('fill', 'white');
-    // TODO : test performances
-    /*if(size > 2) {
-      size.appendTo(star);
-    }
-    opacity.appendTo(star);*/
     star.appendTo($('#svgRoot #stars'));       
   };
 
 	this.init();	
-};
+};*/
 
 /* ------------------------------------------------------------------- */
 /* -------------------------- UiLink --------------------------------- */
@@ -127,7 +104,7 @@ var UiLink = function($origin, $end, type) {
 /* -------------------------- UiFleet --------------------------------- */
 /* ------------------------------------------------------------------- */
 
-var UiFleet = function($origin, $end, nb, state) {
+/*var UiFleet = function($origin, $end, nb, state) {
   this.origin;
   this.end;
   this.state;
@@ -141,7 +118,7 @@ var UiFleet = function($origin, $end, nb, state) {
       //this.draw();
     }
 		this.init = function() {};
-	}; 
+	}; */
   
   // TODO : traduire en webgl
   /*UiFleet.prototype.draw = function () {
@@ -161,5 +138,5 @@ var UiFleet = function($origin, $end, nb, state) {
     }
   };*/
 
-	this.init();	
-};
+	/*this.init();	
+};*/

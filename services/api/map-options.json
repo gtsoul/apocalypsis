@@ -6,7 +6,12 @@
       "defaultValue": true
     },
     {
-      "key": "animated_fleets",
+      "key": "animated_static_fleets",
+      "description": "Flottes statiques animées",
+      "defaultValue": false
+    },
+    {
+      "key": "animated_travel_fleets",
       "description": "Transfert de flotte animés",
       "defaultValue": true
     }

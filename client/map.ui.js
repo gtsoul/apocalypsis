@@ -66,7 +66,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
 
 	MapUi.prototype.__initThree = function(sectorWidth, sectorHeight) {  
-    this.fluxLayer = new FluxLayer(sectorWidth, sectorHeight);
+    this.fluxLayer = new FluxLayer(sectorWidth, sectorHeight, $('#containerThree'));
   };  
   
   MapUi.prototype.__scrollTo = function(left, top) {
@@ -98,7 +98,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     if(now - lastUpdateReperesTime >= lastUpdateReperesDelay) {
       lastUpdateReperesTime = now;
       clearTimeout(lastUpdateReperesTimeout);
-      // TODO : mettre les rep�res Hors carte
+      // TODO : mettre les reperes Hors carte
       var vwidth = this.viewport.width();
       var vheight = this.viewport.height();
       var xmin = getScroller().getValues().left / this.zoom;
@@ -163,10 +163,10 @@ var MapUi = function(mapContainer, viewport, tools) {
     $bgWrap.css({'width': $viewport.outerWidth()+'px', 'height': $viewport.outerHeight()+'px', 'left': $viewport.css('left'), 'top': $viewport.css('top')});
     $bg.css({'width': $viewport.outerWidth()+dx*1.1+'px', 'height': $viewport.outerHeight()+dy*1.1+'px'});
     MapUi.prototype.__updateParallax = function() {
-      var vwidth = this.viewport.width();
+      /*var vwidth = this.viewport.width();
       var vheight = this.viewport.height();
       var xmin = getScroller().getValues().left / this.zoom;
-      var ymin = getScroller().getValues().top / this.zoom;
+      var ymin = getScroller().getValues().top / this.zoom;*/
       var px = xmin / contentWidth;
       var py = ymin / contentHeight;
       px = 1-px;
@@ -201,17 +201,17 @@ var MapUi = function(mapContainer, viewport, tools) {
   MapUi.prototype.repaintSystem = function(system) {
     if(system != undefined) {
       var $oldSystem = $('#'+system.pos+'.system');
-      var left = system.x;
-      var top = system.y;
+      //var left = system.x;
+      //var top = system.y;
       var $newSystem = system.getHtml();
-      var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO � diviser par le nb total de syst�me avec un max
+      /*var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO � diviser par le nb total de syst�me avec un max
       if(!system.known)  {
         nbStars = 0;
       }
       for(var i=0; i<nbStars; i++) {
         var star = new UiStar(Math.floor((Math.random()*3*(system.width)) + left - 1*system.width), 
                               Math.floor((Math.random()*3*(system.height)) + top - 1*system.height));                              
-      }
+      }*/
       if($oldSystem.length > 0) {
         $oldSystem.remove();
       }      

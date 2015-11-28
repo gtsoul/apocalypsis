@@ -27,6 +27,7 @@ var OptionDto = function(data) {
   
   OptionDto.prototype.load = function () {
     this.value = sessionStorage.getItem(localStoragePrefix+this.key);
+    console.log("Option "+this.key+" = "+this.val());
   };  
   
   OptionDto.prototype.save = function (newValue) {
@@ -53,7 +54,6 @@ var Options = function(jsonOptions) {
   Options.prototype.__loadOptionList = function (json) {
     for(var it in json) {
       var option = new OptionDto(json[it]);
-      console.log(option.key);
       this.datas[option.key] = option;
     }
   };  
