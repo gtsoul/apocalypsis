@@ -3,7 +3,10 @@ console.log('Loading map ajax proxy classes');
 
 var MapAjaxProxy = function(servicesContext) {
   this.context = servicesContext;
-  this.services = {'universe-knowledge' : 'universe-knowledge.php'};
+  this.services = {
+                    'universe-knowledge' : 'universe-knowledge.php',
+                    'map-options' : 'map-options.json'                  
+                  };
   this.sSystems = new Array();
   
 	this.init = function() {
@@ -237,6 +240,23 @@ var MapAjaxProxy = function(servicesContext) {
     } 
     return undefined;    
   };  
+  
+  
+  MapAjaxProxy.prototype.loadOptions = function(callback) {
+    var json = this.__ajaxGet('map-options', 
+                                this.__loadOptionsCB, {'callback':callback});
+  }; 
+  
+  MapAjaxProxy.prototype.__loadOptionsCB = function (data, parameters) {
+    var options;
+
+    if(data != undefined && data.options != undefined) {
+      options = new Options(data.options);
+    }
+    if(typeof(parameters.callback) != 'undefined') {
+      parameters.callback(options);
+    }   
+  };
   
 	this.init();	
 };
