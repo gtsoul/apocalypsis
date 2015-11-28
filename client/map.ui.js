@@ -274,14 +274,18 @@ var MapUi = function(mapContainer, viewport, tools) {
     this.mapRoot.find('.nozoom').css(this.newCssNozoom);
 
     this.mapRoot.removeClass('zoomOnPlanet').removeClass('zoomOnCoords').removeClass('zoomOnSystem').removeClass('zoomOnSector');   
-    if(this.zoom >= this.zoomConfig.zoomOnPlanet) {
-      this.mapRoot.addClass('zoomOnPlanet');
-    } else if(this.zoom >= this.zoomConfig.zoomOnCoords) {
-      this.mapRoot.addClass('zoomOnCoords');
-    } else {
-      this.mapRoot.addClass('zoomOnSystem');
-    } 
+    this.mapRoot.addClass(this.getZoomLvl());
   };
+  
+  MapUi.prototype.getZoomLvl = function() {
+    if(this.zoom >= this.zoomConfig.zoomOnPlanet) {
+      return 'zoomOnPlanet';
+    } else if(this.zoom >= this.zoomConfig.zoomOnCoords) {
+      return 'zoomOnCoords';
+    } else {
+      return 'zoomOnSystem';
+    } 
+  };  
   
 	MapUi.prototype.getInfoBox = function() {
     return $("."+InfoBoxUI.prototype.BOX_CLASS+":first");  

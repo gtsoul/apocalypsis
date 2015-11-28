@@ -66,18 +66,42 @@ var UiLink = function($origin, $end, type) {
     var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
     var endY = parseFloat(this.end.css('top')) + this.end.outerHeight() / 2;
     
-    var curve = new THREE.CubicBezierCurve3(
+    /*var curve = new THREE.CubicBezierCurve3(
       new THREE.Vector3( originX, originY, 0 ),
-      new THREE.Vector3( originX, originY, 0 ),
-      new THREE.Vector3( endX, endY, 0 ),
+      new THREE.Vector3( originX, originY, Math.random*100 ),
+      new THREE.Vector3( endX, endY, Math.random*100 ),
       new THREE.Vector3( endX, endY, 0 )
-    );    
+    );    */
     
-    var geometryLine = new THREE.Geometry();
-    geometryLine.vertices = curve.getPoints(60);   
-
-    var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );    
-    globalMap.ui.fluxLayer.drawLine(geometryLine, material, true);
+    /*var curve = new THREE.CubicBezierCurve (
+      new THREE.Vector3( originX, originY, 0 ),
+      new THREE.Vector3( originX+200*(Math.random-0.5), originY+200*(Math.random-0.5), -Math.random*100 ),
+      new THREE.Vector3( endX+200*(Math.random-0.5), endY+200*(Math.random-0.5), -Math.random*100 ),
+      new THREE.Vector3( endX, endY, 0 )
+    );*/     
+    
+    /*var curve = new THREE.CubicBezierCurve (
+      new THREE.Vector3( originX, originY, 0 ),
+      new THREE.Vector3( 1.2*originX, 1.2*originY, -Math.random*100 ),
+      new THREE.Vector3( 1.2*originX, 1.2*originY, -Math.random*100 ),
+      new THREE.Vector3( endX, endY, 0 )
+    );  */     
+    
+    //var geometryLine = new THREE.Geometry();
+    //geometryLine.vertices = curve.getPoints(60);   
+    var curve = new THREE.QuadraticBezierCurve(
+      new THREE.Vector3( originX, originY, 0 ),
+      new THREE.Vector3( (originX+endX)/2*(0.95+Math.random()*0.1), (originY+endY)/2*(0.95+Math.random()*0.1), 0 ),
+      new THREE.Vector3( endX, endY, 0 )
+    );
+    var path = new THREE.Path( curve.getPoints( 10 ) );
+    
+    var geometryLine = path.createPointsGeometry( 10 );
+    //var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );  
+    var material = new THREE.LineDashedMaterial( { linewidth: 1, dashSize: 1, gapSize: 8, color : "#819FF7" } );
+				//var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );      
+    //var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );    
+    globalMap.ui.fluxLayer.drawLine(geometryLine, material, false, ["zoomOnPlanet"]);
   }
   
   // TODO : traduire en webgl

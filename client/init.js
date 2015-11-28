@@ -2,7 +2,6 @@
 
 var globalMap;
 var globalCaptainId;
-var globalOptions;
 jQuery(document).ready(function() {
   globalCaptainId = 2; // TODO : demander a mac qu'il le mette dans le WS
   globalMap = new Map(new MapUi('#map', '#viewport', '#tools_wrapper'),
