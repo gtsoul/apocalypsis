@@ -1,6 +1,7 @@
 console.log('Loading options');
 
 var OptionDto = function(data) {
+  var localStoragePrefix = "apocalypsis-map-options-";
 	this.key;
   this.value;
   this.defaultValue;
@@ -22,6 +23,19 @@ var OptionDto = function(data) {
       return this.defaultValue;
     }
     return this.value;
+  };   
+  
+  OptionDto.prototype.load = function () {
+    this.value = sessionStorage.getItem(localStoragePrefix+this.key);
+  };  
+  
+  OptionDto.prototype.save = function (newValue) {
+    this.value = newValue;
+    if (this.value != undefined && this.value != this.defaultValue) {      
+      sessionStorage.setItem(localStoragePrefix+this.key, this.value);
+    } else if (this.value == undefined) {
+      sessionStorage.removeItem(localStoragePrefix+this.key);
+    }
   };    
   
 	this.init();	
@@ -45,7 +59,9 @@ var Options = function(jsonOptions) {
   };  
   
   Options.prototype.__loadFromStorage = function () {
-    
+    for(var key in this.datas) {
+      this.datas[key].load();
+    }
   };   
   
   Options.prototype.get = function (key) {
@@ -56,6 +72,15 @@ var Options = function(jsonOptions) {
       return "";
     }
   }; 
+  
+  Options.prototype.set = function (key, value) {
+    if (this.datas[key] != undefined) {
+      return this.datas[key].save(value);
+    } else {
+      console.warn("option "+key+" inconnue");
+      return "";
+    }
+  };   
   
 	this.init();	
 };

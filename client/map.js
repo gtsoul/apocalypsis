@@ -49,7 +49,7 @@ var Map = function(mapUi, mapAjaxProxy) {
         sector = pos[1];
       } else if(pos.length == 1) {
         galaxy = pos[0];
-      }            
+      }      
     }
     
     this.proxy.getUniverseKnowledge(galaxy, sector, system, function (sectorWidth, sectorHeight) {
