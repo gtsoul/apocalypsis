@@ -26,11 +26,11 @@ var MapUi = function(mapContainer, viewport, tools) {
 		contentWidth = sectorWidth;
 		contentHeight = sectorHeight;
     // TODO : enlever a terme
-    $('#svgRoot').attr({width:sectorWidth, height:sectorHeight});
+    //$('#svgRoot').attr({width:sectorWidth, height:sectorHeight});
     
 		// Initialize layout
-		var container = viewport[0];
-		var content = mapContainer[0];
+		//var container = viewport[0];
+		//var content = mapContainer[0];
     var ui = this;
     
     this.mapContainer.bind('zooming', function(event) {

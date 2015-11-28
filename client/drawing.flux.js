@@ -1,7 +1,5 @@
 var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
-  this.localTravels = [];
-  this.globalTravels= [];
-  this.staticLines = [];
+  this.dynamicLines= [];
   this.scene;
   this.camera;
   this.renderer;
@@ -9,8 +7,8 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   this.colors = [];
   this.container;
   this.frameIt;
-  this.WIDTH;
-  this.HEIGHT;  
+  this.viewportWidth;
+  this.viewportHeight;  
   this.delayAnimation; 
   this.nbParallelQueue = 5;
   this.newZoom = "";
@@ -21,13 +19,15 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     this.frameIt = 0;
     this.delayAnimation = false;
     this.container = divContainer;
-    this.WIDTH = window.innerWidth;
-    this.HEIGHT = window.innerHeight;    
+    this.viewportWidth = window.innerWidth;
+    this.viewportHeight = window.innerHeight;    
     this.__initThreeCanvas(sectorWidth, sectorHeight);
 		this.init = function() {};
 	}; 	
   
   FluxLayer.prototype.__initThreeCanvas = function(sectorWidth, sectorHeight) { 
+    console.log(sectorWidth+"/"+sectorHeight);
+    console.log(this.viewportWidth+"/"+this.viewportHeight);
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
   
     var color1 = new THREE.Color(Math.random(), Math.random(), Math.random());
@@ -36,8 +36,11 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     this.colors = [colorBlack, colorWhite, color1, color1, colorBlack];
       
   
-    this.camera = new THREE.PerspectiveCamera( 60, this.WIDTH / this.HEIGHT, 1, 200 );
-    this.camera.position.z = 150;
+    //this.camera = new THREE.PerspectiveCamera( 60, this.viewportWidth / this.viewportHeight, 1, 200 );
+    //this.camera = new THREE.OrthographicCamera( this.viewportWidth / - 2, this.viewportWidth / 2, this.viewportHeight / 2, this.viewportHeight / - 2, -100, 100 );
+    
+    this.camera = new THREE.OrthographicCamera( 0, this.viewportWidth, 0, this.viewportHeight, -100, 100 );
+    this.camera.position.z = 0;
     this.scene = new THREE.Scene();    
 
     this.stats = new Stats();
@@ -50,15 +53,15 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     //renderer.setClearColor( 0x111111 );
     this.renderer.setClearColor( 0x000000 );
     this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize( this.WIDTH, this.HEIGHT );
+    this.renderer.setSize( this.viewportWidth, this.viewportHeight );
     
     $('#containerThree').attr({width:sectorWidth, height:sectorHeight});
     //var container = document.getElementById( 'containerThree' );
     $('#containerThree').append(this.renderer.domElement);  
   
-    for(var l=0; l<10; l++) {
+    /*for(var l=0; l<10; l++) {
       this.drawLine();
-    }
+    }*/
     
     
     var me = this;
@@ -71,9 +74,9 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     animate();
   };
   
-  FluxLayer.prototype.drawLine = function() { 
+  FluxLayer.prototype.drawLine = function(geometryLine, material, isDynamic) { 
       
-    var curve = new THREE.CubicBezierCurve3(
+    /*var curve = new THREE.CubicBezierCurve3(
       new THREE.Vector3( -50, 0, 0 ),
       new THREE.Vector3( -25, 75, 20 ),
       new THREE.Vector3( 100, 75, -50 ),
@@ -85,22 +88,24 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       new THREE.Vector3( Math.random()*200-100, Math.random()*200-100, Math.random()*200-100 ),
       new THREE.Vector3( Math.random()*200-100, Math.random()*200-100, Math.random()*200-100 ),
       new THREE.Vector3( Math.random()*200-100, Math.random()*200-100, Math.random()*200-100 )
-    ); 
+    );
     
     
     var geometryLine = new THREE.Geometry();
-    geometryLine.vertices = curve.getPoints(60);   
+    geometryLine.vertices = curve.getPoints(60);*/   
     
     for(var i=0; i<geometryLine.vertices.length; i++) {
       geometryLine.colors[i] = this.colors[0];
     }    
     
-    var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );	
+    //var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );	
     var object = new THREE.Line( geometryLine, material );
     
     object.zoomOptimal = ["secteur"];
 
-    this.localTravels.push( geometryLine );
+    if (isDynamic) {
+      this.dynamicLines.push( geometryLine);
+    }
     this.scene.add( object );
     
 
@@ -119,13 +124,12 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     
     // TODO : afficher en fonction du zoom
     //console.log(globalMap.ui.zoom);
-    this.scene.children[0].traverse( function ( object ) { object.visible = false; } );
     //console.log(this.scene.children[0]);
     // Animations
     if (!this.delayAnimation) {
-      for ( var l = (this.frameIt%this.nbParallelQueue); l < this.localTravels.length; l += this.nbParallelQueue ) {
-        for(var p=0; p < this.localTravels[l].vertices.length; p++) {	
-          this.localTravels[l].colors[p] = this.colors[Math.floor(p+this.frameIt/this.nbParallelQueue)%5];
+      for ( var l = (this.frameIt%this.nbParallelQueue); l < this.dynamicLines.length; l += this.nbParallelQueue ) {
+        for(var p=0; p < this.dynamicLines[l].vertices.length; p++) {	
+          this.dynamicLines[l].colors[p] = this.colors[Math.floor(p+this.frameIt/this.nbParallelQueue)%5];
         }	
       }      
       this.__checkVisibleObjects();      

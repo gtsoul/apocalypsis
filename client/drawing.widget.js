@@ -55,10 +55,30 @@ var UiLink = function($origin, $end, type) {
     this.end = $end;
     this.type = type; // line, path ellipse
     if(this.origin != undefined && this.end != undefined) {
-      //this.draw();
+      this.draw();
     }
 		this.init = function() {};
 	}; 
+  
+  UiLink.prototype.draw = function () {
+    var originX = parseFloat(this.origin.css('left')) + this.origin.outerWidth() / 2;
+    var originY = parseFloat(this.origin.css('top')) + this.origin.outerHeight() / 2;
+    var endX = parseFloat(this.end.css('left')) + this.end.outerWidth() / 2;
+    var endY = parseFloat(this.end.css('top')) + this.end.outerHeight() / 2;
+    
+    var curve = new THREE.CubicBezierCurve3(
+      new THREE.Vector3( originX, originY, 0 ),
+      new THREE.Vector3( originX, originY, 0 ),
+      new THREE.Vector3( endX, endY, 0 ),
+      new THREE.Vector3( endX, endY, 0 )
+    );    
+    
+    var geometryLine = new THREE.Geometry();
+    geometryLine.vertices = curve.getPoints(60);   
+
+    var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );    
+    globalMap.ui.fluxLayer.drawLine(geometryLine, material, true);
+  }
   
   // TODO : traduire en webgl
   /*UiLink.prototype.draw = function () {
