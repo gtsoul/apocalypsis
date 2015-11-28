@@ -2,6 +2,7 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   this.dynamicLines= [];
   this.scene;
   this.camera;
+  this.cameraHelper;
   this.renderer;
   this.stats;
   this.colors = [];
@@ -36,12 +37,15 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     this.colors = [colorBlack, colorWhite, color1, color1, colorBlack];
       
   
-    //this.camera = new THREE.PerspectiveCamera( 60, this.viewportWidth / this.viewportHeight, 1, 200 );
+    //this.camera = new THREE.PerspectiveCamera( 90, this.viewportWidth / this.viewportHeight, 1, 200 );
     //this.camera = new THREE.OrthographicCamera( this.viewportWidth / - 2, this.viewportWidth / 2, this.viewportHeight / 2, this.viewportHeight / - 2, -100, 100 );
     
     this.camera = new THREE.OrthographicCamera( 0, this.viewportWidth, 0, this.viewportHeight, -100, 100 );
     this.camera.position.z = 0;
+
     this.scene = new THREE.Scene();    
+    this.cameraHelper = new THREE.CameraHelper( this.camera );
+    this.scene.add( this.cameraHelper );    
 
     this.stats = new Stats();
 		this.stats.domElement.style.position = 'absolute';
@@ -74,7 +78,7 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     animate();
   };
   
-  FluxLayer.prototype.drawLine = function(geometryLine, material, isDynamic) { 
+  FluxLayer.prototype.drawLine = function(geometryLine, material, isDynamic, zooms) { 
       
     /*var curve = new THREE.CubicBezierCurve3(
       new THREE.Vector3( -50, 0, 0 ),
@@ -101,11 +105,12 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     //var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );	
     var object = new THREE.Line( geometryLine, material );
     
-    object.zoomOptimal = ["secteur"];
+    object.zoomOptimal = zooms;
 
     if (isDynamic) {
       this.dynamicLines.push( geometryLine);
     }
+    object.visible = (true || $.inArray(this.newZoom, object.zoomOptimal) >= 0);
     this.scene.add( object );
     
 
@@ -135,6 +140,7 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       this.__checkVisibleObjects();      
       this.frameIt++;      
       this.renderer.render( this.scene, this.camera );
+      this.cameraHelper.update();
     }
     
     //scene.add( directionalLight );
@@ -144,15 +150,30 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   FluxLayer.prototype.__checkVisibleObjects = function() {        
       // TODO : desactiver des objets au changement de zoom
       //if () {}
-      this.newZoom = "secteur";
+      this.newZoom = globalMap.ui.getZoomLvl();
       if (this.oldZoom != this.newZoom) {
         for(var c=0; c<this.scene.children.length; c++) {
-          this.scene.children[c].traverse( function ( object ) { object.visible = $.inArray(this.newZoom, object.zoomOptimal); } );
+          this.scene.children[c].traverse( function ( object ) { object.visible = (true || $.inArray(this.newZoom, object.zoomOptimal) >= 0); } );
         }
         this.oldZoom = this.newZoom;
       }      
       // TODO : desactiver des objets hors champs tous les 1000 frames
-  }  	
+  };  	
+  
+  FluxLayer.prototype.scrollTo = function(left, top) {
+    console.log("scrollTo "+left+"/"+top);
+    this.camera.lookAt(new THREE.Vector3( left, top, 0 ));
+    //this.camera.position.left += 10;   
+    //this.camera.position.top += 10;
+    
+      //this.renderer.render( this.scene, this.camera );
+      this.__render();
+  };  
+  
+  FluxLayer.prototype.zoomTo = function(zoom) {
+    console.log("zoomTo "+zoom);
+    //this.camera.position.top += 10;
+  };  
 	
 	this.init();	
 };

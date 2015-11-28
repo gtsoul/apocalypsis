@@ -491,8 +491,11 @@ var Scroller;
 			}
 
 			// Push values out
-			self.__publish(left, top, level, animate);
-
+			self.__publish(left, top, level, animate);  
+          
+      if (globalMap.ui.fluxLayer != undefined) {
+        globalMap.ui.fluxLayer.zoomTo(left, top);
+      }
 		},
 
 
@@ -591,7 +594,9 @@ var Scroller;
 
 			// Publish new values
 			self.__publish(left, top, zoom, animate);
-
+      if (globalMap != undefined && globalMap.ui.fluxLayer != undefined) {
+        globalMap.ui.fluxLayer.scrollTo(left, top);
+      }
 		},
 
 

@@ -315,6 +315,11 @@ span.ennemy, div.ennemy {
   box-shadow: 0px 0px 5px 2px orange;
 }*/
 
+/*-------- Three.js -------------*/
+#containerThree {
+  position: absolute; 
+}
+
 /*-------- Lines -------------*/
 
 #lines .line {
