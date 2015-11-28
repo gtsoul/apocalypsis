@@ -14,6 +14,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
   this.zoomConfig = {minZoom : 0.5, maxZoom : 5, zoomFactor : 0.15, zoomOnCoords : 0.5, zoomOnPlanet : 1.1};
+  this.fluxLayer;
 
 	this.init = function() {
     //this.enableSlider(this.tools.find('.zoom'));
@@ -24,6 +25,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     // TODO : passer les variables/fonctions en global
 		contentWidth = sectorWidth;
 		contentHeight = sectorHeight;
+    // TODO : enlever a terme
     $('#svgRoot').attr({width:sectorWidth, height:sectorHeight});
     
 		// Initialize layout
@@ -56,10 +58,16 @@ var MapUi = function(mapContainer, viewport, tools) {
     if(zoomInit < EntitySystem.prototype.ZOOM_OUT*0.5) {
       $('.reperes:first').click();
       getScroller().zoomBy(zoomInit, true, sectorWidth/2, sectorHeight/2);
-    }
+    }    
+    this.__initThree(sectorWidth, sectorHeight);
     console.log('map ui initialized');
     return zoomInit;
   };
+  
+
+	MapUi.prototype.__initThree = function(sectorWidth, sectorHeight) {  
+    this.fluxLayer = new FluxLayer(sectorWidth, sectorHeight);
+  };  
   
   MapUi.prototype.__scrollTo = function(left, top) {
     zoom = getScroller().getValues().zoom;
@@ -289,7 +297,7 @@ var MapUi = function(mapContainer, viewport, tools) {
   
   };
   
-  MapUi.prototype.NB_MAX_STARS = 0; // TODO partager les �toiles
+  MapUi.prototype.NB_MAX_STARS = 0; // TODO partager les etoiles
   
 	this.init();	
 };

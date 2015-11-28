@@ -441,7 +441,7 @@ var Scroller;
 		 */
 		zoomTo: function(level, animate, originLeft, originTop) {
 
-      console.log("zoomTo : "+level);
+      		//console.log("zoomTo : "+level);
     
 			var self = this;
 

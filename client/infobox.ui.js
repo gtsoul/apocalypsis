@@ -1,6 +1,4 @@
 
-console.log('Loading map ui classes');
-
 var InfoBoxUI = function(entity) {
 
   var title;
@@ -43,7 +41,7 @@ var InfoBoxUI = function(entity) {
   InfoBoxUI.prototype.__getHtmlForEntity = function() {
     var $box = $('<div/>');
     if(typeof(this.entity.known) != 'undefined' && this.entity.known == false) {
-      $box.append('<div class="alert">Vous n\'avez pas encore exploré cet endroit.</div>');
+      $box.append('<div class="alert">Vous n\'avez pas encore explorï¿½ cet endroit.</div>');
     }
     var $entityImageWrapper = $('<div class="entityImageWrapper"/>')
     var $entityImage = $('<img class="entityImage" width="50%"/>');
@@ -63,7 +61,7 @@ var InfoBoxUI = function(entity) {
   
   InfoBoxUI.prototype.__getTitleForEntity = function() {
     if(this.entity.type == EntitySystem.prototype.TYPE) {
-      return "Système "+this.entity.pos;
+      return "Systï¿½me "+this.entity.pos;
     } else if(this.entity.type == EntityCoords.prototype.TYPE) {
       return "Coords "+this.entity.pos;       
     } else if(this.entity.type == EntityPlanet.prototype.TYPE) {

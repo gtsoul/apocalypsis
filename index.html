@@ -14,7 +14,14 @@
     <script src="js/scroller/animate.js"></script> 	
     <script src="js/scroller/scroller.js"></script> 	
     <script src="js/scroller/render.js"></script> 
-    <script src="client/widget.drawing.js"></script>
+    
+		<script src="js/three/three.min.js"></script>
+		<script src="js/three/renderers/Projector.js"></script>
+		<script src="js/three/renderers/CanvasRenderer.js"></script>
+		<script src="js/three/Detector.js"></script>    
+    
+    <script src="client/drawing.flux.js"></script>
+    <script src="client/drawing.widget.js"></script>    
     <script src="client/entity.spaceelement.js"></script>
     <script src="client/entity.planet.js"></script>
     <script src="client/entity.system.js"></script>
@@ -51,6 +58,7 @@
             </g>             
           </svg>   
           
+          <div id="containerThree"></div>
           <img id="target" class="nozoom" src="images/apocalypsis/target.png" alt="" />
         </div>
       </div>

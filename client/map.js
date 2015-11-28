@@ -22,9 +22,9 @@ var Map = function(mapUi, mapAjaxProxy) {
   Map.prototype.refreshCoord = function (coord) {
     var map = this;
     this.proxy.getCoordKnowledge(coord.pos, function () {
-      console.log('coord updated, '+coord.pos);
+      //console.log('coord updated, '+coord.pos);
       map.ui.repaintCoord(coord);
-      console.log('repaint updated '+coord.pos);
+      //console.log('repaint updated '+coord.pos);
     });
   };  
   
@@ -84,7 +84,7 @@ var Map = function(mapUi, mapAjaxProxy) {
     return parentEntity;
   };   
 
-  Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => décaler sur la gauche
+  Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => dï¿½caler sur la gauche
     // TODO : check if element is loaded and load it then
     // definir des zooms
     if(entityType != undefined) {
