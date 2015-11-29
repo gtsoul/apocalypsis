@@ -190,7 +190,10 @@ var MapAjaxProxy = function(servicesContext) {
         sectorHeight = (data.cap.absoluteGrid.height*EntitySystem.prototype.Y_TO_PX);
         console.log("map  size :"+sectorWidth+" / "+sectorHeight);
       }
-    } 
+    } else {
+      console.error("Impossible d'initialiser la carte du secteur");
+      console.error(data);
+    }
    
     if(typeof(parameters.callback) != 'undefined') {
       parameters.callback(sectorWidth, sectorHeight);
@@ -223,6 +226,9 @@ var MapAjaxProxy = function(servicesContext) {
       url: this.context + this.services[serviceName],
       data: parameters
     }).done(function(data, textStatus, jqXHR) {
+      if(data.error != undefined) {
+        console.warn('Error in service '+serviceName+" : "+data.error);
+      }
       if(callback != undefined) {
         parameters.context = proxy;
         callback(data, parameters);

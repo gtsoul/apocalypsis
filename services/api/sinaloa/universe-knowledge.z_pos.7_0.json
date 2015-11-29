@@ -1,0 +1,201 @@
+{
+	"sector": {
+		"pos": "7_0",
+		"capAbsoluteX": 1536,
+		"capAbsoluteY": 1664,
+		"absoluteWidth": 512,
+		"absoluteHeight": 512,
+		"image": "\/images\/universe\/sector_fg0.jpg",
+		"known": true,
+		"subElements": {
+			"systems": [{
+				"pos": "7_0_0",
+				"capAbsoluteX": 1936,
+				"capAbsoluteY": 2000,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg0.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_1",
+				"capAbsoluteX": 1792,
+				"capAbsoluteY": 2000,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg1.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_2",
+				"capAbsoluteX": 1968,
+				"capAbsoluteY": 2096,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg2.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_3",
+				"capAbsoluteX": 1696,
+				"capAbsoluteY": 1920,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg3.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_4",
+				"capAbsoluteX": 1552,
+				"capAbsoluteY": 2016,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg4.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_5",
+				"capAbsoluteX": 1552,
+				"capAbsoluteY": 1936,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg5.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_6",
+				"capAbsoluteX": 1776,
+				"capAbsoluteY": 1888,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg6.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_7",
+				"capAbsoluteX": 1552,
+				"capAbsoluteY": 1696,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg7.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_8",
+				"capAbsoluteX": 1696,
+				"capAbsoluteY": 2032,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg8.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_9",
+				"capAbsoluteX": 1648,
+				"capAbsoluteY": 1680,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg9.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_10",
+				"capAbsoluteX": 1856,
+				"capAbsoluteY": 2016,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg10.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_11",
+				"capAbsoluteX": 1984,
+				"capAbsoluteY": 1664,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg11.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_12",
+				"capAbsoluteX": 1616,
+				"capAbsoluteY": 1824,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg0.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_13",
+				"capAbsoluteX": 1808,
+				"capAbsoluteY": 1664,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg1.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_14",
+				"capAbsoluteX": 1680,
+				"capAbsoluteY": 2096,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg2.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_15",
+				"capAbsoluteX": 1808,
+				"capAbsoluteY": 2096,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg3.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_16",
+				"capAbsoluteX": 1984,
+				"capAbsoluteY": 1760,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg4.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_17",
+				"capAbsoluteX": 1728,
+				"capAbsoluteY": 1744,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg5.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_18",
+				"capAbsoluteX": 1552,
+				"capAbsoluteY": 1872,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg6.jpg",
+				"known": true
+			},
+			{
+				"pos": "7_0_19",
+				"capAbsoluteX": 1968,
+				"capAbsoluteY": 1856,
+				"absoluteWidth": 64,
+				"absoluteHeight": 64,
+				"image": "\/images\/universe\/system_fg7.jpg",
+				"known": true
+			}]
+		}
+	},
+	"cap": {
+		"capId": "6186",
+		"minVisiblePosLevel": 1,
+		"absoluteGrid": {
+			"width": 32768,
+			"height": 32768
+		}
+	}
+}

@@ -88,7 +88,7 @@ var Map = function(mapUi, mapAjaxProxy) {
     return parentEntity;
   };   
 
-  Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => d�caler sur la gauche
+  Map.prototype.centerOnEntity = function(entityPos, entityType, zoomIn, infoBox) { // if zoomIn is false => zoomOut, if infoBox => decaler sur la gauche
     // TODO : check if element is loaded and load it then
     // definir des zooms
     if(entityType != undefined) {

@@ -113,7 +113,7 @@ var EntityPc = function(json, parent) {
   EntityPc.prototype.getHtmlExt = function () {
     var $pc = $('<div class="coordPoint extended nozoom" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
     var $pcImg = $('<img class="coordPointImg" style="width:'+EntityCoords.prototype.WIDTH_PX_DEFAULT+'px;height:'+EntityCoords.prototype.HEIGHT_PX_DEFAULT+'px;"/>');
-    var $canvas = $('<canvas class="pcMeter" width="'+(EntityCoords.prototype.WIDTH_PX_DEFAULT)+'" height="'+(EntityCoords.prototype.HEIGHT_PX_DEFAULT)+'" style="position:absolute;left:0px;top:0px;"/>');  // TODO : � mettre en css
+    var $canvas = $('<canvas class="pcMeter" width="'+(EntityCoords.prototype.WIDTH_PX_DEFAULT)+'" height="'+(EntityCoords.prototype.HEIGHT_PX_DEFAULT)+'" style="position:absolute;left:0px;top:0px;"/>');  // TODO : a mettre en css
     var $pcOverlay = $('<div class="overlay"/>');
     $pcImg.attr('src', this.image);
     $pc.css('left', Math.round(this.x + this.width/2 - EntityCoords.prototype.WIDTH_PX_DEFAULT/2)+'px');

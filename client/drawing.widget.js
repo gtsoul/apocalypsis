@@ -91,7 +91,7 @@ var UiLink = function($origin, $end, type) {
     //geometryLine.vertices = curve.getPoints(60);   
     var curve = new THREE.QuadraticBezierCurve(
       new THREE.Vector3( originX, originY, 0 ),
-      new THREE.Vector3( (originX+endX)/2*(0.95+Math.random()*0.1), (originY+endY)/2*(0.95+Math.random()*0.1), 0 ),
+      new THREE.Vector3( (originX+endX)/2+(Math.random()*100-50), (originY+endY)/2+(Math.random()*100-50), 0 ),
       new THREE.Vector3( endX, endY, 0 )
     );
     var path = new THREE.Path( curve.getPoints( 10 ) );
