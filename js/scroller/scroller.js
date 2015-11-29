@@ -630,7 +630,7 @@ var Scroller;
 		 * Mouse wheel handler for zooming support
 		 */
 		doMouseZoom: function(wheelDelta, timeStamp, pageX, pageY) {
-
+      $('#containerThree').addClass('moving');
 			var self = this;
 			var change = wheelDelta > 0 ? 0.80 : 1.20;
 
@@ -643,7 +643,7 @@ var Scroller;
 		 * Touch start handler for scrolling support
 		 */
 		doTouchStart: function(touches, timeStamp) {
-
+      $('#containerThree').addClass('moving');
 			// Array-like check is enough here
 			if (touches.length == null) {
 				throw new Error("Invalid touch list: " + touches);

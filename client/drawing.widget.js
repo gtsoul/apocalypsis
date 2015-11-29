@@ -98,7 +98,7 @@ var UiLink = function($origin, $end, type) {
     
     var geometryLine = path.createPointsGeometry( 10 );
     //var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );  
-    var material = new THREE.LineDashedMaterial( { linewidth: 1, dashSize: 1, gapSize: 8, color : "#819FF7" } );
+    var material = new THREE.LineDashedMaterial( { linewidth: 2, dashSize: 2, gapSize: 8, color : "#819FF7" } );
 				//var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );      
     //var material = new THREE.LineBasicMaterial( { linewidth: 2, color: 0xffffff, vertexColors: THREE.VertexColors } );    
     globalMap.ui.fluxLayer.drawLine(geometryLine, material, false, ["zoomOnPlanet"]);

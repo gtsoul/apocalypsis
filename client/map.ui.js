@@ -7,6 +7,8 @@ var lastUpdateReperesDelay = 500;
 
 var MapUi = function(mapContainer, viewport, tools) {
   this.zoom = 1;
+  this.scrollX = 0;
+  this.scrollY = 0;
   this.newCss = {};
   this.newCssNozoom = {};  
 	this.mapContainer = jQuery(mapContainer);
@@ -73,6 +75,8 @@ var MapUi = function(mapContainer, viewport, tools) {
     zoom = getScroller().getValues().zoom;
     if(left != undefined && top != undefined) {
       getScroller().scrollTo(zoom*left, zoom*top, true);
+      this.scrollX = left;
+      this.scrollY = top;
       // PERFORMANCE : set animate to false    
     }
   };

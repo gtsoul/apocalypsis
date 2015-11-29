@@ -318,6 +318,15 @@ span.ennemy, div.ennemy {
 /*-------- Three.js -------------*/
 #containerThree {
   position: absolute; 
+  -webkit-animation: appear-function 2s linear; 
+     -moz-animation: appear-function 2s linear; 
+      -ms-animation: appear-function 2s linear; 
+       -o-animation: appear-function 2s linear; 
+          animation: appear-function 2s linear;   
+}
+
+#containerThree.moving {
+  display: none;
 }
 
 /*-------- Lines -------------*/
@@ -583,6 +592,40 @@ span.ennemy, div.ennemy {
   }
   100% {
     opacity: 0.7;
+  }
+}
+
+@-webkit-keyframes appear-function {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes appear-function {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes appear-function {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

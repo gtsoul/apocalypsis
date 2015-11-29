@@ -17,9 +17,7 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   this.offsetX = 0;
   this.offsetY = 0;
   this.scrollX = 0;
-  this.scrollY = 0;  
-  this.fov;
-  this.mutexViewport = true;
+  this.scrollY = 0; 
   
 
 	this.init = function() {
@@ -55,7 +53,6 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     //this.camera.position.y = 0;
     this.camera.position.z = 0;
     this.camera.zoom = globalMap.ui.zoom;
-    this.fov = this.camera.fov;
     //this.camera.lookAt(new THREE.Vector3( sectorWidth/2, sectorWidth/2, 0 ));
     //this.camera.lookAt(new THREE.Vector3(0, 0, 0 ));
 
@@ -97,8 +94,9 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       me.stats.update();      
       this.delayAnimation = !me.stats.canUpdate();
     };     
+    
+    this.zoomTo(0,0);
     animate();
-    this.camera.updateProjectionMatrix();
   };
   
   
@@ -148,27 +146,15 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     if (isDynamic) {
       this.dynamicLines.push( geometryLine);
     }
-    object.visible = (true || $.inArray(this.newZoom, object.zoomOptimal) >= 0);
-    this.scene.add( object );
-    
-
-    //container.appendChild( renderer.domElement );
-    this.delayAnimation = false;
-    this.zoomTo();
-   
-  };
-  
-  /*FluxLayer.prototype.__animateLines = function() {   
-    requestAnimationFrame( this.__animateLines );
-    this.__render();
-    //stats.update();
-  };*/ 
+    object.visible = ($.inArray(this.newZoom, object.zoomOptimal) >= 0);
+    this.scene.add( object );    
+    this.delayAnimation = false;  
+    this.zoomTo(globalMap.ui.scrollX, globalMap.ui.scrollY); 
+  };  
   
   FluxLayer.prototype.__render = function() {   
     
     // TODO : afficher en fonction du zoom
-    //console.log(globalMap.ui.zoom);
-    //console.log(this.scene.children[0]);
     // Animations
     if (!this.delayAnimation) {
       for ( var l = (this.frameIt%this.nbParallelQueue); l < this.dynamicLines.length; l += this.nbParallelQueue ) {
@@ -181,22 +167,18 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       this.renderer.render( this.scene, this.camera );
       this.camera.position.x = this.offsetX + this.scrollX;
       this.camera.position.y = this.offsetY + this.scrollY;
-      //this.camera.position.x = this.cameraX;
-      //this.camera.position.y = this.cameraY;
-      //this.cameraHelper.update();
     }
-     this.mutexViewport = true;
-    //scene.add( directionalLight );
  
   };
   
   FluxLayer.prototype.__checkVisibleObjects = function() {        
       // TODO : desactiver des objets au changement de zoom
-      //if () {}
       this.newZoom = globalMap.ui.getZoomLvl();
+      var newZoom = this.newZoom;
       if (this.oldZoom != this.newZoom) {
         for(var c=0; c<this.scene.children.length; c++) {
-          this.scene.children[c].traverse( function ( object ) { object.visible = (true || $.inArray(this.newZoom, object.zoomOptimal) >= 0); } );
+          this.scene.children[c].traverse( function ( object ) { 
+            object.visible = ($.inArray(newZoom, object.zoomOptimal) >= 0); } );
         }
         this.oldZoom = this.newZoom;
       }      
@@ -204,54 +186,24 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   };  	
   
   FluxLayer.prototype.scrollTo = function(left, top) {
-    //if (this.mutexViewport) {      
-      this.mutexViewport = false;
-      //this.camera.lookAt(new THREE.Vector3( left, top, 0 ));
-      
-      /*this.renderer.render( this.scene, this.camera );
-      this.camera.position.x++;
-      this.camera.position.y++;
-      
-      this.cameraHelper.update();*/
-
-      //this.camera.position.left = left;   
-      //this.camera.position.top = top;
-      //this.camera.updateMatrix();
-      
-      //this.renderer.render( this.scene, this.camera );
       this.scrollX = left/globalMap.ui.zoom;
       this.scrollY = top/globalMap.ui.zoom;
-
-      //var windowWidth  = window.innerWidth;
-      //var windowHeight = window.innerHeight;
-      /*this.camera.left = windowWidth / - 2;
-      this.camera.right = windowWidth / 2;
-      this.camera.top = windowHeight / 2;
-      this.camera.bottom = windowHeight / - 2;              
-      this.delayAnimation = false;*/
-      
-      //this.camera.updateProjectionMatrix();
-      //this.renderer.setViewport( -left, top, this.viewportWidth, this.viewportHeight );
-      //this.renderer.setScissor( -left, top, this.viewportWidth, this.viewportHeight );
-      //renderer.enableScissorTest( true );
-      //this.renderer.render( this.scene, this.camera );
-      //this.__render();
-    //}
+      $('#containerThree').removeClass('moving');
   };  
   
-  FluxLayer.prototype.zoomTo = function(zoom) {
+  FluxLayer.prototype.zoomTo = function(left, top) {
     console.log("zoomTo "+zoom+" =>  "+globalMap.ui.zoom);
     if (globalMap.ui.zoom != undefined) {
       this.camera.zoom = globalMap.ui.zoom;
-      //this.camera.fov = this.fov * this.camera.zoom;
       this.camera.updateProjectionMatrix();
     }
-    console.log("viewport "+this.viewportWidth+"/"+this.viewportHeight);
-    console.log("zoom "+globalMap.ui.zoom);
     this.offsetX = ((this.viewportWidth/globalMap.ui.zoom) - this.viewportWidth)/2;    
     this.offsetY = ((this.viewportHeight/globalMap.ui.zoom) - this.viewportHeight)/2;
-    //this.camera.position.top += 10;
-    //this.renderer.setViewport( 0, 0, windowWidth, windowHeight );
+    if (left != undefined && top != undefined) {
+      this.scrollX = left/globalMap.ui.zoom;
+      this.scrollY = top/globalMap.ui.zoom;    
+    }
+    $('#containerThree').removeClass('moving');
   };  
 	
 	this.init();	
