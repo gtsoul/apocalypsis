@@ -1,8 +1,9 @@
 
 var InfoBoxUI = function(entity) {
 
-  var title;
-  var entity;
+  this.title;
+  this.longTitle;
+  this.entity;
 
   InfoBoxUI.prototype.display = function() {
     var me = this;
@@ -21,10 +22,15 @@ var InfoBoxUI = function(entity) {
     var $box = $('<div/>');    
     var $left = $('<img src="images/apocalypsis/left.png" class="prevEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');
     $box.append($left);
-    var $title = $('<span class="title">'+this.title+'</span>');    
+    var $title = $('<span class="title">'+this.title+'</span>');
     $box.append($title);
     var $right = $('<img src="images/apocalypsis/right.png" class="nextEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');    
     $box.append($right);
+    if (this.longTitle != this.title) {
+      var $longTitle = $('<span class="longTitle">'+this.longTitle+'</span>');
+      $box.append($longTitle); 
+      $title.append('<span class="showLongTitle">...</span>');
+    }  
     if(this.entity.type != EntitySystem.prototype.TYPE) {
       var parentType;
       if(this.entity.type == EntityCoords.prototype.TYPE) {
@@ -63,11 +69,30 @@ var InfoBoxUI = function(entity) {
     if(this.entity.type == EntitySystem.prototype.TYPE) {
       return "Système "+this.entity.pos;
     } else if(this.entity.type == EntityCoords.prototype.TYPE) {
-      return "Coords "+this.entity.pos;       
+      return "Coordonnées "+this.entity.pos;       
     } else if(this.entity.type == EntityPlanet.prototype.TYPE) {
       return this.entity.name;  
     }   
     return "";
+  };   
+  
+  InfoBoxUI.prototype.__cropTitle = function(title, maxLength) {
+    var replacements = {"Système": "Syst.", "Syst.": "S.", "Coordonnées": "Coords.", "Coords.": "C."};
+    var hasReplace = false;
+    while (title.length > maxLength) {
+      for (var key in replacements) {
+        if (title.contains(key) && !hasReplace) {
+          title = title.replace(key, replacements[key]);
+          hasReplace = true;
+        }
+      }
+      if (!hasReplace) {
+        title = title.substring(0, title.length - 1);        
+        hasReplace = true;
+      }
+      hasReplace = false;
+    }    
+    return title;
   };   
   
   InfoBoxUI.prototype.__addClickEvent = function(htmlEl) {
@@ -102,7 +127,8 @@ var InfoBoxUI = function(entity) {
   
 	this.init = function() {
     this.entity = entity;
-    this.title = this.__getTitleForEntity();
+    this.longTitle = this.__getTitleForEntity();
+    this.title = this.__cropTitle(this.longTitle, 10);
 		this.init = function() {};
 	}; 	  
   

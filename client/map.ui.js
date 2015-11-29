@@ -208,7 +208,7 @@ var MapUi = function(mapContainer, viewport, tools) {
       //var left = system.x;
       //var top = system.y;
       var $newSystem = system.getHtml();
-      /*var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO � diviser par le nb total de système avec un max
+      /*var nbStars = Math.min(system.width*system.height / 700, MapUi.prototype.NB_MAX_STARS); // TODO a diviser par le nb total de systeme avec un max
       if(!system.known)  {
         nbStars = 0;
       }

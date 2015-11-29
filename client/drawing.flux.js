@@ -192,7 +192,6 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   };  
   
   FluxLayer.prototype.zoomTo = function(left, top) {
-    console.log("zoomTo "+zoom+" =>  "+globalMap.ui.zoom);
     if (globalMap.ui.zoom != undefined) {
       this.camera.zoom = globalMap.ui.zoom;
       this.camera.updateProjectionMatrix();

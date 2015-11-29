@@ -19,8 +19,8 @@ var EntitySpaceElement = function(json, parent) {
   
   EntitySpaceElement.prototype.__loadJson = function (json, parent) {
     this.pos = json.pos;
-    this.x = parseInt(json.capAbsoluteX) * EntitySystem.prototype.X_TO_PX;
-    this.y = parseInt(json.capAbsoluteY) * EntitySystem.prototype.Y_TO_PX;
+    this.x = parseInt(json.capAbsoluteX - globalMap.proxy.absoluteX) * EntitySystem.prototype.X_TO_PX;
+    this.y = parseInt(json.capAbsoluteY - globalMap.proxy.absoluteY) * EntitySystem.prototype.Y_TO_PX;
     this.width = parseInt(json.absoluteWidth) * EntitySystem.prototype.X_TO_PX;
     this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX;
     this.known = json.known;

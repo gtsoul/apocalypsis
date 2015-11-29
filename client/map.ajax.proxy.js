@@ -8,6 +8,8 @@ var MapAjaxProxy = function(servicesContext) {
                     'map-options' : 'map-options.json'                  
                   };
   this.sSystems = new Array();
+  this.absoluteX = 0;
+  this.absoluteY = 0;
   
 	this.init = function() {
     // TODO 
@@ -171,8 +173,13 @@ var MapAjaxProxy = function(servicesContext) {
   
   MapAjaxProxy.prototype.__getSectorKnowledgeCB = function (data, parameters) {
     var proxy = parameters.context;
-
+    var sectorWidth, sectorHeight;
     if(data != undefined && data.sector != undefined && data.sector.subElements != undefined && data.sector.subElements.systems != undefined) {
+      if(data.sector != undefined && data.sector.capAbsoluteX != undefined && data.sector.capAbsoluteY != undefined) {
+        proxy.absoluteX = parseInt(data.sector.capAbsoluteX);
+        proxy.absoluteY = parseInt(data.sector.capAbsoluteY);     
+      }      
+      
       $.each(data.sector.subElements.systems, function(key, datum) {
         if(datum.pos != undefined) {
           var systemBlank = new EntitySystem(datum);
@@ -185,11 +192,13 @@ var MapAjaxProxy = function(servicesContext) {
 
       });
       
-      if(data.cap != undefined && data.cap.absoluteGrid != undefined && data.cap.absoluteGrid.width != undefined && data.cap.absoluteGrid.height != undefined) {
-        sectorWidth = (data.cap.absoluteGrid.width*EntitySystem.prototype.X_TO_PX);
-        sectorHeight = (data.cap.absoluteGrid.height*EntitySystem.prototype.Y_TO_PX);
+      if(data.sector != undefined && data.sector.absoluteWidth != undefined && data.sector.absoluteHeight != undefined) {
+        sectorWidth = (parseInt(data.sector.absoluteWidth)*EntitySystem.prototype.X_TO_PX);
+        sectorHeight = (parseInt(data.sector.absoluteHeight)*EntitySystem.prototype.Y_TO_PX);
+        proxy.absoluteX = parseInt(data.sector.capAbsoluteX);
+        proxy.absoluteY = parseInt(data.sector.capAbsoluteY);     
         console.log("map  size :"+sectorWidth+" / "+sectorHeight);
-      }
+      }  
     } else {
       console.error("Impossible d'initialiser la carte du secteur");
       console.error(data);
