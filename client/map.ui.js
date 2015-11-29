@@ -15,7 +15,7 @@ var MapUi = function(mapContainer, viewport, tools) {
 	this.viewport = jQuery(viewport);
 	this.tools = jQuery(tools);
   this.mapRoot = this.mapContainer.children('*:first');
-  this.zoomConfig = {minZoom : 0.5, maxZoom : 5, zoomFactor : 0.15, zoomOnCoords : 0.5, zoomOnPlanet : 1.1};
+  this.zoomConfig = {minZoom : 0.05, maxZoom : 5, zoomFactor : 0.15, zoomOnCoords : 0.5, zoomOnPlanet : 1.1};
   this.fluxLayer;
 
 	this.init = function() {
@@ -53,7 +53,7 @@ var MapUi = function(mapContainer, viewport, tools) {
     
     var ratioX = this.viewport.width()/sectorWidth;
     var ratioY = this.viewport.height()/sectorHeight;
-    var zoomInit = Math.max(0.1, Math.min(ratioX, ratioY)*1.5);    
+    var zoomInit = Math.max(this.zoomConfig.minZoom, Math.min(ratioX, ratioY)*1.1);   
     getScroller().options.minZoom = Math.min(this.zoomConfig.maxZoom, zoomInit);
     getScroller().options.maxZoom = this.zoomConfig.maxZoom;    
     this.__zoomTo(zoomInit);  

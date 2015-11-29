@@ -22,13 +22,15 @@ var InfoBoxUI = function(entity) {
     var $box = $('<div/>');    
     var $left = $('<img src="images/apocalypsis/left.png" class="prevEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');
     $box.append($left);
+    var $titleWrap = $('<span class="titleWrap"></span>');    
     var $title = $('<span class="title">'+this.title+'</span>');
-    $box.append($title);
+    $box.append($titleWrap);
+    $titleWrap.append($title);
     var $right = $('<img src="images/apocalypsis/right.png" class="nextEntity" curPos="'+this.entity.pos+'" type="'+this.entity.type+'"/>');    
     $box.append($right);
     if (this.longTitle != this.title) {
-      var $longTitle = $('<span class="longTitle">'+this.longTitle+'</span>');
-      $box.append($longTitle); 
+      var $longTitle = $('<div class="longTitle">'+this.longTitle+'</div>');
+      $titleWrap.append($longTitle); 
       $title.append('<span class="showLongTitle">...</span>');
     }  
     if(this.entity.type != EntitySystem.prototype.TYPE) {
@@ -77,7 +79,7 @@ var InfoBoxUI = function(entity) {
   };   
   
   InfoBoxUI.prototype.__cropTitle = function(title, maxLength) {
-    var replacements = {"Système": "Syst.", "Syst.": "S.", "Coordonnées": "Coords.", "Coords.": "C."};
+    var replacements = {"Système": "Syst", "Syst": "S.", "Coordonnées": "Coords", "Coords": "C."};
     var hasReplace = false;
     while (title.length > maxLength) {
       for (var key in replacements) {
@@ -123,12 +125,27 @@ var InfoBoxUI = function(entity) {
         globalMap.centerOnEntity(parentEntity.pos, type, false, true);
       }
     });
+    if (this.longTitle != this.title) {
+      htmlEl.find('#cboxTitle .titleWrap').hover(function() { 
+        if ($(this).find('.showLongTitle')) {
+          $(this).find('.title').hide();
+          $(this).parent().find('img').hide();
+          $(this).find('.longTitle').show();
+        }
+      }, function() {
+        if ($(this).find('.showLongTitle')) {
+          $(this).find('.title').show();        
+          $(this).parent().find('img').show();        
+          $(this).find('.longTitle').hide();
+        }
+      }); 
+    } 
   };  
   
 	this.init = function() {
     this.entity = entity;
     this.longTitle = this.__getTitleForEntity();
-    this.title = this.__cropTitle(this.longTitle, 10);
+    this.title = this.__cropTitle(this.longTitle, 16);
 		this.init = function() {};
 	}; 	  
   

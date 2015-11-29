@@ -417,7 +417,7 @@ span.ennemy, div.ennemy {
 
 #colorbox.popininfo #cboxContent #cboxTitle {
   float: none;
-  font-size: 24px;
+  font-size: 20px;
   position: absolute;
   top: 30px;
   border-bottom: 1px solid #555555;
@@ -473,6 +473,16 @@ span.ennemy, div.ennemy {
   color: white;
   cursor: pointer;
   font-size: 15px;
+}
+
+#colorbox.popininfo #cboxTitle .longTitle {
+  cursor: pointer;
+  display: none;
+  line-height: 30px;
+  position: relative;
+  top: -30px;  
+  word-wrap: break-word;
+  font-size: 18px;
 }
 
 #colorbox.popininfo #cboxContent .entityImageWrapper {

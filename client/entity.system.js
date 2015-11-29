@@ -23,7 +23,6 @@ var EntitySystem = function(json) {
     this.pos = json.pos;
     this.x = parseInt(json.capAbsoluteX - globalMap.proxy.absoluteX) * EntitySystem.prototype.X_TO_PX;
     this.y = parseInt(json.capAbsoluteY - globalMap.proxy.absoluteY) * EntitySystem.prototype.Y_TO_PX;
-    console.log(json.capAbsoluteX+" - "+globalMap.proxy.absoluteX);
     this.width = parseInt(json.absoluteWidth) * EntitySystem.prototype.X_TO_PX;
     this.height = parseInt(json.absoluteHeight) * EntitySystem.prototype.Y_TO_PX; 
     this.sun = undefined;  
