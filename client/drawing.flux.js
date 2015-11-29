@@ -14,14 +14,20 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   this.nbParallelQueue = 5;
   this.newZoom = "";
   this.oldZoom = "";
+  this.offsetX = 0;
+  this.offsetY = 0;
+  this.scrollX = 0;
+  this.scrollY = 0;  
+  this.fov;
+  this.mutexViewport = true;
   
 
 	this.init = function() {
     this.frameIt = 0;
     this.delayAnimation = false;
     this.container = divContainer;
-    this.viewportWidth = window.innerWidth;
-    this.viewportHeight = window.innerHeight;    
+    this.viewportWidth = container.clientWidth;
+    this.viewportHeight = container.clientHeight;    
     this.__initThreeCanvas(sectorWidth, sectorHeight);
 		this.init = function() {};
 	}; 	
@@ -38,19 +44,33 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       
   
     //this.camera = new THREE.PerspectiveCamera( 90, this.viewportWidth / this.viewportHeight, 1, 200 );
-    //this.camera = new THREE.OrthographicCamera( this.viewportWidth / - 2, this.viewportWidth / 2, this.viewportHeight / 2, this.viewportHeight / - 2, -100, 100 );
+    this.camera = new THREE.OrthographicCamera( 0, this.viewportWidth, 0, this.viewportHeight, 0, 100 );
+    //this.camera = new THREE.OrthographicCamera( sectorWidth / - 2, sectorWidth / 2, sectorHeight / 2, sectorHeight / - 2, -100, 100 );
     
-    this.camera = new THREE.OrthographicCamera( 0, this.viewportWidth, 0, this.viewportHeight, -100, 100 );
+    //this.camera = new THREE.OrthographicCamera( this.viewportWidth, 100, -this.viewportWidth, 100, 0, 100 );
+    
+    //this.camera = new THREE.OrthographicCamera( 0, this.viewportWidth, 0, this.viewportHeight, -100, 100 );
+
+    this.camera.position.X = -2000;
+    //this.camera.position.y = 0;
     this.camera.position.z = 0;
+    this.camera.zoom = globalMap.ui.zoom;
+    this.fov = this.camera.fov;
+    //this.camera.lookAt(new THREE.Vector3( sectorWidth/2, sectorWidth/2, 0 ));
+    //this.camera.lookAt(new THREE.Vector3(0, 0, 0 ));
 
     this.scene = new THREE.Scene();    
-    this.cameraHelper = new THREE.CameraHelper( this.camera );
-    this.scene.add( this.cameraHelper );    
+    /*this.cameraHelper = new THREE.CameraHelper( this.camera );
+    this.scene.add( this.cameraHelper );    */
 
     this.stats = new Stats();
 		this.stats.domElement.style.position = 'absolute';
 		this.stats.domElement.style.top = '0px';
-		$('body').append( this.stats.domElement )
+		$('body').append( this.stats.domElement );
+    
+    // axis helper
+    var axes = new THREE.AxisHelper( 1000 );
+    this.scene.add( axes );    
   
     this.renderer = new THREE.CanvasRenderer();
     //this.renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -59,13 +79,15 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
     this.renderer.setPixelRatio( window.devicePixelRatio );
     this.renderer.setSize( this.viewportWidth, this.viewportHeight );
     
-    $('#containerThree').attr({width:sectorWidth, height:sectorHeight});
+    //$('#containerThree').attr({width:sectorWidth, height:sectorHeight});
     //var container = document.getElementById( 'containerThree' );
     $('#containerThree').append(this.renderer.domElement);  
   
-    /*for(var l=0; l<10; l++) {
-      this.drawLine();
+    /*for(var l=0; l<30; l++) {
+      
+      this.drawPoint(4000*Math.random(), 1000*Math.random());
     }*/
+    this.drawPoint(2505, 895);
     
     
     var me = this;
@@ -76,6 +98,22 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       this.delayAnimation = !me.stats.canUpdate();
     };     
     animate();
+    this.camera.updateProjectionMatrix();
+  };
+  
+  
+  FluxLayer.prototype.drawPoint = function(x, y) { 
+    var pointLight = new THREE.PointLight( 0xFF0000 );
+    
+    // set its position
+    pointLight.position.x = x;
+    pointLight.position.y = y;
+    pointLight.position.z = 0;
+    var sphere = new THREE.SphereGeometry( 5, 32, 32 );
+    pointLight.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+    
+    // add to the scene
+    this.scene.add(pointLight);
   };
   
   FluxLayer.prototype.drawLine = function(geometryLine, material, isDynamic, zooms) { 
@@ -116,6 +154,7 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
 
     //container.appendChild( renderer.domElement );
     this.delayAnimation = false;
+    this.zoomTo();
    
   };
   
@@ -140,9 +179,13 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
       this.__checkVisibleObjects();      
       this.frameIt++;      
       this.renderer.render( this.scene, this.camera );
-      this.cameraHelper.update();
+      this.camera.position.x = this.offsetX + this.scrollX;
+      this.camera.position.y = this.offsetY + this.scrollY;
+      //this.camera.position.x = this.cameraX;
+      //this.camera.position.y = this.cameraY;
+      //this.cameraHelper.update();
     }
-    
+     this.mutexViewport = true;
     //scene.add( directionalLight );
  
   };
@@ -161,18 +204,54 @@ var FluxLayer = function(sectorWidth, sectorHeight, divContainer) {
   };  	
   
   FluxLayer.prototype.scrollTo = function(left, top) {
-    console.log("scrollTo "+left+"/"+top);
-    this.camera.lookAt(new THREE.Vector3( left, top, 0 ));
-    //this.camera.position.left += 10;   
-    //this.camera.position.top += 10;
-    
+    //if (this.mutexViewport) {      
+      this.mutexViewport = false;
+      //this.camera.lookAt(new THREE.Vector3( left, top, 0 ));
+      
+      /*this.renderer.render( this.scene, this.camera );
+      this.camera.position.x++;
+      this.camera.position.y++;
+      
+      this.cameraHelper.update();*/
+
+      //this.camera.position.left = left;   
+      //this.camera.position.top = top;
+      //this.camera.updateMatrix();
+      
       //this.renderer.render( this.scene, this.camera );
-      this.__render();
+      this.scrollX = left/globalMap.ui.zoom;
+      this.scrollY = top/globalMap.ui.zoom;
+
+      //var windowWidth  = window.innerWidth;
+      //var windowHeight = window.innerHeight;
+      /*this.camera.left = windowWidth / - 2;
+      this.camera.right = windowWidth / 2;
+      this.camera.top = windowHeight / 2;
+      this.camera.bottom = windowHeight / - 2;              
+      this.delayAnimation = false;*/
+      
+      //this.camera.updateProjectionMatrix();
+      //this.renderer.setViewport( -left, top, this.viewportWidth, this.viewportHeight );
+      //this.renderer.setScissor( -left, top, this.viewportWidth, this.viewportHeight );
+      //renderer.enableScissorTest( true );
+      //this.renderer.render( this.scene, this.camera );
+      //this.__render();
+    //}
   };  
   
   FluxLayer.prototype.zoomTo = function(zoom) {
-    console.log("zoomTo "+zoom);
+    console.log("zoomTo "+zoom+" =>  "+globalMap.ui.zoom);
+    if (globalMap.ui.zoom != undefined) {
+      this.camera.zoom = globalMap.ui.zoom;
+      //this.camera.fov = this.fov * this.camera.zoom;
+      this.camera.updateProjectionMatrix();
+    }
+    console.log("viewport "+this.viewportWidth+"/"+this.viewportHeight);
+    console.log("zoom "+globalMap.ui.zoom);
+    this.offsetX = ((this.viewportWidth/globalMap.ui.zoom) - this.viewportWidth)/2;    
+    this.offsetY = ((this.viewportHeight/globalMap.ui.zoom) - this.viewportHeight)/2;
     //this.camera.position.top += 10;
+    //this.renderer.setViewport( 0, 0, windowWidth, windowHeight );
   };  
 	
 	this.init();	
